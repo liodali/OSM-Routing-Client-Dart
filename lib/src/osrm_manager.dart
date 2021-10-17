@@ -6,10 +6,14 @@ import 'models/lng_lat.dart';
 import 'utilities/utils.dart';
 
 class OSRMManager {
-  String server = oSRMServer;
-  RoadType roadType = RoadType.car;
+  final String server;
+  final RoadType roadType;
   final dio = Dio();
-  OSRMManager();
+
+  OSRMManager()
+      : server = oSRMServer,
+        roadType = RoadType.car;
+
   OSRMManager.custom({
     required this.server,
     this.roadType = RoadType.car,
@@ -24,7 +28,7 @@ class OSRMManager {
     Geometries geometrie = Geometries.geojson,
   }) async {
     String path = await generatePath(
-      waypoints,
+      waypoints.toWaypoints(),
       alternative: alternative,
       steps: steps,
       overview: overview,
@@ -40,18 +44,18 @@ class OSRMManager {
 }
 
 extension OSRMPrivateFunct on OSRMManager {
-  Future<String> generatePath(
-    List<LngLat> waypoints, {
+  @visibleForTesting
+  String generatePath(
+    String waypoints, {
     RoadType roadType = RoadType.car,
     int alternative = 0,
     bool steps = true,
     Overview overview = Overview.full,
-    Geometries geometrie = Geometries.geojson,
-  }) async {
-    String url =
-        "$server/routed-${roadType.value}/route/v1/diving/${waypoints.toWaypoints()}";
+    Geometries geometrie = Geometries.polyline,
+  })  {
+    String url = "$server/routed-${roadType.value}/route/v1/diving/$waypoints";
     String option = "";
-    option += "alternative=${alternative <= 0 ? false : alternative}&";
+    option += "alternatives=${alternative <= 0 ? false : alternative}&";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";
     option += "geometries=${geometrie.value}";
