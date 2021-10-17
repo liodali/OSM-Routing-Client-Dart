@@ -9,7 +9,7 @@ class OSRMManager {
   String server = oSRMServer;
   RoadType roadType = RoadType.car;
   final dio = Dio();
-
+  OSRMManager();
   OSRMManager.custom({
     required this.server,
     this.roadType = RoadType.car,
