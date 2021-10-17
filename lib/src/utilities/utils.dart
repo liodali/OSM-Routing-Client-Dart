@@ -6,7 +6,7 @@ enum Geometries { polyline, polyline6, geojson }
 
 extension RoadTypeExtension on RoadType {
   String get value {
-    return ["simplified", "full", "false"][index];
+    return ["car", "foot", "bike"][index];
   }
 }
 
@@ -29,7 +29,7 @@ extension TransformToWaysOSRM on List<LngLat> {
   }
 }
 
-const String oSRMServer = "https://routing.openstreetmap.de/";
+const String oSRMServer = "https://routing.openstreetmap.de";
 
 const Map<String, int> maneuvers = {
   "new name": 2,
