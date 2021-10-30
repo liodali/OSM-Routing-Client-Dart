@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,33 +12,38 @@ Future<Road> parseRoad(List<dynamic> data) async {
   Map<String, dynamic> jsonResponse = data.first;
   String languageCode = data.last;
   var road = Road.empty();
-  final Map<String, dynamic> routes = jsonResponse["routes"];
+  final List<Map<String, dynamic>> routes =
+      List.castFrom(jsonResponse["routes"]);
 
-  routes.forEach((key, route) {
+  for (var route in routes) {
     final distance = (route["distance"] as double) / 1000;
-    final duration = route["duration"] as double;
+    final duration = route["duration"] as int;
     final mRouteHigh = route["geometry"] as String;
     road = road.copyWith(
       distance: distance,
-      duration: duration,
+      duration: duration.toDouble(),
       polylineEncoded: mRouteHigh,
     );
-    if ((route as Map).containsKey("legs")) {
-      final Map<String, dynamic> mapLegs = route["legs"];
-      mapLegs.forEach((key, leg) {
+    if ((route).containsKey("legs")) {
+      final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
+      for (var leg in mapLegs) {
         final RoadLeg legRoad = RoadLeg(
           leg["distance"],
-          leg["duration"],
+          (leg["duration"] as double),
         );
         road.details.roadLegs.add(legRoad);
-        if ((leg as Map<String, dynamic>).containsKey("steps")) {
-          final Map<String, dynamic> steps = leg["steps"];
-          steps.forEach((key, step) {
-            final location = LngLat(
-              lat: step["location"][1],
-              lng: step["location"][0],
-            );
+        if ((leg).containsKey("steps")) {
+          final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
+          RoadInstruction? lastNode;
+          var lastName = "";
+          for (var step in steps) {
             Map<String, dynamic> maneuver = step["maneuver"];
+            List<double> locationJsonArray =
+                List.castFrom(maneuver["location"]);
+            final location = LngLat(
+              lat: locationJsonArray.last,
+              lng: locationJsonArray.first,
+            );
             String direction = maneuver["type"];
             String name = step["name"] ?? "";
             String instruction = OSRMManager.instructionFromDirection(
@@ -50,17 +53,24 @@ Future<Road> parseRoad(List<dynamic> data) async {
               languageCode,
             );
             RoadInstruction roadInstruction = RoadInstruction(
-              distance: step["distance"],
-              duration: step["duration"],
+              distance: double.parse(step["distance"].toString()),
+              duration: double.parse(step["duration"].toString()),
               instruction: instruction,
               location: location,
             );
-            road.instructions.add(roadInstruction);
-          });
+            if(lastNode != null &&  maneuvers[direction] != 2 && lastName == name ){
+              lastNode.distance+=distance;
+              lastNode.duration+=duration;
+            }else{
+              road.instructions.add(roadInstruction);
+              lastNode = roadInstruction;
+              lastName = name;
+            }
+          }
         }
-      });
+      }
     }
-  });
+  }
 
   return road;
 }
@@ -97,7 +107,7 @@ class OSRMManager {
     );
     final response = await dio.get(path);
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = json.decode(response.data);
+      final Map<String, dynamic> responseJson = response.data;
       return compute(parseRoad, [responseJson, languageCode]);
     } else {
       return Road.withError();

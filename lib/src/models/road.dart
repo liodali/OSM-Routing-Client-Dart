@@ -56,16 +56,21 @@ class RoadInstruction {
   final LngLat location;
 
   RoadInstruction({
-
     required this.distance,
     required this.duration,
     required this.instruction,
     required this.location,
   });
+
+  @override
+  String toString() {
+    return "$instruction at $location";
+  }
 }
 
 class RoadDetailInfo {
   List<RoadLeg> roadLegs = [];
+
   RoadDetailInfo();
 }
 
@@ -78,4 +83,3 @@ class RoadLeg {
     this.duration,
   );
 }
-
