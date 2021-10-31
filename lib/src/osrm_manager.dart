@@ -58,10 +58,12 @@ Future<Road> parseRoad(List<dynamic> data) async {
               instruction: instruction,
               location: location,
             );
-            if(lastNode != null &&  maneuvers[direction] != 2 && lastName == name ){
-              lastNode.distance+=distance;
-              lastNode.duration+=duration;
-            }else{
+            if (lastNode != null &&
+                maneuvers[direction] != 2 &&
+                lastName == name) {
+              lastNode.distance += distance;
+              lastNode.duration += duration;
+            } else {
               road.instructions.add(roadInstruction);
               lastNode = roadInstruction;
               lastName = name;

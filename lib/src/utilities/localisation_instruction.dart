@@ -7,19 +7,19 @@ class LocalisationInstruction {
             "your language is not supported yet,you can contribute to support your language or use en default");
 
   String getInstruction(int direction, String name) {
-    Map<int,String> directions = languageCodeDirection[languageCode];
+    Map<int, String> directions = languageCodeDirection[languageCode];
     String instruction = "";
-    switch(directions.containsKey(direction)){
-      case true :
+    switch (directions.containsKey(direction)) {
+      case true:
         instruction = directions[direction]!;
         switch (name.isEmpty) {
           case true:
             instruction = instruction.replaceAll(RegExp(r"\[.*\]"), "");
             break;
           default:
-            instruction = instruction.replaceAll("\[", "");
-            instruction = instruction.replaceAll("\]", "");
-            instruction = instruction.replaceAll("\%\s", name);
+            instruction = instruction.replaceAll(RegExp(r"\["), "");
+            instruction = instruction.replaceAll(RegExp(r"\]"), "");
+            instruction = instruction.replaceAll(RegExp(r"\%\s"), name);
             break;
         }
         break;
