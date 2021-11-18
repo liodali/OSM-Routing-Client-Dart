@@ -1,0 +1,27 @@
+name: osm_flutter
+on: [ push ]
+
+jobs:
+  build:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    container:
+      image:  google/dart:latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup credentials
+        run: |
+          mkdir -p ~/.pub-cache
+          cat <<EOF > ~/.pub-cache/credentials.json
+          {
+            "accessToken":"${{ secrets.OAUTH_ACCESS_TOKEN }}",
+            "refreshToken":"${{ secrets.OAUTH_REFRESH_TOKEN }}",
+            "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
+            "scopes":["https://www.googleapis.com/auth/userinfo.email","openid"],
+            "expiration": 1583530852703
+          }
+          EOF
+      - name: fomarting files
+        run : dart format --output=none --set-exit-if-changed .
+      - name: Publish package
+        run: pub publish -f

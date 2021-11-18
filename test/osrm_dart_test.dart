@@ -1,9 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:osrm_dart/osrm_dart.dart';
-import 'package:osrm_dart/src/models/lng_lat.dart';
-import 'package:osrm_dart/src/models/road.dart';
-import 'package:osrm_dart/src/osrm_manager.dart';
-import 'package:osrm_dart/src/utilities/utils.dart';
+import 'package:routing_client_dart/routing_client_dart.dart';
+import 'package:routing_client_dart/src/osrm_manager.dart';
+import 'package:routing_client_dart/src/utilities/utils.dart';
 
 void main() {
   test("transform waypoint to string", () {
@@ -37,10 +35,11 @@ void main() {
     ];
     final manager = OSRMManager();
     final road = await manager.getRoad(
-        waypoints: waypoints,
-        geometrie: Geometries.polyline,
-        steps: true,
-        languageCode: "en");
+      waypoints: waypoints,
+      geometrie: Geometries.polyline,
+      steps: true,
+      languageCode: "en",
+    );
     expect(road.distance, 4.7238);
   });
   test("test get road without steps", () async {

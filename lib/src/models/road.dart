@@ -1,4 +1,4 @@
-import 'package:osrm_dart/src/models/lng_lat.dart';
+import 'lng_lat.dart';
 
 class Road {
   final double distance;
