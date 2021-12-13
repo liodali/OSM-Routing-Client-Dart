@@ -22,6 +22,6 @@ jobs:
           }
           EOF
       - name: fomarting files
-        run : dart format --output=none --set-exit-if-changed .
+        run : dart format --output=none  .
       - name: Publish package
         run: pub publish -f
