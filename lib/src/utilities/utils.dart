@@ -26,25 +26,29 @@ extension GeometriesExtension on Geometries {
 
 extension TransformToWaysOSRM on List<LngLat> {
   String toWaypoints() {
-    return map((e) => e.toString())
-        .reduce((value, element) => "$value;$element");
+    return map((e) => e.toString()).reduce((value, element) => "$value;$element");
   }
 }
-
+/// parseRoad
+/// this method used to parse json get from routing server to [Road] object
+/// we use this method in another thread like compute
+/// get [data] as List of map objects to be parse and to [Road]
+/// fix parsing problem [#1]
+/// return [Road] object that contain list of waypoint
+/// and distance and duration of the road
 Future<Road> parseRoad(List<dynamic> data) async {
   Map<String, dynamic> jsonResponse = data.first;
   String languageCode = data.last;
   var road = Road.empty();
-  final List<Map<String, dynamic>> routes =
-      List.castFrom(jsonResponse["routes"]);
+  final List<Map<String, dynamic>> routes = List.castFrom(jsonResponse["routes"]);
 
   for (var route in routes) {
-    final distance = (route["distance"] as double) / 1000;
-    final duration = route["duration"] as int;
+    final distance = (double.parse(route["distance"].toString())) / 1000;
+    final duration = double.parse(route["duration"].toString());
     final mRouteHigh = route["geometry"] as String;
     road = road.copyWith(
       distance: distance,
-      duration: duration.toDouble(),
+      duration: duration,
       polylineEncoded: mRouteHigh,
     );
     if ((route).containsKey("legs")) {
@@ -61,8 +65,7 @@ Future<Road> parseRoad(List<dynamic> data) async {
           var lastName = "";
           for (var step in steps) {
             Map<String, dynamic> maneuver = step["maneuver"];
-            List<double> locationJsonArray =
-                List.castFrom(maneuver["location"]);
+            List<double> locationJsonArray = List.castFrom(maneuver["location"]);
             final location = LngLat(
               lat: locationJsonArray.last,
               lng: locationJsonArray.first,
@@ -81,9 +84,7 @@ Future<Road> parseRoad(List<dynamic> data) async {
               instruction: instruction,
               location: location,
             );
-            if (lastNode != null &&
-                maneuvers[direction] != 2 &&
-                lastName == name) {
+            if (lastNode != null && maneuvers[direction] != 2 && lastName == name) {
               lastNode.distance += distance;
               lastNode.duration += duration;
             } else {
