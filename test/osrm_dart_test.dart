@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routing_client_dart/routing_client_dart.dart';
 import 'package:routing_client_dart/src/osrm_manager.dart';
+import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 void main() {
@@ -41,7 +42,7 @@ void main() {
       languageCode: "en",
     );
     expect(road.distance, 4.7238);
-    expect(road.duration, 615.0);
+    expect(road.duration >= 615.0, true);
   });
   test("test get road without steps", () async {
     List<LngLat> waypoints = [
@@ -727,7 +728,10 @@ void main() {
         }
       ]
     };
-    Road road = await parseRoad([responseApi, "en"]);
+    Road road = await parseRoad(ParserRoadComputerArg(
+      jsonRoad: responseApi,
+      langCode: "en",
+    ));
     expect(road.distance, 4.7238);
     expect(road.duration, 615.0);
   });

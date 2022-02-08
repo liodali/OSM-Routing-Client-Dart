@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'utilities/computes_utilities.dart';
 
 import 'models/lng_lat.dart';
 import 'models/road.dart';
@@ -41,7 +41,7 @@ class OSRMManager {
   Future<Road> getRoad({
     required List<LngLat> waypoints,
     RoadType roadType = RoadType.car,
-    int alternative = 0,
+    bool alternative = false,
     bool steps = true,
     Overview overview = Overview.full,
     Geometries geometrie = Geometries.geojson,
@@ -49,7 +49,7 @@ class OSRMManager {
   }) async {
     String path = generatePath(
       waypoints.toWaypoints(),
-      alternative: alternative,
+      getAlternatives: alternative,
       steps: steps,
       overview: overview,
       geometrie: geometrie,
@@ -57,7 +57,14 @@ class OSRMManager {
     final response = await dio.get(path);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = response.data;
-      return compute(parseRoad, [responseJson, languageCode]);
+      return compute(
+        parseRoad,
+        ParserRoadComputerArg(
+          jsonRoad: responseJson,
+          langCode: languageCode,
+          alternative: alternative,
+        ),
+      );
     } else {
       return Road.withError();
     }
@@ -97,14 +104,14 @@ extension OSRMPrivateFunct on OSRMManager {
   String generatePath(
     String waypoints, {
     RoadType roadType = RoadType.car,
-    int alternative = 0,
+    bool getAlternatives = false,
     bool steps = true,
     Overview overview = Overview.full,
     Geometries geometrie = Geometries.polyline,
   }) {
     String url = "$server/routed-${roadType.value}/route/v1/diving/$waypoints";
     String option = "";
-    option += "alternatives=${alternative <= 0 ? false : alternative}&";
+    option += "alternatives=$getAlternatives&";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";
     option += "geometries=${geometrie.value}";

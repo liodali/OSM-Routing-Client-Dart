@@ -1,6 +1,6 @@
 import '../models/lng_lat.dart';
 import '../models/road.dart';
-import '../osrm_manager.dart';
+import 'computes_utilities.dart';
 
 enum RoadType { car, foot, bike }
 enum Overview { simplified, full, none }
@@ -26,9 +26,11 @@ extension GeometriesExtension on Geometries {
 
 extension TransformToWaysOSRM on List<LngLat> {
   String toWaypoints() {
-    return map((e) => e.toString()).reduce((value, element) => "$value;$element");
+    return map((e) => e.toString())
+        .reduce((value, element) => "$value;$element");
   }
 }
+
 /// parseRoad
 /// this method used to parse json get from routing server to [Road] object
 /// we use this method in another thread like compute
@@ -36,65 +38,23 @@ extension TransformToWaysOSRM on List<LngLat> {
 /// fix parsing problem [#1]
 /// return [Road] object that contain list of waypoint
 /// and distance and duration of the road
-Future<Road> parseRoad(List<dynamic> data) async {
-  Map<String, dynamic> jsonResponse = data.first;
-  String languageCode = data.last;
+Future<Road> parseRoad(ParserRoadComputerArg data) async {
+  Map<String, dynamic> jsonResponse = data.jsonRoad;
+  String languageCode = data.langCode;
+  bool alternative = data.alternative;
   var road = Road.empty();
-  final List<Map<String, dynamic>> routes = List.castFrom(jsonResponse["routes"]);
+  final List<Map<String, dynamic>> routes =
+      List.castFrom(jsonResponse["routes"]);
 
-  for (var route in routes) {
-    final distance = (double.parse(route["distance"].toString())) / 1000;
-    final duration = double.parse(route["duration"].toString());
-    final mRouteHigh = route["geometry"] as String;
-    road = road.copyWith(
-      distance: distance,
-      duration: duration,
-      polylineEncoded: mRouteHigh,
-    );
-    if ((route).containsKey("legs")) {
-      final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
-      for (var leg in mapLegs) {
-        final RoadLeg legRoad = RoadLeg(
-          leg["distance"],
-          (leg["duration"] as double),
-        );
-        road.details.roadLegs.add(legRoad);
-        if ((leg).containsKey("steps")) {
-          final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
-          RoadInstruction? lastNode;
-          var lastName = "";
-          for (var step in steps) {
-            Map<String, dynamic> maneuver = step["maneuver"];
-            List<double> locationJsonArray = List.castFrom(maneuver["location"]);
-            final location = LngLat(
-              lat: locationJsonArray.last,
-              lng: locationJsonArray.first,
-            );
-            String direction = maneuver["type"];
-            String name = step["name"] ?? "";
-            String instruction = OSRMManager.instructionFromDirection(
-              direction,
-              maneuver,
-              name,
-              languageCode,
-            );
-            RoadInstruction roadInstruction = RoadInstruction(
-              distance: double.parse(step["distance"].toString()),
-              duration: double.parse(step["duration"].toString()),
-              instruction: instruction,
-              location: location,
-            );
-            if (lastNode != null && maneuvers[direction] != 2 && lastName == name) {
-              lastNode.distance += distance;
-              lastNode.duration += duration;
-            } else {
-              road.instructions.add(roadInstruction);
-              lastNode = roadInstruction;
-              lastName = name;
-            }
-          }
-        }
-      }
+  if (routes.length == 1) {
+    final route = routes.first;
+    road = Road.fromOSRMJson(route, languageCode);
+  }
+  if (routes.length > 1 && alternative) {
+    routes.removeAt(0);
+    for (var route in routes) {
+      final alternative = Road.fromOSRMJson(route, languageCode);
+      road.addAlternativeRoute(alternative);
     }
   }
 
