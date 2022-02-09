@@ -49,20 +49,66 @@ class OSRMManager {
   }) async {
     String path = generatePath(
       waypoints.toWaypoints(),
-      getAlternatives: alternative,
       steps: steps,
       overview: overview,
-      geometrie: geometrie,
+      geometry: geometrie,
     );
+    path += "&alternatives=$alternative";
+
     final response = await dio.get(path);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = response.data;
       return compute(
         parseRoad,
-        ParserRoadComputerArg(
+        ParserRoadComputeArg(
           jsonRoad: responseJson,
           langCode: languageCode,
           alternative: alternative,
+        ),
+      );
+    } else {
+      return Road.withError();
+    }
+  }
+
+  /// [getTrip]
+  /// this method used to get route from trip service api
+  /// used if you have more that 10 waypoint to generate route will more accurate
+  /// that [getRoad].
+  Future<Road> getTrip({
+    required List<LngLat> waypoints,
+    RoadType roadType = RoadType.car,
+    bool roundTrip = true,
+    SourceGeoPointOption source = SourceGeoPointOption.any,
+    DestinationGeoPointOption destination = DestinationGeoPointOption.any,
+    bool steps = true,
+    Overview overview = Overview.full,
+    Geometries geometry = Geometries.polyline,
+    String languageCode = "en",
+  }) async {
+    if (!roundTrip &&
+        (source == SourceGeoPointOption.any ||
+            destination == DestinationGeoPointOption.any)) {
+      return Road.empty();
+    }
+    String urlReq = generateTripPath(
+      waypoints.toWaypoints(),
+      roadType: roadType,
+      roundTrip: roundTrip,
+      source: source,
+      destination: destination,
+      steps: steps,
+      overview: overview,
+      geometrie: geometry,
+    );
+    final response = await dio.get(urlReq);
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseJson = response.data;
+      return compute(
+        parseTrip,
+        ParserTripComputeArg(
+          tripJson: responseJson,
+          langCode: languageCode,
         ),
       );
     } else {
@@ -103,19 +149,37 @@ extension OSRMPrivateFunct on OSRMManager {
   @visibleForTesting
   String generatePath(
     String waypoints, {
+    Profile profile = Profile.route,
     RoadType roadType = RoadType.car,
-    bool getAlternatives = false,
+    bool steps = true,
+    Overview overview = Overview.full,
+    Geometries geometry= Geometries.polyline,
+  }) {
+    String url =
+        "$server/routed-${roadType.value}/${profile.name}/v1/diving/$waypoints";
+    var option = "";
+    option += "steps=$steps&";
+    option += "overview=${overview.value}&";
+    option += "geometries=${geometry.value}";
+    return "$url?$option";
+  }
+
+  @visibleForTesting
+  String generateTripPath(
+    String waypoints, {
+    RoadType roadType = RoadType.car,
+    bool roundTrip = true,
+    SourceGeoPointOption source = SourceGeoPointOption.any,
+    DestinationGeoPointOption destination = DestinationGeoPointOption.any,
     bool steps = true,
     Overview overview = Overview.full,
     Geometries geometrie = Geometries.polyline,
   }) {
-    String url = "$server/routed-${roadType.value}/route/v1/diving/$waypoints";
-    String option = "";
-    option += "alternatives=$getAlternatives&";
-    option += "steps=$steps&";
-    option += "overview=${overview.value}&";
-    option += "geometries=${geometrie.value}";
+    String baseGeneratedUrl = generatePath(
+      waypoints,
+      profile: Profile.trip,
+    );
 
-    return "$url${option.isNotEmpty ? "?$option" : ""}";
+    return "$baseGeneratedUrl&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";
   }
 }
