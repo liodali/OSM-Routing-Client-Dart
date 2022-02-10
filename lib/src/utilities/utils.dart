@@ -79,7 +79,6 @@ Future<Road> parseRoad(ParserRoadComputeArg data) async {
 Future<Road> parseTrip(ParserTripComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.jsonRoad;
   String languageCode = data.langCode;
-  bool alternative = data.alternative;
   var road = Road.empty();
   final List<Map<String, dynamic>> routes =
       List.castFrom(jsonResponse["trips"]);
@@ -89,6 +88,12 @@ Future<Road> parseTrip(ParserTripComputeArg data) async {
 
   return road;
 }
+
+double parseToDouble(dynamic value){
+  return double.parse(value.toString());
+}
+
+
 
 const String oSRMServer = "https://routing.openstreetmap.de";
 

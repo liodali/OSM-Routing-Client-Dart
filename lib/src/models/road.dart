@@ -39,8 +39,8 @@ class Road {
       final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
       for (var leg in mapLegs) {
         final RoadLeg legRoad = RoadLeg(
-          leg["distance"],
-          (leg["duration"] as double),
+          parseToDouble(leg["distance"]),
+          parseToDouble(leg["duration"]),
         );
         details.roadLegs.add(legRoad);
         if ((leg).containsKey("steps")) {
