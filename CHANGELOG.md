@@ -1,3 +1,5 @@
+## 0.3.0+1:
+* fix parse data
 ## 0.3.0: trip service
 * add new method `getTrip` that implement req call to trip service for osrm
 ## 0.2.0:  
