@@ -2,10 +2,21 @@ import '../../routing_client_dart.dart';
 import '../utilities/utils.dart';
 
 class Road {
+  /// this attribute is the  distance of the route in km
   final double distance;
+
+  /// this attribute is the duration of route in second
   final double duration;
+
+  /// the instruction that user should follow to reach t destination from started location
   List<RoadInstruction> instructions = [];
+
+  /// this is the encoded list of lnglat that should decoded to get list of geopoint
+  /// this attribute can be null if the geometry == geojson
   final String? polylineEncoded;
+
+  /// this is list of geopoint of the route,this attribute is not null if geometry equal to geojson
+  /// except that use always [polylineEncoded]
   List<LngLat>? polyline;
   List<Road>? _alternativesRoads;
   bool _isError = false;
@@ -39,7 +50,10 @@ class Road {
             ? route["geometry"] as String
             : null {
     if (route["geometry"].runtimeType != String) {
-      polyline = (route["geometry"]["coordinates"] as List<List<double>>)
+      final List<List<dynamic>> listOfPoints =
+          List.castFrom(route["geometry"]["coordinates"]);
+
+      polyline = listOfPoints
           .map((e) => LngLat(
                 lng: e.first,
                 lat: e.last,
