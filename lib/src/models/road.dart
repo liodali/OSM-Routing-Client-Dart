@@ -5,7 +5,8 @@ class Road {
   final double distance;
   final double duration;
   List<RoadInstruction> instructions = [];
-  final String polylineEncoded;
+  final String? polylineEncoded;
+  List<LngLat>? polyline;
   List<Road>? _alternativesRoads;
   bool _isError = false;
   RoadDetailInfo details = RoadDetailInfo();
@@ -18,7 +19,7 @@ class Road {
   Road.minimize({
     required this.distance,
     required this.duration,
-    required this.polylineEncoded,
+    this.polylineEncoded,
   });
 
   Road({
@@ -34,7 +35,17 @@ class Road {
   Road.fromOSRMJson(Map route, String languageCode)
       : distance = (double.parse(route["distance"].toString())) / 1000,
         duration = double.parse(route["duration"].toString()),
-        polylineEncoded = route["geometry"] as String {
+        polylineEncoded = route["geometry"].runtimeType == String
+            ? route["geometry"] as String
+            : null {
+    if (route["geometry"].runtimeType != String) {
+      polyline = (route["geometry"]["coordinates"] as List<List<double>>)
+          .map((e) => LngLat(
+                lng: e.first,
+                lat: e.last,
+              ))
+          .toList();
+    }
     if ((route).containsKey("legs")) {
       final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
       for (var leg in mapLegs) {
