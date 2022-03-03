@@ -1,3 +1,6 @@
+## 0.3.1:
+* fix parse route when configure geometry to geojson
+* add new attribute polyline
 ## 0.3.0+1:
 * fix parse data
 ## 0.3.0: trip service

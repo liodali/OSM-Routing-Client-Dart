@@ -58,6 +58,21 @@ void main() {
         languageCode: "en");
     expect(road.instructions.isEmpty, true);
   });
+  test("test if polyline not null when geometry is geojson", () async {
+    List<LngLat> waypoints = [
+      LngLat(lng: 13.388860, lat: 52.517037),
+      LngLat(lng: 13.397634, lat: 52.529407),
+      LngLat(lng: 13.428555, lat: 52.523219),
+    ];
+    final manager = OSRMManager();
+    final road = await manager.getRoad(
+        waypoints: waypoints,
+        geometrie: Geometries.geojson,
+        steps: false,
+        languageCode: "en");
+    expect(road.polyline != null, true);
+    expect(road.polyline!.isNotEmpty, true);
+  });
 
   /// distance 7982.2 , duration 945.6
   test("test get trip", () async {
