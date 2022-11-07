@@ -44,14 +44,14 @@ class OSRMManager {
     bool alternative = false,
     bool steps = true,
     Overview overview = Overview.full,
-    Geometries geometrie = Geometries.geojson,
+    Geometries geometries = Geometries.geojson,
     String languageCode = "en",
   }) async {
     String path = generatePath(
       waypoints.toWaypoints(),
       steps: steps,
       overview: overview,
-      geometry: geometrie,
+      geometries: geometries,
     );
     path += "&alternatives=$alternative";
 
@@ -83,7 +83,7 @@ class OSRMManager {
     DestinationGeoPointOption destination = DestinationGeoPointOption.any,
     bool steps = true,
     Overview overview = Overview.full,
-    Geometries geometry = Geometries.polyline,
+    Geometries geometries = Geometries.polyline,
     String languageCode = "en",
   }) async {
     if (!roundTrip &&
@@ -99,7 +99,7 @@ class OSRMManager {
       destination: destination,
       steps: steps,
       overview: overview,
-      geometrie: geometry,
+      geometries: geometries,
     );
     final response = await dio.get(urlReq);
     if (response.statusCode == 200) {
@@ -153,14 +153,14 @@ extension OSRMPrivateFunct on OSRMManager {
     RoadType roadType = RoadType.car,
     bool steps = true,
     Overview overview = Overview.full,
-    Geometries geometry = Geometries.polyline,
+    Geometries geometries = Geometries.polyline,
   }) {
     String url =
         "$server/routed-${roadType.value}/${profile.name}/v1/diving/$waypoints";
     var option = "";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";
-    option += "geometries=${geometry.value}";
+    option += "geometries=${geometries.value}";
     return "$url?$option";
   }
 
@@ -173,7 +173,7 @@ extension OSRMPrivateFunct on OSRMManager {
     DestinationGeoPointOption destination = DestinationGeoPointOption.any,
     bool steps = true,
     Overview overview = Overview.full,
-    Geometries geometrie = Geometries.polyline,
+    Geometries geometries = Geometries.polyline,
   }) {
     String baseGeneratedUrl = generatePath(
       waypoints,
@@ -181,7 +181,7 @@ extension OSRMPrivateFunct on OSRMManager {
       steps: steps,
       overview: overview,
       profile: Profile.trip,
-      geometry: geometrie,
+      geometries: geometries,
     );
 
     return "$baseGeneratedUrl&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";
