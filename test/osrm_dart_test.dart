@@ -20,7 +20,7 @@ void main() {
     final manager = OSRMManager();
     final urlGenerated = manager.generatePath(
       waypoint,
-      geometry: Geometries.polyline,
+      geometries: Geometries.polyline,
       steps: true,
     );
     String shouldBrUrl =
@@ -37,7 +37,7 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
       waypoints: waypoints,
-      geometrie: Geometries.polyline,
+      geometries: Geometries.polyline,
       steps: true,
       languageCode: "en",
     );
@@ -53,7 +53,7 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
         waypoints: waypoints,
-        geometrie: Geometries.polyline,
+        geometries: Geometries.polyline,
         steps: false,
         languageCode: "en");
     expect(road.instructions.isEmpty, true);
@@ -67,7 +67,7 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
         waypoints: waypoints,
-        geometrie: Geometries.geojson,
+        geometries: Geometries.geojson,
         steps: false,
         languageCode: "en");
     expect(road.polyline != null, true);
@@ -86,7 +86,7 @@ void main() {
         waypoints: waypoints,
         destination: DestinationGeoPointOption.last,
         source: SourceGeoPointOption.first,
-        geometry: Geometries.polyline,
+        geometries: Geometries.polyline,
         steps: false,
         languageCode: "en");
     expect(road.distance >= 7.9822, true);
