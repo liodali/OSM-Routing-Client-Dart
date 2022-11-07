@@ -7,12 +7,16 @@ import 'models/road.dart';
 import 'utilities/localisation_instruction.dart';
 import 'utilities/utils.dart';
 
-/// OSRMManager
+/// [OSRMManager]
+/// 
 /// this class responsible to manage http call to get road from open-source osm server
 /// or custom server that should be specified in constructor based on osrm project
 /// contain only one public method [getRoad] to make the call
 /// and return [Road] object.
+/// 
 /// for more detail see : https://github.com/Project-OSRM/osrm-backend
+/// 
+/// 
 /// [server]   : (String) represent the osm server or any custom server that based of OSRM project
 ///
 /// [roadType] : (RoadType) represent the type of road that you want to use, car or foot,bike only for osm servers
@@ -30,10 +34,12 @@ class OSRMManager {
     this.roadType = RoadType.car,
   });
 
-  /// getRoad
+  /// [getRoad]
+  /// 
   /// this method make http call to get road from specific server
   /// this method return Road that contain road information like distance and duration
-  /// and instruction or return Road with empty values
+  /// and instruction or return Road with empty values.
+  /// 
   /// return Road object that contain information of road
   /// that will help to draw road in the map or show important information to the user
   /// you should take a specific case when road object will contain empty values like 0.0 or empty string
@@ -74,7 +80,9 @@ class OSRMManager {
   /// [getTrip]
   /// this method used to get route from trip service api
   /// used if you have more that 10 waypoint to generate route will more accurate
-  /// that [getRoad]. Please note that if one sets [roundTrip] to false, then
+  /// than [getRoad]. 
+  /// 
+  /// Please note that if one sets [roundTrip] to false, then
   /// [source] and [destination] must be provided.
   Future<Road> getTrip({
     required List<LngLat> waypoints,
