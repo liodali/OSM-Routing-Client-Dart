@@ -74,7 +74,8 @@ class OSRMManager {
   /// [getTrip]
   /// this method used to get route from trip service api
   /// used if you have more that 10 waypoint to generate route will more accurate
-  /// that [getRoad].
+  /// that [getRoad]. Please note that if one sets [roundTrip] to false, then
+  /// [source] and [destination] must be provided.
   Future<Road> getTrip({
     required List<LngLat> waypoints,
     RoadType roadType = RoadType.car,

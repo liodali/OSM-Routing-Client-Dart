@@ -31,7 +31,7 @@ List<LngLat> waypoints = [
     final manager = OSRMManager();
     final road = await manager.getRoad(
       waypoints: waypoints,
-      geometrie: Geometries.polyline,
+      geometries: Geometries.polyline,
       steps: true,
       languageCode: "en",
     );
@@ -48,10 +48,10 @@ List<LngLat> waypoints = [
     final manager = OSRMManager();
     final road = await manager.getTrip(
       waypoints: waypoints,
-      roudTrip:true,
-      destination: DestinationGeoPointOption.last,
+      roundTrip:false,
       source: SourceGeoPointOption.first,
-      geometrie: Geometries.polyline,
+      destination: DestinationGeoPointOption.last,
+      geometries: Geometries.polyline,
       steps: true,
       languageCode: "en",
     );
