@@ -24,4 +24,4 @@ jobs:
       - name: fomarting files
         run : flutter format --output=none  .
       - name: Publish package
-        run: flutter publish -f
+        run: flutter pub publish -f
