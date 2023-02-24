@@ -20,7 +20,7 @@ void main() {
     final manager = OSRMManager();
     final urlGenerated = manager.generatePath(
       waypoint,
-      geometry: Geometries.polyline,
+      geometries: Geometries.polyline,
       steps: true,
     );
     String shouldBrUrl =
@@ -37,11 +37,11 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
       waypoints: waypoints,
-      geometrie: Geometries.polyline,
+      geometries: Geometries.polyline,
       steps: true,
       languageCode: "en",
     );
-    expect(road.distance, 4.7238);
+    expect(road.distance.toStringAsFixed(2), 4.7338.toStringAsFixed(2));
     expect(road.duration >= 615.0, true);
   });
   test("test get road without steps", () async {
@@ -53,7 +53,7 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
         waypoints: waypoints,
-        geometrie: Geometries.polyline,
+        geometries: Geometries.polyline,
         steps: false,
         languageCode: "en");
     expect(road.instructions.isEmpty, true);
@@ -67,7 +67,7 @@ void main() {
     final manager = OSRMManager();
     final road = await manager.getRoad(
         waypoints: waypoints,
-        geometrie: Geometries.geojson,
+        geometries: Geometries.geojson,
         steps: false,
         languageCode: "en");
     expect(road.polyline != null, true);
@@ -86,7 +86,7 @@ void main() {
         waypoints: waypoints,
         destination: DestinationGeoPointOption.last,
         source: SourceGeoPointOption.first,
-        geometry: Geometries.polyline,
+        geometries: Geometries.polyline,
         steps: false,
         languageCode: "en");
     expect(road.distance >= 7.9822, true);

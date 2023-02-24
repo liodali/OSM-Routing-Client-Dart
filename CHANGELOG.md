@@ -1,3 +1,4 @@
+## 0.3.2: update dependency
 ## 0.3.1:
 * fix parse route when configure geometry to geojson
 * add new attribute polyline
