@@ -5,10 +5,10 @@ jobs:
   build:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    container:
-      image:  google/dart:latest
     steps:
       - uses: actions/checkout@v1
+      - name: flutter setup
+        uses: britannio/action-install-flutter@v1
       - name: Setup credentials
         run: |
           mkdir -p ~/.pub-cache
@@ -22,6 +22,6 @@ jobs:
           }
           EOF
       - name: fomarting files
-        run : dart format --output=none  .
+        run : flutter format --output=none  .
       - name: Publish package
-        run: pub publish -f
+        run: flutter publish -f

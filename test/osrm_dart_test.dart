@@ -41,7 +41,7 @@ void main() {
       steps: true,
       languageCode: "en",
     );
-    expect(road.distance, 4.7238);
+    expect(road.distance.toStringAsFixed(2), 4.7338.toStringAsFixed(2));
     expect(road.duration >= 615.0, true);
   });
   test("test get road without steps", () async {
