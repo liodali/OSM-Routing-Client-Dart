@@ -1,5 +1,7 @@
-import '../../routing_client_dart.dart';
-import '../utilities/utils.dart';
+import 'package:routing_client_dart/src/models/lng_lat.dart';
+import 'package:routing_client_dart/src/models/road_helper.dart';
+import 'package:routing_client_dart/src/osrm_manager.dart';
+import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class Road {
   /// this attribute is the  distance of the route in km
@@ -43,7 +45,7 @@ class Road {
     _alternativesRoads = alternativesRoads;
   }
 
-  Road.fromOSRMJson(Map route, String languageCode)
+  Road.fromOSRMJson(Map route, Map<String, dynamic> instructionHelper)
       : distance = (double.parse(route["distance"].toString())) / 1000,
         duration = double.parse(route["duration"].toString()),
         polylineEncoded = route["geometry"].runtimeType == String
@@ -62,7 +64,7 @@ class Road {
     }
     if ((route).containsKey("legs")) {
       final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
-      for (var leg in mapLegs) {
+      mapLegs.asMap().forEach((indexLeg, leg) {
         final RoadLeg legRoad = RoadLeg(
           parseToDouble(leg["distance"]),
           parseToDouble(leg["duration"]),
@@ -73,40 +75,34 @@ class Road {
           RoadInstruction? lastNode;
           var lastName = "";
           for (var step in steps) {
-            Map<String, dynamic> maneuver = step["maneuver"];
-            List<double> locationJsonArray =
-                List.castFrom(maneuver["location"]);
-            final location = LngLat(
-              lat: locationJsonArray.last,
-              lng: locationJsonArray.first,
-            );
-            String direction = maneuver["type"];
-            String name = step["name"] ?? "";
-            String instruction = OSRMManager.instructionFromDirection(
-              direction,
-              maneuver,
-              name,
-              languageCode,
+            final roadStep = RoadStep.fromJson(step);
+            String instruction = OSRMManager.buildInstruction(
+              roadStep,
+              instructionHelper,
+              {
+                "legIndex": indexLeg,
+                "legCount": mapLegs.length - 1,
+              },
             );
             RoadInstruction roadInstruction = RoadInstruction(
               distance: double.parse(step["distance"].toString()),
               duration: double.parse(step["duration"].toString()),
               instruction: instruction,
-              location: location,
+              location: roadStep.maneuver.location,
             );
             if (lastNode != null &&
-                maneuvers[direction] != 2 &&
-                lastName == name) {
+                roadStep.maneuver.maneuverType == "new name" &&
+                lastName == roadStep.name) {
               lastNode.distance += distance;
               lastNode.duration += duration;
             } else {
               instructions.add(roadInstruction);
               lastNode = roadInstruction;
-              lastName = name;
+              lastName = roadStep.name;
             }
           }
         }
-      }
+      });
     }
   }
 
