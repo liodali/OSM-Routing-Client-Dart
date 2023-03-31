@@ -1,15 +1,27 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+import 'package:routing_client_dart/src/models/road_helper.dart';
+
 import '../models/lng_lat.dart';
 import '../models/road.dart';
 import 'computes_utilities.dart';
 
+enum Languages { en }
+
 enum RoadType { car, foot, bike }
+
 enum Profile { route, trip }
+
 enum Overview { simplified, full, none }
+
 enum Geometries { polyline, polyline6, geojson }
+
 enum SourceGeoPointOption {
   any,
   first,
 }
+
 enum DestinationGeoPointOption {
   any,
   last,
@@ -56,12 +68,16 @@ Future<Road> parseRoad(ParserRoadComputeArg data) async {
       List.castFrom(jsonResponse["routes"]);
 
   final route = routes.first;
-  road = Road.fromOSRMJson(route, languageCode);
+  final instructionHelper = await loadInstructionHelperJson(
+    language:
+        Languages.values.firstWhere((element) => element.name == languageCode),
+  );
+  road = Road.fromOSRMJson(route, instructionHelper);
 
   if (routes.length > 1 && alternative) {
     routes.removeAt(0);
     for (var route in routes) {
-      final alternative = Road.fromOSRMJson(route, languageCode);
+      final alternative = Road.fromOSRMJson(route, instructionHelper);
       road.addAlternativeRoute(alternative);
     }
   }
@@ -69,7 +85,8 @@ Future<Road> parseRoad(ParserRoadComputeArg data) async {
   return road;
 }
 
-/// parseTrip
+/// [parseTrip
+/// ]
 /// this method used to parse json get from trip service,
 /// the [data] is  [ParserTripComputeArg] that contain information need it to be parsed to [Road]
 /// such as json map and language that will be instruction
@@ -82,18 +99,19 @@ Future<Road> parseTrip(ParserTripComputeArg data) async {
   var road = Road.empty();
   final List<Map<String, dynamic>> routes =
       List.castFrom(jsonResponse["trips"]);
-
+  final instructionHelper = await loadInstructionHelperJson(
+    language:
+        Languages.values.firstWhere((element) => element.name == languageCode),
+  );
   final route = routes.first;
-  road = Road.fromOSRMJson(route, languageCode);
+  road = Road.fromOSRMJson(route, instructionHelper);
 
   return road;
 }
 
-double parseToDouble(dynamic value){
+double parseToDouble(dynamic value) {
   return double.parse(value.toString());
 }
-
-
 
 const String oSRMServer = "https://routing.openstreetmap.de";
 
@@ -132,3 +150,86 @@ const Map<String, int> maneuvers = {
   "ramp-slight right": 18,
   "ramp-straight": 19,
 };
+
+Future<Map<String, dynamic>> loadInstructionHelperJson({
+  Languages language = Languages.en,
+}) async {
+  final loadedJson = await rootBundle.loadString('assets/${language.name}.json');
+  return json.decode(loadedJson);
+}
+
+String tokenize(String instruction, Map<String, String> tokens) {
+  String output = instruction;
+  tokens.forEach((key, value) {
+    output = output.replaceAll('{$key}', value);
+  });
+  output = output.replaceAll(RegExp(r' {2}'), ' ');
+  return output;
+}
+
+String ordinalize({
+  required Map<String, dynamic> instructionsV5,
+  required String key,
+}) {
+  return (instructionsV5["constants"]["ordinalize"] as Map).containsKey(key)
+      ? instructionsV5["constants"]["ordinalize"][key]
+      : "";
+}
+
+String retrieveName(RoadStep step) {
+  final refN = step.ref?.split(';').first;
+  var n = step.name;
+  if (refN != null && refN == n) {
+    n = '';
+  }
+  if (n.isNotEmpty && refN != null) {
+    return '${step.name} ($refN)';
+  }
+  return n;
+}
+
+String directionFromDegree(double? degree) {
+  if (degree == null) {
+    return '';
+  }
+  if (degree >= 0 && degree <= 20) {
+    return 'north';
+  } else if (degree > 20 && degree < 70) {
+    return 'northeast';
+  } else if (degree >= 70 && degree <= 110) {
+    return 'east';
+  } else if (degree > 110 && degree < 160) {
+    return 'southeast';
+  } else if (degree >= 160 && degree <= 200) {
+    return 'south';
+  } else if (degree > 200 && degree < 250) {
+    return 'southwest';
+  } else if (degree >= 250 && degree <= 290) {
+    return 'west';
+  } else if (degree > 290 && degree < 340) {
+    return 'northwest';
+  } else if (degree >= 340 && degree <= 360) {
+    return 'north';
+  } else {
+    return '';
+  }
+}
+
+String? laneConfig(RoadStep step) {
+  if (step.intersections.isEmpty || step.intersections.first.lanes == null) {
+    return null;
+  }
+  final config = <String>[];
+  bool? validity;
+  step.intersections.first.lanes?.forEach((lane) {
+    if (validity == null || validity != lane.valid) {
+      if (lane.valid) {
+        config.add('o');
+      } else {
+        config.add('x');
+      }
+      validity = lane.valid;
+    }
+  });
+  return config.join();
+}
