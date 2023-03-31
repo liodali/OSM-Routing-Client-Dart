@@ -1,10 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routing_client_dart/routing_client_dart.dart';
+import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/osrm_manager.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test("transform waypoint to string", () {
     List<LngLat> waypoints = [
       LngLat(lng: 13.388860, lat: 52.517037),
@@ -767,5 +769,119 @@ void main() {
     ));
     expect(road.distance, 4.7238);
     expect(road.duration, 615.0);
+  });
+  test('test RoadStep', () {
+    final json = {
+      "geometry": "}b~`Hmzur@DPb@_@",
+      "maneuver": {
+        "bearing_after": 240,
+        "bearing_before": 0,
+        "location": [8.47287, 47.509114],
+        "modifier": "right",
+        "type": "depart"
+      },
+      "mode": "driving",
+      "driving_side": "right",
+      "name": "",
+      "intersections": [
+        {
+          "out": 0,
+          "entry": [true],
+          "bearings": [240],
+          "location": [8.47287, 47.509114]
+        }
+      ],
+      "weight": 16.9,
+      "duration": 9.4,
+      "distance": 31.2
+    };
+    final roadStep = RoadStep.fromJson(json);
+    expect(roadStep.maneuver.maneuverType, "depart");
+    expect(roadStep.maneuver.modifier, "right");
+    expect(roadStep.name, "");
+    expect(roadStep.destinations, null);
+    expect(roadStep.intersections.first.lanes, null);
+  });
+  test('test buildInstruction 1', () async {
+    final instructionHelper = await loadInstructionHelperJson();
+    final json = {
+      "geometry": "}b~`Hmzur@DPb@_@",
+      "maneuver": {
+        "bearing_after": 240,
+        "bearing_before": 0,
+        "location": [8.47287, 47.509114],
+        "modifier": "right",
+        "type": "depart"
+      },
+      "mode": "driving",
+      "driving_side": "right",
+      "name": "",
+      "intersections": [
+        {
+          "out": 0,
+          "entry": [true],
+          "bearings": [240],
+          "location": [8.47287, 47.509114]
+        }
+      ],
+      "weight": 16.9,
+      "duration": 9.4,
+      "distance": 31.2
+    };
+    final roadStep = RoadStep.fromJson(json);
+    final instruction = OSRMManager.buildInstruction(
+      roadStep,
+      instructionHelper,
+      {
+        "legIndex": 0,
+        "legCount": 1,
+      },
+    );
+    expect(instruction, "Head north");
+  });
+  test('test buildInstruction 2', () async {
+    final instructionHelper = await loadInstructionHelperJson();
+    final json = {
+      "geometry": "mh~`Hgqur@KJUHg@POBM@SCGAIEQOKSEEM]EGMYGOG[",
+      "maneuver": {
+        "bearing_after": 329,
+        "bearing_before": 322,
+        "location": [8.471398, 47.509993],
+        "modifier": "straight",
+        "type": "new name"
+      },
+      "mode": "driving",
+      "driving_side": "right",
+      "name": "Binzmühlestrasse",
+      "intersections": [
+        {
+          "out": 2,
+          "in": 0,
+          "entry": [false, true, true],
+          "bearings": [135, 240, 330],
+          "location": [8.471398, 47.509993]
+        },
+        {
+          "out": 0,
+          "in": 1,
+          "entry": [true, false, true],
+          "bearings": [30, 195, 300],
+          "location": [8.471227, 47.510695]
+        }
+      ],
+      "weight": 14.1,
+      "duration": 14.1,
+      "distance": 157.6
+    };
+    final roadStep = RoadStep.fromJson(json);
+    final instruction = OSRMManager.buildInstruction(
+      roadStep,
+      instructionHelper,
+      {
+        "legIndex": 0,
+        "legCount": 1,
+      },
+    );
+    expect(instruction, "Continue onto Binzmühlestrasse");
   });
 }
