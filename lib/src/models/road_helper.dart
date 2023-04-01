@@ -19,8 +19,8 @@ class RoadStep {
         destinations = json['destinations'],
         exits = json['exits'],
         maneuver = Maneuver.fromJson(json['maneuver']!),
-        duration = json['duration']!,
-        distance = json['distance']!,
+        duration = double.parse(json['duration'].toString()),
+        distance = double.parse(json['distance'].toString()),
         drivingSide = json['driving_side']!,
         intersections = List<Intersections>.from(
           (json['intersections'] as List<dynamic>).map(
@@ -36,7 +36,7 @@ class Intersections {
 
   Intersections.fromJson(Map<String, dynamic> json)
       : location = LngLat.fromList(
-          lnglat: json['location'],
+          lnglat: (json['location'] as List).cast<double>(),
         ),
         bearings = List<int>.from(json['bearings']),
         lanes = json['lanes'] != null
@@ -58,7 +58,7 @@ class Maneuver {
 
   Maneuver.fromJson(Map<String, dynamic> json)
       : location = LngLat.fromList(
-          lnglat: json['location'],
+          lnglat: (json['location'] as List).cast<double>(),
         ),
         maneuverType = json['type']!,
         modifier = json['modifier'],
