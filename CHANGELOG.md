@@ -1,3 +1,4 @@
+## 0.4.0: re-implementation for buildInstruction
 ## 0.3.2: update dependency
 ## 0.3.1:
 * fix parse route when configure geometry to geojson
