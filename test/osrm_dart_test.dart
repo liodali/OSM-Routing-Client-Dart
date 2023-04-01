@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:routing_client_dart/routing_client_dart.dart';
+import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/osrm_mixin.dart';
+import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/osrm_manager.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
@@ -43,6 +43,7 @@ void main() {
       String waypoint =
           "13.388860,52.517037;13.397634,52.529407;13.428555,52.523219";
       final urlGenerated = manager.generatePath(
+        oSRMServer,
         waypoint,
         geometries: Geometries.polyline,
         steps: true,
