@@ -23,7 +23,7 @@ class Road {
   List<Road>? _alternativesRoads;
   bool _isError = false;
   RoadDetailInfo details = RoadDetailInfo();
-
+  List<List<RoadStep>> _roadLegs = <List<RoadStep>>[];
   Road.empty()
       : distance = 0.0,
         duration = 0.0,
@@ -45,8 +45,9 @@ class Road {
     _alternativesRoads = alternativesRoads;
   }
 
-  Road.fromOSRMJson(Map route, Map<String, dynamic> instructionHelper)
-      : distance = (double.parse(route["distance"].toString())) / 1000,
+  Road.fromOSRMJson({
+    required Map route,
+  })  : distance = (double.parse(route["distance"].toString())) / 1000,
         duration = double.parse(route["duration"].toString()),
         polylineEncoded = route["geometry"].runtimeType == String
             ? route["geometry"] as String
@@ -74,33 +75,24 @@ class Road {
           final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
           RoadInstruction? lastNode;
           var lastName = "";
+          final List<RoadStep> roadSteps = [];
           for (var step in steps) {
             final roadStep = RoadStep.fromJson(step);
-            String instruction = OSRMManager.buildInstruction(
-              roadStep,
-              instructionHelper,
-              {
-                "legIndex": indexLeg,
-                "legCount": mapLegs.length - 1,
-              },
-            );
-            RoadInstruction roadInstruction = RoadInstruction(
-              distance: double.parse(step["distance"].toString()),
-              duration: double.parse(step["duration"].toString()),
-              instruction: instruction,
-              location: roadStep.maneuver.location,
-            );
+            roadSteps.add(roadStep);
+            // String instruction = OSRMManager.
+
             if (lastNode != null &&
                 roadStep.maneuver.maneuverType == "new name" &&
                 lastName == roadStep.name) {
               lastNode.distance += distance;
               lastNode.duration += duration;
             } else {
-              instructions.add(roadInstruction);
-              lastNode = roadInstruction;
+              //instructions.add(roadInstruction);
+              //lastNode = roadInstruction;
               lastName = roadStep.name;
             }
           }
+          _roadLegs.add(roadSteps);
         }
       });
     }
@@ -135,6 +127,10 @@ class Road {
       polylineEncoded: polylineEncoded ?? this.polylineEncoded,
     ).._alternativesRoads = alternativesRoads;
   }
+}
+
+extension PrivateRoad on Road {
+  List<List<RoadStep>> get roadLegs => _roadLegs;
 }
 
 class RoadInstruction {
