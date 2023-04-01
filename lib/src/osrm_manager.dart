@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:routing_client_dart/src/models/osrm_mixin.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'utilities/computes_utilities.dart';
 
-import 'models/lng_lat.dart';
-import 'models/road.dart';
-import 'utilities/localisation_instruction.dart';
-import 'utilities/utils.dart';
+import 'package:routing_client_dart/src/models/lng_lat.dart';
+import 'package:routing_client_dart/src/models/road.dart';
+import 'package:routing_client_dart/src/utilities/utils.dart';
 
 /// [OSRMManager]
 ///
@@ -21,7 +21,7 @@ import 'utilities/utils.dart';
 /// [server]   : (String) represent the osm server or any custom server that based of OSRM project
 ///
 /// [roadType] : (RoadType) represent the type of road that you want to use, car or foot,bike only for osm servers
-class OSRMManager {
+class OSRMManager with OSRMHelper {
   final String server;
   final RoadType roadType;
   final dio = Dio();
@@ -52,7 +52,7 @@ class OSRMManager {
     bool steps = true,
     Overview overview = Overview.full,
     Geometries geometries = Geometries.geojson,
-    String languageCode = "en",
+    Languages language = Languages.en,
   }) async {
     String path = generatePath(
       waypoints.toWaypoints(),
@@ -61,7 +61,6 @@ class OSRMManager {
       geometries: geometries,
     );
     path += "&alternatives=$alternative";
-
     final response = await dio.get(path);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = response.data;
@@ -69,7 +68,7 @@ class OSRMManager {
         parseRoad,
         ParserRoadComputeArg(
           jsonRoad: responseJson,
-          langCode: languageCode,
+          langCode: language.name,
           alternative: alternative,
         ),
       );
@@ -94,7 +93,7 @@ class OSRMManager {
     bool steps = true,
     Overview overview = Overview.full,
     Geometries geometries = Geometries.polyline,
-    String languageCode = "en",
+    Languages language = Languages.en,
   }) async {
     if (!roundTrip &&
         (source == SourceGeoPointOption.any ||
@@ -118,143 +117,40 @@ class OSRMManager {
         parseTrip,
         ParserTripComputeArg(
           tripJson: responseJson,
-          langCode: languageCode,
+          langCode: language.name,
         ),
       );
     } else {
       return Road.withError();
     }
   }
-
-  static String buildInstruction(
-    RoadStep step,
-    Map<String, dynamic> instructionsHelper,
-    Map<String, dynamic> option,
-  ) {
-    var type = step.maneuver.maneuverType;
-    final instructionsV5 = instructionsHelper['v5'] as Map<String, dynamic>;
-    if (!instructionsV5.containsKey(type)) {
-      type = 'turn';
-    }
-
-    var instructionObject = (instructionsV5[type]
-        as Map<String, dynamic>)['default'] as Map<String, dynamic>;
-    final omitSide = type == 'off ramp' &&
-        ((step.maneuver.modifier?.indexOf(step.drivingSide) ?? 0) >= 0);
-    if (step.maneuver.modifier != null &&
-        (instructionsV5[type] as Map<String, dynamic>)
-            .containsKey(step.maneuver.modifier!) &&
-        !omitSide) {
-      instructionObject = (instructionsV5[type]
-              as Map<String, dynamic>)[step.maneuver.modifier!]
-          as Map<String, dynamic>;
-    }
-    String? laneInstruction;
-    switch (step.maneuver.maneuverType) {
-      case 'use lane':
-        final lane = laneConfig(step);
-        if (lane != null) {
-          laneInstruction = (((instructionsV5[type]
-                  as Map<String, dynamic>)['constants']
-              as Map<String, dynamic>)['lanes'] as Map<String, String>)[lane];
-        } else {
-          instructionObject = ((instructionsV5[type]
-                  as Map<String, dynamic>)[step.maneuver.maneuverType]
-              as Map<String, dynamic>)['no_lanes'] as Map<String, dynamic>;
-        }
-        break;
-      case 'rotary':
-      case 'roundabout':
-        if (step.rotaryName != null &&
-            step.maneuver.exit != null &&
-            instructionObject.containsKey('name_exit')) {
-          instructionObject =
-              instructionObject['name_exit'] as Map<String, dynamic>;
-        } else if (step.rotaryName != null &&
-            instructionObject.containsKey('name')) {
-          instructionObject = instructionObject['name'] as Map<String, dynamic>;
-        } else if (step.maneuver.exit != null &&
-            instructionObject.containsKey('exit')) {
-          instructionObject = instructionObject['exit'] as Map<String, dynamic>;
-        } else {
-          instructionObject =
-              instructionObject['default'] as Map<String, dynamic>;
-        }
-        break;
-      default:
-        break;
-    }
-
-    final name = retrieveName(step);
-    var instruction = instructionObject['default'] as String;
-    if (step.destinations != null &&
-        step.exits != null &&
-        instructionObject.containsKey('exit_destination')) {
-      instruction = instructionObject['exit_destination'] as String;
-    } else if (step.destinations != null &&
-        instructionObject.containsKey('destination')) {
-      instruction = instructionObject['destination'] as String;
-    } else if (step.exits != null && instructionObject.containsKey('exit')) {
-      instruction = instructionObject['exit'] as String;
-    } else if (name.isNotEmpty && instructionObject.containsKey('name')) {
-      instruction = instructionObject['name'] as String;
-    }
-    var firstDestination = "";
-    try {
-      if (step.destinations != null) {
-        var destinationSplits = step.destinations!.split(':');
-        var destinationRef = destinationSplits.first.split(',').first;
-        if (destinationSplits.length > 1) {
-          var destination = destinationSplits[1].split(',').first;
-          firstDestination = destination;
-          if (destination.isNotEmpty && destinationRef.isNotEmpty) {
-            firstDestination = "$destinationRef: $destination";
-          } else {
-            if (destination.isNotEmpty) {
-              firstDestination = "$destinationRef: $destination";
-            } else if (destinationRef.isNotEmpty) {
-              firstDestination = destinationRef;
-            }
-          }
-        } else {
-          firstDestination = destinationRef;
-        }
+  /// [buildInstructions]
+  /// 
+  /// this method to generate instructions of specific [road]
+  Future<List<RoadInstruction>> buildInstructions(Road road) async {
+    final legs = road.roadLegs;
+    final instructionsHelper = await loadInstructionHelperJson();
+    final List<RoadInstruction> instructions = [];
+    legs.asMap().forEach((indexLeg, listSteps) {
+      for (var step in listSteps) {
+        final instruction = buildInstruction(
+          step,
+          instructionsHelper,
+          {
+            "legIndex": indexLeg,
+            "legCount": legs.length - 1,
+          },
+        );
+        RoadInstruction roadInstruction = RoadInstruction(
+          distance: step.distance,
+          duration: step.duration,
+          instruction: instruction,
+          location: step.maneuver.location,
+        );
+        instructions.add(roadInstruction);
       }
-    } catch (e) {
-      print(e);
-    }
-    String modifierInstruction = "";
-    if (step.maneuver.modifier != null) {
-      modifierInstruction =
-          (instructionsV5["constants"] as Map<String, dynamic>)["modifier"]
-              [step.maneuver.modifier] as String;
-    }
-
-    String nthWaypoint = "";
-    if (option["legIndex"] != null &&
-        option["legIndex"] != -1 &&
-        option["legIndex"] != option["legCount"]) {
-      String key = (option["legIndex"] + 1).toString();
-      nthWaypoint = ordinalize(instructionsV5: instructionsV5, key: key);
-    }
-
-    String exitOrdinalise = "";
-    if (step.maneuver.exit != null) {
-      exitOrdinalise = ordinalize(
-          instructionsV5: instructionsV5, key: step.maneuver.exit.toString());
-    }
-
-    return tokenize(instruction, {
-      "way_name": name,
-      "destination": firstDestination,
-      "exit": step.exits?.split(",").first ?? "",
-      "exit_number": exitOrdinalise,
-      "rotary_name": step.rotaryName ?? "",
-      "lane_instruction": laneInstruction ?? "",
-      "modifier": modifierInstruction,
-      "direction": directionFromDegree(step.maneuver.bearingBefore),
-      "nth": nthWaypoint,
     });
+    return instructions;
   }
 }
 
