@@ -12,6 +12,11 @@ class LngLat {
     required this.lat,
   });
 
+  LngLat.fromList({
+    required List<double> lnglat,
+  })  : assert(lnglat.length == 2),
+        lat = lnglat.last,
+        lng = lnglat.first;
   @override
   String toString() => "$lng,$lat";
 }

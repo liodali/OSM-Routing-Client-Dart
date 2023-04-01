@@ -1,5 +1,5 @@
 ## Routing Client Dart Package
-![pub](https://img.shields.io/badge/pub-v0.3.3-orange)
+![pub](https://img.shields.io/badge/pub-v0.4.0-orange)
 
 
 > Package for osm routing client api 
@@ -17,7 +17,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^0.3.3
+      routing_client_dart: ^0.4.0
 
 
 ### example for route service
@@ -55,4 +55,10 @@ List<LngLat> waypoints = [
       steps: true,
       languageCode: "en",
     );
+```
+
+### build instruction from road
+
+```dart
+    final instructions = await manager.buildInstructions(road);
 ```

@@ -1,5 +1,6 @@
-import '../../routing_client_dart.dart';
-import '../utilities/utils.dart';
+import 'package:routing_client_dart/src/models/lng_lat.dart';
+import 'package:routing_client_dart/src/models/road_helper.dart';
+import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class Road {
   /// this attribute is the  distance of the route in km
@@ -21,7 +22,7 @@ class Road {
   List<Road>? _alternativesRoads;
   bool _isError = false;
   RoadDetailInfo details = RoadDetailInfo();
-
+  final List<List<RoadStep>> _roadLegs = <List<RoadStep>>[];
   Road.empty()
       : distance = 0.0,
         duration = 0.0,
@@ -43,8 +44,9 @@ class Road {
     _alternativesRoads = alternativesRoads;
   }
 
-  Road.fromOSRMJson(Map route, String languageCode)
-      : distance = (double.parse(route["distance"].toString())) / 1000,
+  Road.fromOSRMJson({
+    required Map route,
+  })  : distance = (double.parse(route["distance"].toString())) / 1000,
         duration = double.parse(route["duration"].toString()),
         polylineEncoded = route["geometry"].runtimeType == String
             ? route["geometry"] as String
@@ -62,7 +64,7 @@ class Road {
     }
     if ((route).containsKey("legs")) {
       final List<Map<String, dynamic>> mapLegs = List.castFrom(route["legs"]);
-      for (var leg in mapLegs) {
+      mapLegs.asMap().forEach((indexLeg, leg) {
         final RoadLeg legRoad = RoadLeg(
           parseToDouble(leg["distance"]),
           parseToDouble(leg["duration"]),
@@ -72,41 +74,26 @@ class Road {
           final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
           RoadInstruction? lastNode;
           var lastName = "";
+          final List<RoadStep> roadSteps = [];
           for (var step in steps) {
-            Map<String, dynamic> maneuver = step["maneuver"];
-            List<double> locationJsonArray =
-                List.castFrom(maneuver["location"]);
-            final location = LngLat(
-              lat: locationJsonArray.last,
-              lng: locationJsonArray.first,
-            );
-            String direction = maneuver["type"];
-            String name = step["name"] ?? "";
-            String instruction = OSRMManager.instructionFromDirection(
-              direction,
-              maneuver,
-              name,
-              languageCode,
-            );
-            RoadInstruction roadInstruction = RoadInstruction(
-              distance: double.parse(step["distance"].toString()),
-              duration: double.parse(step["duration"].toString()),
-              instruction: instruction,
-              location: location,
-            );
+            final roadStep = RoadStep.fromJson(step);
+            roadSteps.add(roadStep);
+            // String instruction = OSRMManager.
+
             if (lastNode != null &&
-                maneuvers[direction] != 2 &&
-                lastName == name) {
+                roadStep.maneuver.maneuverType == "new name" &&
+                lastName == roadStep.name) {
               lastNode.distance += distance;
               lastNode.duration += duration;
             } else {
-              instructions.add(roadInstruction);
-              lastNode = roadInstruction;
-              lastName = name;
+              //instructions.add(roadInstruction);
+              //lastNode = roadInstruction;
+              lastName = roadStep.name;
             }
           }
+          _roadLegs.add(roadSteps);
         }
-      }
+      });
     }
   }
 
@@ -139,6 +126,10 @@ class Road {
       polylineEncoded: polylineEncoded ?? this.polylineEncoded,
     ).._alternativesRoads = alternativesRoads;
   }
+}
+
+extension PrivateRoad on Road {
+  List<List<RoadStep>> get roadLegs => _roadLegs;
 }
 
 class RoadInstruction {
