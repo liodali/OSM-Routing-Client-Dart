@@ -24,7 +24,7 @@ import 'package:routing_client_dart/src/utilities/utils.dart';
 class OSRMManager with OSRMHelper {
   final String server;
   final RoadType roadType;
-  final dio = Dio();
+  late final Dio dio;
 
   OSRMManager()
       : server = oSRMServer,
@@ -33,7 +33,10 @@ class OSRMManager with OSRMHelper {
   OSRMManager.custom({
     required this.server,
     this.roadType = RoadType.car,
-  });
+    Dio? dio,
+  }){
+    this.dio= dio ?? Dio();
+  }
 
   /// [getRoad]
   ///
