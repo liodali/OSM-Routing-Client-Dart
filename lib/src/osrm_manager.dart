@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:routing_client_dart/src/models/osrm_mixin.dart';
-import 'package:routing_client_dart/src/models/road_helper.dart';
-import 'utilities/computes_utilities.dart';
+import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road.dart';
@@ -58,6 +57,7 @@ class OSRMManager with OSRMHelper {
     Languages language = Languages.en,
   }) async {
     String path = generatePath(
+      server,
       waypoints.toWaypoints(),
       steps: steps,
       overview: overview,
@@ -104,6 +104,7 @@ class OSRMManager with OSRMHelper {
       return Road.empty();
     }
     String urlReq = generateTripPath(
+      oSRMServer,
       waypoints.toWaypoints(),
       roadType: roadType,
       roundTrip: roundTrip,
@@ -154,48 +155,5 @@ class OSRMManager with OSRMHelper {
       }
     });
     return instructions;
-  }
-}
-
-extension OSRMPrivateFunct on OSRMManager {
-  @visibleForTesting
-  String generatePath(
-    String waypoints, {
-    Profile profile = Profile.route,
-    RoadType roadType = RoadType.car,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.polyline,
-  }) {
-    String url =
-        "$server/routed-${roadType.value}/${profile.name}/v1/diving/$waypoints";
-    var option = "";
-    option += "steps=$steps&";
-    option += "overview=${overview.value}&";
-    option += "geometries=${geometries.value}";
-    return "$url?$option";
-  }
-
-  @visibleForTesting
-  String generateTripPath(
-    String waypoints, {
-    RoadType roadType = RoadType.car,
-    bool roundTrip = true,
-    SourceGeoPointOption source = SourceGeoPointOption.any,
-    DestinationGeoPointOption destination = DestinationGeoPointOption.any,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.polyline,
-  }) {
-    String baseGeneratedUrl = generatePath(
-      waypoints,
-      roadType: roadType,
-      steps: steps,
-      overview: overview,
-      profile: Profile.trip,
-      geometries: geometries,
-    );
-
-    return "$baseGeneratedUrl&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";
   }
 }

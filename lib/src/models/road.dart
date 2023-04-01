@@ -1,6 +1,5 @@
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
-import 'package:routing_client_dart/src/osrm_manager.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class Road {
@@ -23,7 +22,7 @@ class Road {
   List<Road>? _alternativesRoads;
   bool _isError = false;
   RoadDetailInfo details = RoadDetailInfo();
-  List<List<RoadStep>> _roadLegs = <List<RoadStep>>[];
+  final List<List<RoadStep>> _roadLegs = <List<RoadStep>>[];
   Road.empty()
       : distance = 0.0,
         duration = 0.0,
