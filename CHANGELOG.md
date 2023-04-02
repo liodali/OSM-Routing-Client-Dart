@@ -1,3 +1,6 @@
+## 0.4.1: fix bugs
+* fix uninitialized dio in OSRMManager default constructor
+* remove instructions from road classes
 ## 0.4.0: re-implementation for buildInstruction
 ## 0.3.2: update dependency
 ## 0.3.1:
