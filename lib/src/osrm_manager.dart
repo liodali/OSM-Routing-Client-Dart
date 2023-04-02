@@ -27,14 +27,15 @@ class OSRMManager with OSRMHelper {
 
   OSRMManager()
       : server = oSRMServer,
-        roadType = RoadType.car;
+        roadType = RoadType.car,
+        dio = Dio();
 
   OSRMManager.custom({
     required this.server,
     this.roadType = RoadType.car,
     Dio? dio,
-  }){
-    this.dio= dio ?? Dio();
+  }) {
+    this.dio = dio ?? Dio();
   }
 
   /// [getRoad]
@@ -128,8 +129,9 @@ class OSRMManager with OSRMHelper {
       return Road.withError();
     }
   }
+
   /// [buildInstructions]
-  /// 
+  ///
   /// this method to generate instructions of specific [road]
   Future<List<RoadInstruction>> buildInstructions(Road road) async {
     final legs = road.roadLegs;
