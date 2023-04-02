@@ -88,7 +88,8 @@ void main() {
         steps: false,
         language: Languages.en,
       );
-      expect(road.instructions.isEmpty, true);
+      expect(
+          road.roadLegs.where((element) => element.isNotEmpty).isEmpty, true);
     });
     test("test if polyline not null when geometry is geojson", () async {
       List<LngLat> waypoints = [
