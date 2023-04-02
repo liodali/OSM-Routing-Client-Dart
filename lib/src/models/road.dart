@@ -2,15 +2,13 @@ import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
+/// [Road]
 class Road {
   /// this attribute is the  distance of the route in km
   final double distance;
 
   /// this attribute is the duration of route in second
   final double duration;
-
-  /// the instruction that user should follow to reach t destination from started location
-  List<RoadInstruction> instructions = [];
 
   /// this is the encoded list of lnglat that should decoded to get list of geopoint
   /// this attribute can be null if the geometry == geojson
@@ -37,7 +35,6 @@ class Road {
   Road({
     required this.distance,
     required this.duration,
-    required this.instructions,
     required this.polylineEncoded,
     List<Road>? alternativesRoads,
   }) {
@@ -122,7 +119,6 @@ class Road {
     return Road(
       distance: distance ?? this.distance,
       duration: duration ?? this.duration,
-      instructions: instructions ?? this.instructions,
       polylineEncoded: polylineEncoded ?? this.polylineEncoded,
     ).._alternativesRoads = alternativesRoads;
   }
