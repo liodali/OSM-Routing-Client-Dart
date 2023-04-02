@@ -108,7 +108,7 @@ mixin OSRMHelper {
     Languages language = Languages.en,
   }) async {
     final loadedJson = await rootBundle
-        .loadString('assets/${language.name}.json', cache: false);
+        .loadString('packages/routing_client_dart/src/assets/${language.name}.json', cache: false);
     return json.decode(loadedJson);
   }
 
