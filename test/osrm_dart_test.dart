@@ -138,7 +138,6 @@ void main() {
     });
   });
   test("test parser", () async {
-    final osrmHelper = FakeOSRMMixin();
     final responseApi = {
       "code": "Ok",
       "waypoints": [
@@ -807,7 +806,7 @@ void main() {
         }
       ]
     };
-    Road road = await osrmHelper.parseRoad(ParserRoadComputeArg(
+    Road road = await parseRoad(ParserRoadComputeArg(
       jsonRoad: responseApi,
       langCode: "en",
     ));
