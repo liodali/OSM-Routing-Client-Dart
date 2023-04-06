@@ -1,6 +1,6 @@
 name: routing_client_dart
 description: Dart Package for Routing Client Api ( support OSRM project)
-version: 0.4.1
+version: 0.4.3
 homepage: https://github.com/liodali/OSM-Routing-Client-Dart
 
 environment:
@@ -25,7 +25,7 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   assets:
-      - assets/en.json
+      - packages/routing_client_dart/src/assets/en.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #

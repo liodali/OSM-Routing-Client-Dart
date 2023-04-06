@@ -1,3 +1,7 @@
+## 0.4.3: fix bug #16
+* fix compute `parseRoad`in mobile platform
+## 0.4.2: fix bugs
+* fix load json for instructionsHelper
 ## 0.4.1: fix bugs
 * fix uninitialized dio in OSRMManager default constructor
 * remove instructions from road classes
