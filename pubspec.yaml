@@ -4,8 +4,7 @@ version: 0.4.3
 homepage: https://github.com/liodali/OSM-Routing-Client-Dart
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:

@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:routing_client_dart/routing_client_dart.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
-import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 mixin OSRMHelper {

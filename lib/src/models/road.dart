@@ -69,7 +69,7 @@ class Road {
         details.roadLegs.add(legRoad);
         if ((leg).containsKey("steps")) {
           final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
-          RoadInstruction? lastNode;
+          //RoadInstruction? lastNode;
           var lastName = "";
           final List<RoadStep> roadSteps = [];
           for (var step in steps) {
@@ -77,12 +77,11 @@ class Road {
             roadSteps.add(roadStep);
             // String instruction = OSRMManager.
 
-            if (lastNode != null &&
-                roadStep.maneuver.maneuverType == "new name" &&
-                lastName == roadStep.name) {
-              lastNode.distance += distance;
-              lastNode.duration += duration;
-            } else {
+            if (roadStep.maneuver.maneuverType != "new name" &&
+                lastName != roadStep.name) {
+            //   lastNode.distance += distance;
+            //   lastNode.duration += duration;
+            // } else {
               //instructions.add(roadInstruction);
               //lastNode = roadInstruction;
               lastName = roadStep.name;
