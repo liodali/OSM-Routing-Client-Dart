@@ -4,7 +4,11 @@ import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 
 const String oSRMServer = "https://routing.openstreetmap.de";
 const double earthRadius = 6371009;
-typedef TurnByTurnInformation = ({ RoadInstruction currentInstruction, RoadInstruction? nextInstruction, double distance});
+typedef TurnByTurnInformation = ({
+  RoadInstruction currentInstruction,
+  RoadInstruction? nextInstruction,
+  double distance
+});
 
 enum Languages {
   en,

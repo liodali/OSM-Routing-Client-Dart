@@ -142,7 +142,8 @@ class OSRMManager with OSRMHelper {
     Languages languages = Languages.en,
   }) async {
     final legs = road.roadLegs;
-    final instructionsHelper = await loadInstructionHelperJson();
+    final instructionsHelper =
+        await loadInstructionHelperJson(language: languages);
     final List<RoadInstruction> instructions = [];
     legs.asMap().forEach((indexLeg, listSteps) {
       for (var step in listSteps) {
@@ -176,7 +177,6 @@ class OSRMManager with OSRMHelper {
   Future<bool> isOnPath(
     Road road,
     LngLat currentLocation, {
-    Languages languages = Languages.en,
     double tolerance = 0.1,
   }) async {
     var polyline = road.polyline;
@@ -203,11 +203,14 @@ class OSRMManager with OSRMHelper {
   /// this method will provide the [TurnByTurnInformation] from [currentLocation],[instructions] and [road]
   /// which contain current instruction,next instruction and distance between [currentLocation] and [nextInstruction.location]
   /// the distance will in meters
+  ///
+  /// Note that [tolerance] can effect the result which used to mesure location in road which close to [currentLocation]
+  ///
+  /// return Future of TurnByTurnInformation, can be null also if current location not in Path
   Future<TurnByTurnInformation?> nextInstruction(
     List<RoadInstruction> instructions,
     Road road,
     LngLat currentLocation, {
-    Languages languages = Languages.en,
     double tolerance = 0.1,
   }) async {
     var polyline = road.polyline;

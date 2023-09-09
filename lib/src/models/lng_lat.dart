@@ -38,7 +38,7 @@ class LngLat {
 
 extension ExtLngLat on LngLat {
   double distance({required LngLat location}) {
-  final radianLocation = LngLatRadians.fromLngLat(location: location);
+    final radianLocation = LngLatRadians.fromLngLat(location: location);
     final currentRadianLocation = LngLatRadians.fromLngLat(location: this);
     return earthRadius *
         MathUtil.inverseHaversine(

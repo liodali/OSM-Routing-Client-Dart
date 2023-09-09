@@ -29,7 +29,6 @@ class LngLatRadians {
       longitude: longitude - right.longitude,
     );
   }
-   
 }
 
 extension on LocationRadians {
@@ -42,12 +41,13 @@ extension on LngLatRadians {
         lat: latitude.toDegree(),
       );
 }
+
 extension ExtLngLat on LngLat {
   LngLatRadians get lngLatRadian => LngLatRadians.fromLngLat(
         location: this,
       );
 }
-extension on double {
-    double get radian => this * (pi/180 );
 
+extension on double {
+  double get radian => this * (pi / 180);
 }
