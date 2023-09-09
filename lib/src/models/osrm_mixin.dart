@@ -5,7 +5,6 @@ import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 mixin OSRMHelper {
-
   String generatePath(
     String server,
     String waypoints, {
@@ -48,12 +47,12 @@ mixin OSRMHelper {
     return "$baseGeneratedUrl&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";
   }
 
-
   Future<Map<String, dynamic>> loadInstructionHelperJson({
     Languages language = Languages.en,
   }) async {
-    final loadedJson = await rootBundle
-        .loadString('packages/routing_client_dart/src/assets/${language.name}.json', cache: false);
+    final loadedJson = await rootBundle.loadString(
+        'packages/routing_client_dart/src/assets/${language.name}.json',
+        cache: false);
     return json.decode(loadedJson);
   }
 
@@ -129,6 +128,9 @@ mixin OSRMHelper {
       instruction = instructionObject['exit'] as String;
     } else if (name.isNotEmpty && instructionObject.containsKey('name')) {
       instruction = instructionObject['name'] as String;
+    } else if (option['waypointname'] != null &&
+        instructionObject.containsKey('named')) {
+      instruction = instructionObject['named'] as String;
     }
     var firstDestination = "";
     try {

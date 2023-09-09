@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
+import 'package:routing_client_dart/src/models/math_utils.dart';
 import 'package:routing_client_dart/src/models/osrm_mixin.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 
@@ -133,7 +137,10 @@ class OSRMManager with OSRMHelper {
   /// [buildInstructions]
   ///
   /// this method to generate instructions of specific [road]
-  Future<List<RoadInstruction>> buildInstructions(Road road) async {
+  Future<List<RoadInstruction>> buildInstructions(
+    Road road, {
+    Languages languages = Languages.en,
+  }) async {
     final legs = road.roadLegs;
     final instructionsHelper = await loadInstructionHelperJson();
     final List<RoadInstruction> instructions = [];
@@ -153,9 +160,182 @@ class OSRMManager with OSRMHelper {
           instruction: instruction,
           location: step.maneuver.location,
         );
-        instructions.add(roadInstruction);
+        if (indexLeg < legs.length - 1 && !instruction.contains("arrive")) {
+          instructions.add(roadInstruction);
+        } else if (indexLeg == legs.length - 1) {
+          instructions.add(roadInstruction);
+        }
       }
     });
     return instructions;
+  }
+
+  /// [isOnPath]
+  ///
+  /// this method to generate instructions of specific [road]
+  Future<bool> isOnPath(
+    Road road,
+    LngLat currentLocation, {
+    Languages languages = Languages.en,
+    double tolerance = 0.1,
+  }) async {
+    var polyline = road.polyline;
+    if (road.polyline == null && road.polylineEncoded == null) {
+      throw Exception(
+          'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
+    } else if (road.polyline == null && road.polylineEncoded != null) {
+      polyline = road.decodePoylinesGeometry(road.polylineEncoded!);
+    }
+    final indexOfNextLocation = indexOfNextLocationFromRoad(
+      currentLocation,
+      polyline!,
+      tolerance: tolerance,
+    );
+    if (indexOfNextLocation == -1 ||
+        indexOfNextLocation > polyline.length - 1) {
+      return false;
+    }
+    return true;
+  }
+
+  /// [nextInstruction]
+  ///
+  /// this method will provide the [TurnByTurnInformation] from [currentLocation],[instructions] and [road]
+  /// which contain current instruction,next instruction and distance between [currentLocation] and [nextInstruction.location]
+  /// the distance will in meters
+  Future<TurnByTurnInformation?> nextInstruction(
+    List<RoadInstruction> instructions,
+    Road road,
+    LngLat currentLocation, {
+    Languages languages = Languages.en,
+    double tolerance = 0.1,
+  }) async {
+    var polyline = road.polyline;
+    if (road.polyline == null && road.polylineEncoded == null) {
+      throw Exception(
+          'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
+    } else if (road.polyline == null && road.polylineEncoded != null) {
+      polyline = road.decodePoylinesGeometry(road.polylineEncoded!);
+    }
+    final indexOfNextLocation = indexOfNextLocationFromRoad(
+      currentLocation,
+      polyline!,
+      tolerance: tolerance,
+    );
+    if (indexOfNextLocation == -1 ||
+        indexOfNextLocation > polyline.length - 1) {
+      return null;
+    }
+    final nextLocation = polyline[indexOfNextLocation];
+
+    var currentInstruction = instructions.cast<RoadInstruction?>().firstWhere(
+        (element) => element != null && element.location == nextLocation,
+        orElse: () => null);
+    currentInstruction ??=
+        closeInstructionToLocation(instructions, nextLocation);
+
+    if (currentInstruction == null) {
+      return null;
+    }
+
+    final nextInstruction =
+        instructions[instructions.indexOf(currentInstruction) + 1];
+    return (
+      currentInstruction: currentInstruction,
+      nextInstruction: nextInstruction,
+      distance: currentLocation.distance(location: nextInstruction.location),
+    );
+  }
+}
+
+extension RoadManagerUtils on OSRMManager {
+  /// [indexOfNextLocationFromRoad]
+  ///
+  /// this method will return int that index of next Location from [polylines] and current [location]
+  /// within a specified [tolerance].
+  ///
+  /// credit from [https://github.com/googlemaps/android-maps-utils/blob/main/library/src/main/java/com/google/maps/android/PolyUtil.java]
+  int indexOfNextLocationFromRoad(
+    LngLat location,
+    List<LngLat> polylines, {
+    bool closed = false,
+    bool geodesic = false,
+    double tolerance = 0.1,
+  }) {
+    if (polylines.isEmpty) {
+      return -1;
+    }
+    double toleranceCalc = tolerance / earthRadius;
+    double havTolerance = MathUtil.hav(tolerance / earthRadius);
+    final lngLatRadian = LngLatRadians.fromLngLat(
+      location: location,
+    );
+    final prev = polylines[closed ? polylines.length - 1 : 0];
+    final prevRadian = prev.lngLatRadian;
+    var idx = 0;
+
+    if (!geodesic) {
+      // } else {
+      final (minAcceptable, maxAcceptable) = (
+        lngLatRadian.latitude - toleranceCalc,
+        lngLatRadian.latitude + toleranceCalc
+      );
+      final (y1, y3) = (
+        MathUtil.mercator(prevRadian.latitude),
+        MathUtil.mercator(lngLatRadian.latitude)
+      );
+      final xtry = List.generate(
+        3,
+        (index) => 0.0,
+      );
+      for (final lngLat in polylines) {
+        final point2 = lngLat.lngLatRadian;
+        final y2 = MathUtil.mercator(point2.latitude);
+        if (max(prev.lat, point2.latitude) >= minAcceptable &&
+            min(prev.lat, point2.latitude) <= maxAcceptable) {
+          final x2 = MathUtil.wrap(
+            point2.longitude - prevRadian.longitude,
+            -pi,
+            pi,
+          );
+          final x3Base = MathUtil.wrap(
+            lngLatRadian.longitude - prevRadian.longitude,
+            -pi,
+            pi,
+          );
+          xtry[0] = x3Base;
+          xtry[1] = x3Base + (2 * pi);
+          xtry[2] = x3Base - (2 * pi);
+          for (final x3 in xtry) {
+            double dy = y2 - y1;
+            double len2 = x2 * x2 + dy * dy;
+            double t = len2 <= 0
+                ? 0
+                : MathUtil.clamp((x3 * x2 + (y3 - y1) * dy) / len2, 0, 1);
+            double xClosest = t * x2;
+            double yClosest = y1 + t * dy;
+            double latClosest = MathUtil.inverseMercator(yClosest);
+            double havDist = MathUtil.havDistance(
+                lngLatRadian.latitude, latClosest, x3 - xClosest);
+            if (havDist < havTolerance) {
+              return max(0, idx - 1);
+            }
+          }
+          idx++;
+        }
+      }
+    }
+    return -1;
+  }
+
+  RoadInstruction? closeInstructionToLocation(
+      List<RoadInstruction> instructions, LngLat location) {
+    final instructionWithDistance = instructions
+        .map((instruction) =>
+            (instruction, location.distance(location: instruction.location)))
+        .toList()
+      ..sort((a, b) => a.$2.compareTo(b.$2));
+    debugPrint(instructionWithDistance.toString());
+    return instructionWithDistance.first.$1;
   }
 }

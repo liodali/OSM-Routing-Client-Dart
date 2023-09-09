@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:fixnum/fixnum.dart';
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
@@ -79,9 +82,9 @@ class Road {
 
             if (roadStep.maneuver.maneuverType != "new name" &&
                 lastName != roadStep.name) {
-            //   lastNode.distance += distance;
-            //   lastNode.duration += duration;
-            // } else {
+              //   lastNode.distance += distance;
+              //   lastNode.duration += duration;
+              // } else {
               //instructions.add(roadInstruction);
               //lastNode = roadInstruction;
               lastName = roadStep.name;
@@ -125,6 +128,57 @@ class Road {
 
 extension PrivateRoad on Road {
   List<List<RoadStep>> get roadLegs => _roadLegs;
+  List<LngLat> decodePoylinesGeometry(String str, {int precision = 5}) {
+    final List<LngLat> coordinates = [];
+
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        shift = 0,
+        result = 0,
+        factor = pow(10, precision);
+
+    int? latitudeChange, longitudeChange, byte;
+
+    // Coordinates have variable length when encoded, so just keep
+    // track of whether we've hit the end of the string. In each
+    // loop iteration, a single coordinate is decoded.
+    while (index < str.length) {
+      // Reset shift, result, and byte
+      byte = null;
+      shift = 0;
+      result = 0;
+
+      do {
+        byte = str.codeUnitAt(index++) - 63;
+        result |= ((Int32(byte) & Int32(0x1f)) << shift).toInt();
+        shift += 5;
+      } while (byte >= 0x20);
+
+      latitudeChange =
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
+              .toInt();
+
+      shift = result = 0;
+
+      do {
+        byte = str.codeUnitAt(index++) - 63;
+        result |= ((Int32(byte) & Int32(0x1f)) << shift).toInt();
+        shift += 5;
+      } while (byte >= 0x20);
+
+      longitudeChange =
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
+              .toInt();
+
+      lat += latitudeChange;
+      lng += longitudeChange;
+
+      coordinates.add(LngLat(lat: lat / factor, lng: lng / factor));
+    }
+
+    return coordinates;
+  }
 }
 
 class RoadInstruction {
