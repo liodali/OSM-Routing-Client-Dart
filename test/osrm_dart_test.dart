@@ -929,6 +929,47 @@ void main() {
     );
     expect(instruction, "Continue onto Binzmühlestrasse");
   });
+
+  test('test isOnPath', () async {
+    final roadManager = OSRMManager();
+    final road = Road.fromOSRMJson(
+        route: (_responseRandomRoute["routes"]! as List).first);
+
+    final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
+    final isOnPath =
+        await roadManager.isOnPath(road, currentLocation, tolerance: 5);
+    expect(isOnPath, true);
+  });
+
+  test('test instruction', () async {
+    final roadManager = OSRMManager();
+    final road = Road.fromOSRMJson(
+      route: (_responseRandomRoute["routes"]! as List).first,
+    );
+
+    final instructions = await roadManager.buildInstructions(road);
+
+    final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
+    final turnByTurnInformation = await roadManager
+        .nextInstruction(instructions, road, currentLocation, tolerance: 5);
+    //You have arrived at your {nth} destination, on the right
+    debugPrint(turnByTurnInformation.toString());
+    expect(turnByTurnInformation != null, true);
+    expect(
+      turnByTurnInformation?.currentInstruction.instruction,
+      "Turn right onto Torstraße",
+    );
+    expect(
+      turnByTurnInformation?.nextInstruction?.instruction,
+      "Head north on Torstraße",
+    );
+    final distance = currentLocation.distance(
+        location: LngLat.fromList(lnglat: [13.39763, 52.529432]));
+    expect(
+      turnByTurnInformation?.distance,
+      distance,
+    );
+  });
 }
 
 const _response = {
@@ -2556,4 +2597,679 @@ const _en = {
       "default": {"default": "{lane_instruction}"}
     }
   }
+};
+
+const _responseRandomRoute = {
+  "code": "Ok",
+  "routes": [
+    {
+      "geometry":
+          "mfp_I__vpAWBSBE?C?C@m@DuALI@O@wAJK@UBMKGAK@c@DyBPA?G@IDIDA@M@]BUBSBA?E@E@A@IFWBG@C?WBm@FG@I@aBNG@i@FO@OBaBNG@M@mAFc@@}@Fu@DG?a@B]@oAF}@JA?[D_E`@SBO@ODA@UDA?ODE@GBC?uBNE?OAKCC]AK]mCCUE[AK[iCUaBAMAMSsAE[k@sE_@_DAMACAKCQGi@AKQuACOKy@E_@G[Gc@]wBw@aFKw@M{@k@qDCMAKIq@?KAQ?KIuDQmHEuB@U@U?MCs@?I?IASAg@ASMaF?OAi@?c@@c@Du@r@cH@U@I@G@I?G~@kJRyBf@uE@KFi@@KPuABMFc@Da@@GT_C@QJ{@Ny@Ha@RiAfBuJF]DOh@yAHSf@aADIR_@JS@C@A@CJSWWEECEECOQe@a@CCUQaCkB{@y@GESO?_@?C?C?WIoCGqCAK?[MaEASMgDAi@AQ@YBKf@_ENg@D]T{ABIHm@FY@GBUJk@@IHcA?c@?QAQG]JKDC@ADCHOL]FOFUT{@BKTu@La@\\gANg@L_@DOJ[~@kBP[JSXg@^q@R]Ta@HQR]b@y@^s@Xg@JQHQP_@HQLMLKRIFAL?J@HBFBr@XNH^NHDTJNFTRRJd@LXFB@B?VB@V?N?F@jA@dB",
+      "legs": [
+        {
+          "steps": [
+            {
+              "geometry":
+                  "mfp_I__vpAWBSBE?C?C@m@DuALI@O@wAJK@UBMKGAK@c@DyBPA?G@IDIDA@M@]BUBSBA?E@E@A@IFWBG@C?WBm@FG@I@aBNG@i@FO@OBaBNG@M@mAFc@@}@Fu@DG?a@B]@oAF}@JA?[D_E`@SBO@ODA@UDA?ODE@GBC?uBNE?OAKC",
+              "maneuver": {
+                "bearing_after": 355,
+                "bearing_before": 0,
+                "location": [13.388798, 52.517033],
+                "type": "depart"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Friedrichstraße",
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [355],
+                  "location": [13.388798, 52.517033]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, false, false, true],
+                  "bearings": [0, 90, 180, 270],
+                  "location": [13.38878, 52.517149]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [0, 90, 180, 270],
+                  "location": [13.388643, 52.518027]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true, false],
+                  "bearings": [15, 90, 180, 270, 315],
+                  "location": [13.388544, 52.518716]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true, false],
+                  "bearings": [0, 165, 180, 285],
+                  "location": [13.388255, 52.520395]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [0, 45, 180, 225],
+                  "location": [13.388022, 52.521758]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [0, 180, 255],
+                  "location": [13.387898, 52.52245]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [0, 90, 180],
+                  "location": [13.387799, 52.523401]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": false,
+                      "indications": ["none"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [0, 180, 270],
+                  "location": [13.387748, 52.523877]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [0, 90, 180],
+                  "location": [13.3877, 52.524433]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, false, true],
+                  "bearings": [105, 165, 300, 345],
+                  "location": [13.387337, 52.526239]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, false, false, false],
+                  "bearings": [0, 105, 165, 255],
+                  "location": [13.387283, 52.526386]
+                }
+              ],
+              "weight": 138.2,
+              "duration": 135.3,
+              "distance": 1136.2
+            },
+            {
+              "geometry":
+                  "yer_IeuupAC]AK]mCCUE[AK[iCUaBAMAMSsAE[k@sE_@_DAMACAKCQGi@AKQuACOKy@E_@G[Gc@]wBw@aFKw@M{@k@qDCMAKIq@?K",
+              "maneuver": {
+                "bearing_after": 71,
+                "bearing_before": 8,
+                "location": [13.387228, 52.527168],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Torstraße",
+              "intersections": [
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [75, 195, 255, 330],
+                  "location": [13.387228, 52.527168]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [75, 255, 345],
+                  "location": [13.389147, 52.527549]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [75, 255, 330],
+                  "location": [13.391396, 52.528032]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [75, 165, 255, 345],
+                  "location": [13.392444, 52.528237]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [75, 120, 255, 330],
+                  "location": [13.393814, 52.528526]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [75, 255, 345],
+                  "location": [13.395724, 52.528996]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [90, 180, 255, 345],
+                  "location": [13.397565, 52.529429]
+                }
+              ],
+              "weight": 124.799999999,
+              "duration": 124.799999999,
+              "distance": 750.1
+            },
+            {
+              "geometry": "}sr_IevwpA",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 86,
+                "location": [13.39763, 52.529432],
+                "type": "arrive"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Torstraße",
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [266],
+                  "location": [13.39763, 52.529432]
+                }
+              ],
+              "weight": 0,
+              "duration": 0,
+              "distance": 0
+            }
+          ],
+          "summary": "Friedrichstraße, Torstraße",
+          "weight": 263,
+          "duration": 260.1,
+          "distance": 1886.3
+        },
+        {
+          "steps": [
+            {
+              "geometry":
+                  "}sr_IevwpAAQ?KIuDQmHEuB@U@U?MCs@?I?IASAg@ASMaF?OAi@?c@@c@Du@r@cH@U@I@G@I?G~@kJRyBf@uE@KFi@@KPuABMFc@Da@@GT_C@QJ{@Ny@Ha@RiAfBuJF]DOh@yAHSf@aADIR_@",
+              "maneuver": {
+                "bearing_after": 85,
+                "bearing_before": 0,
+                "location": [13.39763, 52.529432],
+                "type": "depart"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Torstraße",
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [85],
+                  "location": [13.39763, 52.529432]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": true,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, false],
+                  "bearings": [90, 150, 270, 330],
+                  "location": [13.401337, 52.529605]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, false, true],
+                  "bearings": [90, 165, 285],
+                  "location": [13.401541, 52.529618]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [105, 195, 285],
+                  "location": [13.405456, 52.529405]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 105, 210, 285],
+                  "location": [13.409405, 52.528711]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [105, 165, 285],
+                  "location": [13.409967, 52.528591]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, false, false, false],
+                  "bearings": [105, 165, 285, 330],
+                  "location": [13.410146, 52.52855]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [120, 210, 285],
+                  "location": [13.411852, 52.528201]
+                }
+              ],
+              "weight": 203.4,
+              "duration": 203.4,
+              "distance": 1275.5
+            },
+            {
+              "geometry": "gdr_Iie{pAJS@C@A@CJSWWEECEECOQ",
+              "maneuver": {
+                "bearing_after": 133,
+                "bearing_before": 133,
+                "location": [13.415405, 52.526922],
+                "modifier": "left",
+                "type": "turn"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "",
+              "intersections": [
+                {
+                  "lanes": [
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 1,
+                  "in": 3,
+                  "entry": [false, true, true, false],
+                  "bearings": [30, 135, 210, 315],
+                  "location": [13.415405, 52.526922]
+                },
+                {
+                  "lanes": [
+                    {
+                      "valid": true,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 3,
+                  "entry": [true, true, false, false],
+                  "bearings": [30, 135, 210, 315],
+                  "location": [13.415657, 52.52677]
+                }
+              ],
+              "weight": 12,
+              "duration": 12,
+              "distance": 60.6
+            },
+            {
+              "geometry": "aer_Iuh{pAe@a@CCUQaCkB{@y@GESO",
+              "maneuver": {
+                "bearing_after": 26,
+                "bearing_before": 32,
+                "location": [13.415945, 52.527047],
+                "modifier": "straight",
+                "type": "new name"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Prenzlauer Allee",
+              "intersections": [
+                {
+                  "lanes": [
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight"]
+                    }
+                  ],
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, false, false, true],
+                  "bearings": [30, 120, 210, 315],
+                  "location": [13.415945, 52.527047]
+                }
+              ],
+              "weight": 18.2,
+              "duration": 18.2,
+              "distance": 177.6
+            },
+            {
+              "geometry":
+                  "{mr_Iip{pA?_@?C?C?WIoCGqCAK?[MaEASMgDAi@AQ@YBKf@_ENg@D]T{ABIHm@FY@GBUJk@@IHcA?c@?QAQG]",
+              "maneuver": {
+                "bearing_after": 85,
+                "bearing_before": 28,
+                "location": [13.417166, 52.528458],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Prenzlauer Berg",
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false, false],
+                  "bearings": [30, 90, 210, 315],
+                  "location": [13.417166, 52.528458]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [false, true, true, false],
+                  "bearings": [45, 120, 225, 285],
+                  "location": [13.423592, 52.528206]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, false, false],
+                  "bearings": [45, 120, 210, 300],
+                  "location": [13.423868, 52.528136]
+                }
+              ],
+              "weight": 57.1,
+              "duration": 57.1,
+              "distance": 548.7
+            },
+            {
+              "geometry":
+                  "mkr_Iea}pAJKDC@ADCHOL]FOFUT{@BKTu@La@\\gANg@L_@DOJ[~@kBP[JSXg@^q@R]Ta@HQR]b@y@^s@Xg@JQHQP_@HQLMLKRI",
+              "maneuver": {
+                "bearing_after": 151,
+                "bearing_before": 67,
+                "location": [13.424993, 52.528068],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Friedenstraße",
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [60, 150, 255, 345],
+                  "location": [13.424993, 52.528068]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [120, 225, 300],
+                  "location": [13.425818, 52.52763]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [135, 225, 315],
+                  "location": [13.428041, 52.526565]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [135, 225, 315],
+                  "location": [13.429337, 52.525737]
+                }
+              ],
+              "weight": 52.4,
+              "duration": 52.4,
+              "distance": 510.1
+            },
+            {
+              "geometry": "_xq_Iac~pAFAL?J@HBFBr@XNH^NHDTJNFTRRJd@LXFB@B?VB",
+              "maneuver": {
+                "bearing_after": 174,
+                "bearing_before": 163,
+                "location": [13.430405, 52.524964],
+                "modifier": "straight",
+                "type": "new name"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Platz der Vereinten Nationen",
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [135, 180, 345],
+                  "location": [13.430405, 52.524964]
+                }
+              ],
+              "weight": 20.6,
+              "duration": 20.6,
+              "distance": 196.6
+            },
+            {
+              "geometry": "mmq_Io~}pA@V?N?F@jA@dB",
+              "maneuver": {
+                "bearing_after": 267,
+                "bearing_before": 189,
+                "location": [13.429678, 52.523269],
+                "modifier": "right",
+                "type": "continue"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Platz der Vereinten Nationen",
+              "intersections": [
+                {
+                  "lanes": [
+                    {
+                      "valid": false,
+                      "indications": ["left"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight", "left"]
+                    },
+                    {
+                      "valid": false,
+                      "indications": ["straight"]
+                    },
+                    {
+                      "valid": true,
+                      "indications": ["straight", "right"]
+                    }
+                  ],
+                  "out": 3,
+                  "in": 0,
+                  "entry": [false, false, true, true],
+                  "bearings": [15, 90, 180, 270],
+                  "location": [13.429678, 52.523269]
+                }
+              ],
+              "weight": 6.9,
+              "duration": 6.9,
+              "distance": 76.4
+            },
+            {
+              "geometry": "gmq_Imw}pA",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 268,
+                "location": [13.428554, 52.523239],
+                "type": "arrive"
+              },
+              "mode": "driving",
+              "driving_side": "right",
+              "name": "Platz der Vereinten Nationen",
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [88],
+                  "location": [13.428554, 52.523239]
+                }
+              ],
+              "weight": 0,
+              "duration": 0,
+              "distance": 0
+            }
+          ],
+          "summary": "Torstraße, Friedenstraße",
+          "weight": 370.6,
+          "duration": 370.6,
+          "distance": 2845.5
+        }
+      ],
+      "weight_name": "routability",
+      "weight": 633.6,
+      "duration": 630.7,
+      "distance": 4731.8
+    }
+  ],
+  "waypoints": [
+    {
+      "hint":
+          "T_4JgCfVmoUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABV_wAA_kvMAKlYIQM8TMwArVghAwAA7wpkjokY",
+      "distance": 4.231521214,
+      "name": "Friedrichstraße",
+      "location": [13.388798, 52.517033]
+    },
+    {
+      "hint":
+          "KW_dgUMTi4cGAAAACQAAAAAAAAB3AAAAppONQCyhu0AAAAAA1J-EQgYAAAAJAAAAAAAAAHcAAABV_wAAfm7MABiJIQOCbswA_4ghAwAAXwVkjokY",
+      "distance": 2.795148358,
+      "name": "Torstraße",
+      "location": [13.39763, 52.529432]
+    },
+    {
+      "hint":
+          "cCgYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0IQ7CZCjsMGQh8AAABRAAAAJgAAAB4AAABV_wAASufMAOdwIQNL58wA03AhAwQAvxBkjokY",
+      "distance": 2.226580806,
+      "name": "Platz der Vereinten Nationen",
+      "location": [13.428554, 52.523239]
+    }
+  ]
 };
