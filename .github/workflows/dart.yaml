@@ -11,6 +11,6 @@ jobs:
       - name: flutter setup
         uses: britannio/action-install-flutter@v1
       - name: fomarting files
-        run : flutter format --output=none  .
+        run : dart format --output=none  .
       - name: Publish package
         run: flutter pub publish -f
