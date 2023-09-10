@@ -256,7 +256,7 @@ extension RoadManagerUtils on OSRMManager {
   ///
   /// this method will return int that index of Location from [polylines] and current [location]
   /// within a specified [tolerance].
-  /// 
+  ///
   /// **note : our [location] use precision 5,it better to provide [LngLat] with the precision 5 means 5 digits after fraction
   ///
   /// credit from [https://github.com/googlemaps/android-maps-utils/blob/main/library/src/main/java/com/google/maps/android/PolyUtil.java]

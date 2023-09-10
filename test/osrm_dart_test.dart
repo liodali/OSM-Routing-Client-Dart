@@ -1027,8 +1027,9 @@ void main() {
     );
     expect(turnByTurnInformation?.nextInstruction?.instruction,
         "Make a slight right");
-    final distance = currentLocation.alignWithPrecision().distance(
-        location: LngLat.fromList(lnglat: [8.262933, 50.008737]));
+    final distance = currentLocation
+        .alignWithPrecision()
+        .distance(location: LngLat.fromList(lnglat: [8.262933, 50.008737]));
     expect(
       turnByTurnInformation?.distance,
       distance,

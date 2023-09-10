@@ -130,7 +130,7 @@ class Road {
 
 extension PrivateRoad on Road {
   List<List<RoadStep>> get roadLegs => _roadLegs;
- static List<LngLat> decodePoylinesGeometry(String str, {int precision = 5}) {
+  static List<LngLat> decodePoylinesGeometry(String str, {int precision = 5}) {
     final List<LngLat> coordinates = [];
 
     var index = 0,
@@ -181,11 +181,12 @@ extension PrivateRoad on Road {
 
     return coordinates;
   }
-  
-  static   num _py2Round(num value) {
+
+  static num _py2Round(num value) {
     return (value.abs() + 0.5).floor() * (value >= 0 ? 1 : -1);
   }
-   static String _encode(num current, num previous, num factor) {
+
+  static String _encode(num current, num previous, num factor) {
     current = _py2Round(current * factor);
     previous = _py2Round(previous * factor);
     Int32 coordinate = Int32(current as int) - Int32(previous as int) as Int32;
@@ -206,7 +207,8 @@ extension PrivateRoad on Road {
     output += ascii.decode([coordinate.toInt() + 63]);
     return output;
   }
-   static String encode(List<LngLat> coordinates, {int precision = 5}) {
+
+  static String encode(List<LngLat> coordinates, {int precision = 5}) {
     if (coordinates.isEmpty) {
       return "";
     }
