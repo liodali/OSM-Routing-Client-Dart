@@ -15,7 +15,7 @@ mixin OSRMHelper {
     Geometries geometries = Geometries.polyline,
   }) {
     String url =
-        "$server/routed-${roadType.value}/${profile.name}/v1/diving/$waypoints";
+        "$server/routed-${roadType.name}/${profile.name}/v1/driving/$waypoints";
     var option = "";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";

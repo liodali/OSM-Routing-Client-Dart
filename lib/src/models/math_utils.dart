@@ -75,4 +75,27 @@ class MathUtil {
   static double havDistance(double lat1, double lat2, double dLng) {
     return hav(lat1 - lat2) + hav(dLng) * cos(lat1) * cos(lat2);
   }
+
+  static double sinDeltaBearing(
+    double lat1,
+    double lng1,
+    double lat2,
+    double lng2,
+    double lat3,
+    double lng3,
+  ) {
+    double sinLat1 = sin(lat1);
+    double cosLat2 = cos(lat2);
+    double cosLat3 = cos(lat3);
+    double lat31 = lat3 - lat1;
+    double lng31 = lng3 - lng1;
+    double lat21 = lat2 - lat1;
+    double lng21 = lng2 - lng1;
+    double a = sin(lng31) * cosLat3;
+    double c = sin(lng21) * cosLat2;
+    double b = sin(lat31) + 2 * sinLat1 * cosLat3 * MathUtil.hav(lng31);
+    double d = sin(lat21) + 2 * sinLat1 * cosLat2 * MathUtil.hav(lng21);
+    double denom = (a * a + b * b) * (c * c + d * d);
+    return denom <= 0 ? 1 : (a * d - b * c) / sqrt(denom);
+  }
 }

@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:fixnum/fixnum.dart';
+import 'package:flutter/foundation.dart';
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
@@ -128,7 +130,7 @@ class Road {
 
 extension PrivateRoad on Road {
   List<List<RoadStep>> get roadLegs => _roadLegs;
-  List<LngLat> decodePoylinesGeometry(String str, {int precision = 5}) {
+ static List<LngLat> decodePoylinesGeometry(String str, {int precision = 5}) {
     final List<LngLat> coordinates = [];
 
     var index = 0,
@@ -178,6 +180,48 @@ extension PrivateRoad on Road {
     }
 
     return coordinates;
+  }
+  
+  static   num _py2Round(num value) {
+    return (value.abs() + 0.5).floor() * (value >= 0 ? 1 : -1);
+  }
+   static String _encode(num current, num previous, num factor) {
+    current = _py2Round(current * factor);
+    previous = _py2Round(previous * factor);
+    Int32 coordinate = Int32(current as int) - Int32(previous as int) as Int32;
+    coordinate <<= 1;
+    if (current - previous < 0) {
+      coordinate = ~coordinate;
+    }
+    var output = "";
+    while (coordinate >= Int32(0x20)) {
+      try {
+        Int32 v = (Int32(0x20) | (coordinate & Int32(0x1f))) + 63 as Int32;
+        output += String.fromCharCodes([v.toInt()]);
+      } catch (err) {
+        debugPrint(err.toString());
+      }
+      coordinate >>= 5;
+    }
+    output += ascii.decode([coordinate.toInt() + 63]);
+    return output;
+  }
+   static String encode(List<LngLat> coordinates, {int precision = 5}) {
+    if (coordinates.isEmpty) {
+      return "";
+    }
+
+    final factor = pow(10, precision);
+    var output = _encode(coordinates[0].lat, 0, factor) +
+        _encode(coordinates[0].lng, 0, factor);
+
+    for (var i = 1; i < coordinates.length; i++) {
+      var a = coordinates[i], b = coordinates[i - 1];
+      output += _encode(a.lat, b.lat, factor);
+      output += _encode(a.lng, b.lng, factor);
+    }
+
+    return output;
   }
 }
 

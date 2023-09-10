@@ -161,11 +161,7 @@ class OSRMManager with OSRMHelper {
           instruction: instruction,
           location: step.maneuver.location,
         );
-        if (indexLeg < legs.length - 1 && !instruction.contains("arrive")) {
-          instructions.add(roadInstruction);
-        } else if (indexLeg == legs.length - 1) {
-          instructions.add(roadInstruction);
-        }
+        instructions.add(roadInstruction);
       }
     });
     return instructions;
@@ -184,10 +180,12 @@ class OSRMManager with OSRMHelper {
       throw Exception(
           'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
     } else if (road.polyline == null && road.polylineEncoded != null) {
-      polyline = road.decodePoylinesGeometry(road.polylineEncoded!);
+      polyline = PrivateRoad.decodePoylinesGeometry(road.polylineEncoded!);
     }
-    final indexOfNextLocation = indexOfNextLocationFromRoad(
-      currentLocation,
+    final location = currentLocation.alignWithPrecision(precision: 5);
+
+    final indexOfNextLocation = indexOfLocationFromRoad(
+      location,
       polyline!,
       tolerance: tolerance,
     );
@@ -218,10 +216,12 @@ class OSRMManager with OSRMHelper {
       throw Exception(
           'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
     } else if (road.polyline == null && road.polylineEncoded != null) {
-      polyline = road.decodePoylinesGeometry(road.polylineEncoded!);
+      polyline = PrivateRoad.decodePoylinesGeometry(road.polylineEncoded!);
     }
-    final indexOfNextLocation = indexOfNextLocationFromRoad(
-      currentLocation,
+    final location = currentLocation.alignWithPrecision(precision: 5);
+
+    final indexOfNextLocation = indexOfLocationFromRoad(
+      location,
       polyline!,
       tolerance: tolerance,
     );
@@ -246,19 +246,21 @@ class OSRMManager with OSRMHelper {
     return (
       currentInstruction: currentInstruction,
       nextInstruction: nextInstruction,
-      distance: currentLocation.distance(location: nextInstruction.location),
+      distance: location.distance(location: nextInstruction.location),
     );
   }
 }
 
 extension RoadManagerUtils on OSRMManager {
-  /// [indexOfNextLocationFromRoad]
+  /// [indexOfLocationFromRoad]
   ///
-  /// this method will return int that index of next Location from [polylines] and current [location]
+  /// this method will return int that index of Location from [polylines] and current [location]
   /// within a specified [tolerance].
+  /// 
+  /// **note : our [location] use precision 5,it better to provide [LngLat] with the precision 5 means 5 digits after fraction
   ///
   /// credit from [https://github.com/googlemaps/android-maps-utils/blob/main/library/src/main/java/com/google/maps/android/PolyUtil.java]
-  int indexOfNextLocationFromRoad(
+  int indexOfLocationFromRoad(
     LngLat location,
     List<LngLat> polylines, {
     bool closed = false,
@@ -268,25 +270,42 @@ extension RoadManagerUtils on OSRMManager {
     if (polylines.isEmpty) {
       return -1;
     }
+    if (polylines.contains(location)) {
+      return polylines.indexOf(location);
+    }
+
     double toleranceCalc = tolerance / earthRadius;
-    double havTolerance = MathUtil.hav(tolerance / earthRadius);
+    double havTolerance = MathUtil.hav(toleranceCalc);
     final lngLatRadian = LngLatRadians.fromLngLat(
       location: location,
     );
     final prev = polylines[closed ? polylines.length - 1 : 0];
-    final prevRadian = prev.lngLatRadian;
+    var prevRadian = prev.lngLatRadian;
     var idx = 0;
+    if (geodesic) {
+      for (final point2 in polylines) {
+        var lngLat2 = point2.lngLatRadian;
 
-    if (!geodesic) {
-      // } else {
+        if (isOnSegmentGC(
+            prevRadian.latitude,
+            prevRadian.longitude,
+            lngLat2.latitude,
+            lngLat2.longitude,
+            lngLatRadian.latitude,
+            lngLatRadian.longitude,
+            havTolerance)) {
+          return max(0, idx - 1);
+        }
+        prevRadian = lngLat2;
+        idx++;
+      }
+    } else if (!geodesic) {
       final (minAcceptable, maxAcceptable) = (
         lngLatRadian.latitude - toleranceCalc,
         lngLatRadian.latitude + toleranceCalc
       );
-      final (y1, y3) = (
-        MathUtil.mercator(prevRadian.latitude),
-        MathUtil.mercator(lngLatRadian.latitude)
-      );
+      var y1 = MathUtil.mercator(prevRadian.latitude);
+      var y3 = MathUtil.mercator(lngLatRadian.latitude);
       final xtry = List.generate(
         3,
         (index) => 0.0,
@@ -324,6 +343,8 @@ extension RoadManagerUtils on OSRMManager {
               return max(0, idx - 1);
             }
           }
+          prevRadian = point2;
+          y1 = y2;
           idx++;
         }
       }
@@ -332,13 +353,54 @@ extension RoadManagerUtils on OSRMManager {
   }
 
   RoadInstruction? closeInstructionToLocation(
-      List<RoadInstruction> instructions, LngLat location) {
+    List<RoadInstruction> instructions,
+    LngLat location,
+  ) {
     final instructionWithDistance = instructions
         .map((instruction) =>
             (instruction, location.distance(location: instruction.location)))
         .toList()
       ..sort((a, b) => a.$2.compareTo(b.$2));
-    debugPrint(instructionWithDistance.toString());
     return instructionWithDistance.first.$1;
+  }
+
+  bool isOnSegmentGC(double lat1, double lng1, double lat2, double lng2,
+      double lat3, double lng3, double havTolerance) {
+    double havDist13 = MathUtil.havDistance(lat1, lat3, lng1 - lng3);
+    if (havDist13 <= havTolerance) {
+      return false;
+    }
+
+    double havDist23 = MathUtil.havDistance(lat2, lat3, lng2 - lng3);
+    if (havDist23 <= havTolerance) {
+      return false;
+    }
+
+    double sinBearing =
+        MathUtil.sinDeltaBearing(lat1, lng1, lat2, lng2, lat3, lng3);
+    double sinDist13 = MathUtil.sinFromHav(havDist13);
+    double havCrossTrack = MathUtil.havFromSin(sinDist13 * sinBearing);
+    if (havCrossTrack > havTolerance) {
+      return false;
+    }
+
+    double havDist12 = MathUtil.havDistance(lat1, lat2, lng1 - lng2);
+    double term = havDist12 + havCrossTrack * (1 - 2 * havDist12);
+    if (havDist13 > term || havDist23 > term) {
+      return false;
+    }
+
+    if (havDist12 < 0.74) {
+      return false;
+    }
+
+    double cosCrossTrack = 1 - 2 * havCrossTrack;
+    double havAlongTrack13 = (havDist13 - havCrossTrack) / cosCrossTrack;
+    double havAlongTrack23 = (havDist23 - havCrossTrack) / cosCrossTrack;
+    double sinSumAlongTrack =
+        MathUtil.sinSumFromHav(havAlongTrack13, havAlongTrack23);
+
+    // Compare with half-circle == pi using sign of sin().
+    return sinSumAlongTrack > 0;
   }
 }

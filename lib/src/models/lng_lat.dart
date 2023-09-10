@@ -1,5 +1,6 @@
 import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
 import 'package:routing_client_dart/src/models/math_utils.dart';
+import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 ///  [LngLat] representative class  of geographic point for longitude and latitude
@@ -21,6 +22,7 @@ class LngLat {
   })  : assert(lnglat.length == 2),
         lat = lnglat.last,
         lng = lnglat.first;
+
   @override
   String toString() => "$lng,$lat";
 
@@ -33,7 +35,7 @@ class LngLat {
   }
 
   @override
-  int get hashCode => int.parse((lat * lng).toString());
+  int get hashCode => int.parse((lat + lng).toString());
 }
 
 extension ExtLngLat on LngLat {
@@ -47,5 +49,19 @@ extension ExtLngLat on LngLat {
               radianLocation.latitude,
               (currentRadianLocation - radianLocation).longitude),
         );
+  }
+}
+
+extension PrvExtLngLat on LngLat {
+  LngLat alignWithPrecision({int precision = 5}) {
+    final precisedLngLat = PrivateRoad.decodePoylinesGeometry(
+      PrivateRoad.encode(
+        [this],
+        precision: precision,
+      ),
+      precision: precision,
+    );
+
+    return precisedLngLat.first;
   }
 }
