@@ -1,5 +1,5 @@
 ## Routing Client Dart Package
-![pub](https://img.shields.io/badge/pub-v0.5.0-orange)
+![pub](https://img.shields.io/badge/pub-v0.5.1-orange)
 
 
 > Package for osm routing client api 
@@ -17,7 +17,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^0.5.0
+      routing_client_dart: ^0.5.1
 
 
 ### example for route service
@@ -73,9 +73,12 @@ await roadManager.isOnPath(road, currentLocation, tolerance: 5);
 
 ### example to get next navigation instruction Location in Road
 
+
 ```dart
 final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
     final isOnPath =
 final instruction = await roadManager.nextInstruction(instructions, road, currentLocation, tolerance: 5);
 
 ```
+
+**Note** you can get some inaccurate information `nextInstruction`,for that we will be happy for yours contributions

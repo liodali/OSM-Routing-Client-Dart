@@ -1,3 +1,5 @@
+## 0.5.1: 
+* fix bug
 ## 0.5.0: 
 * add `isOnPath`,`nextInstruction` in OSRMManager
 * support new languages for instructions
