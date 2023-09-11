@@ -1,5 +1,5 @@
 ## Routing Client Dart Package
-![pub](https://img.shields.io/badge/pub-v0.4.3-orange)
+![pub](https://img.shields.io/badge/pub-v0.5.2-orange)
 
 
 > Package for osm routing client api 
@@ -17,7 +17,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^0.4.3
+      routing_client_dart: ^0.5.2
 
 
 ### example for route service
@@ -62,3 +62,25 @@ List<LngLat> waypoints = [
 ```dart
     final instructions = await manager.buildInstructions(road);
 ```
+
+### example for check Location in Road
+
+```dart
+final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
+    final isOnPath =
+await roadManager.isOnPath(road, currentLocation, tolerance: 5);
+```
+
+### Example to get next navigation instruction of current Location
+
+
+
+```dart
+final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
+    final isOnPath =
+final instruction = await roadManager.nextInstruction(instructions, road, currentLocation, tolerance: 5);
+
+```
+**Warning** the precision of `LngLat` should be 5 if the road contain `polylineEncoded`, or the same precies as `LngLat` in `polylines`
+
+**Note** you can get some inaccurate information `nextInstruction`,for that we will be happy for yours contributions

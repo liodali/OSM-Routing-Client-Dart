@@ -1,3 +1,10 @@
+## 0.5.2:
+* remove some unnecessary files
+## 0.5.1:
+* fix bug
+## 0.5.0: 
+* add `isOnPath`,`nextInstruction` in OSRMManager
+* support new languages for instructions
 ## 0.4.3: fix bug #16
 * fix compute `parseRoad`in mobile platform
 ## 0.4.2: fix bugs
