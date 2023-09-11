@@ -71,7 +71,8 @@ final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
 await roadManager.isOnPath(road, currentLocation, tolerance: 5);
 ```
 
-### example to get next navigation instruction Location in Road
+### Example to get next navigation instruction of current Location
+
 
 
 ```dart
@@ -80,5 +81,6 @@ final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
 final instruction = await roadManager.nextInstruction(instructions, road, currentLocation, tolerance: 5);
 
 ```
+**Warning** the precision of `LngLat` should be 5 if the road contain `polylineEncoded`, or the same precies as `LngLat` in `polylines`
 
 **Note** you can get some inaccurate information `nextInstruction`,for that we will be happy for yours contributions

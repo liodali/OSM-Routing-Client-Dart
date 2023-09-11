@@ -29,17 +29,15 @@ class LngLatRadians {
       longitude: longitude - right.longitude,
     );
   }
-}
 
-extension on LocationRadians {
-  double toDegree() => this * (180 / pi);
-}
-
-extension on LngLatRadians {
   LngLat toLngLat() => LngLat(
         lng: longitude.toDegree(),
         lat: latitude.toDegree(),
       );
+}
+
+extension on LocationRadians {
+  double toDegree() => this * (180 / pi);
 }
 
 extension ExtLngLat on LngLat {

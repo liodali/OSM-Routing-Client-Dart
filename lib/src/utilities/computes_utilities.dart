@@ -1,4 +1,5 @@
-/// [ParserRoadComputerArg]
+/// [ParserRoadComputeArg]
+/// 
 /// this class used to data to parserRoad Compute function
 /// that will help to make communication easy,readable,maintainable
 class ParserRoadComputeArg {

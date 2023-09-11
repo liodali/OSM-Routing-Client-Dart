@@ -86,6 +86,7 @@ class OSRMManager with OSRMHelper {
   }
 
   /// [getTrip]
+  /// 
   /// this method used to get route from trip service api
   /// used if you have more that 10 waypoint to generate route will more accurate
   /// than [getRoad].

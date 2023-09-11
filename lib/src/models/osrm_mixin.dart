@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:routing_client_dart/src/models/road_helper.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
-
+/// [OSRMHelper]
+/// 
+/// this helper fpr OSRMManager that contain URL , intruction generator
 mixin OSRMHelper {
   String generatePath(
     String server,

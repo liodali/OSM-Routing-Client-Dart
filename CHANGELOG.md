@@ -1,4 +1,6 @@
-## 0.5.1: 
+## 0.5.2:
+* remove some unnecessary files
+## 0.5.1:
 * fix bug
 ## 0.5.0: 
 * add `isOnPath`,`nextInstruction` in OSRMManager
