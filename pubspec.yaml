@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   dio: '>=5.0.0'
-  intl: ^0.18.0
   fixnum: ^1.1.0
 dev_dependencies:
   flutter_test:
