@@ -949,7 +949,8 @@ void main() {
 
     final instructions = await roadManager.buildInstructions(road);
 
-    final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549]);
+    final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549])
+        .alignWithPrecision(precision: 5);
     final turnByTurnInformation = await roadManager
         .nextInstruction(instructions, road, currentLocation, tolerance: 5);
     //You have arrived at your {nth} destination, on the right
