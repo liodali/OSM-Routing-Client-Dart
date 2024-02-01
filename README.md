@@ -17,7 +17,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^0.5.3
+      routing_client_dart: ^0.5.4
 
 
 ### example for route service

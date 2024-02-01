@@ -1,3 +1,7 @@
+## 0.5.4:
+* remove unnecessary dependency
+* add check for nullable in road for attribute geometry
+* thanks for @eshjordan, @derklaro  for their contribution 
 ## 0.5.3:
 * add destinations to get all destination from road
 ## 0.5.2:
