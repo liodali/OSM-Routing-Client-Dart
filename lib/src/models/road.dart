@@ -26,6 +26,14 @@ class Road {
   bool _isError = false;
   RoadDetailInfo details = RoadDetailInfo();
   final List<List<RoadStep>> _roadLegs = <List<RoadStep>>[];
+
+  List<String> get destinations => _roadLegs
+      .expand((legs) => legs)
+      .map((roadLeg) => roadLeg.destinations)
+      .where((element) => element != null)
+      .whereType<String>()
+      .toList();
+
   Road.empty()
       : distance = 0.0,
         duration = 0.0,

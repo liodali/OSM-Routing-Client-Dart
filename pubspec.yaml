@@ -1,6 +1,6 @@
 name: routing_client_dart
 description: Dart Package for Routing Client Api ( support OSRM project )
-version: 0.5.2
+version: 0.5.3
 homepage: https://github.com/liodali/OSM-Routing-Client-Dart
 
 environment:
@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   dio: '>=5.0.0'
-  intl: ^0.19.0
   fixnum: ^1.1.0
 dev_dependencies:
   flutter_test:
