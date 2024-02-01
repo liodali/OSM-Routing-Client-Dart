@@ -61,7 +61,7 @@ class Road {
         polylineEncoded = route["geometry"].runtimeType == String
             ? route["geometry"] as String
             : null {
-    if (route["geometry"].runtimeType != String) {
+    if (route["geometry"].runtimeType != String && null != route["geometry"]) {
       final List<List<dynamic>> listOfPoints =
           List.castFrom(route["geometry"]["coordinates"]);
 
