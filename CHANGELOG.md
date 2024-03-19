@@ -1,3 +1,5 @@
+## 0.5.5: fix bug
+* fix bug related to generate path for getRoute
 ## 0.5.4:
 * remove unnecessary dependency
 * add check for nullable in road for attribute geometry
