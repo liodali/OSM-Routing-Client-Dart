@@ -52,7 +52,20 @@ void main() {
           "$oSRMServer/routed-car/route/v1/driving/$waypoint?steps=true&overview=full&geometries=polyline";
       expect(urlGenerated, shouldBrUrl);
     });
-
+    test("test generate URL Route-bike", () {
+      String waypoint =
+          "13.388860,52.517037;13.397634,52.529407;13.428555,52.523219";
+      final urlGenerated = manager.generatePath(
+        oSRMServer,
+        waypoint,
+        roadType: RoadType.bike,
+        geometries: Geometries.polyline,
+        steps: true,
+      );
+      String shouldBrUrl =
+          "$oSRMServer/routed-bike/route/v1/driving/$waypoint?steps=true&overview=full&geometries=polyline";
+      expect(urlGenerated, shouldBrUrl);
+    });
     test("test get road ", () async {
       List<LngLat> waypoints = [
         LngLat(lng: 13.388860, lat: 52.517037),

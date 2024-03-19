@@ -17,10 +17,9 @@ class ParserRoadComputeArg {
 class ParserTripComputeArg extends ParserRoadComputeArg {
   ParserTripComputeArg({
     required Map<String, dynamic> tripJson,
-    required String langCode,
+    required super.langCode,
   }) : super(
           jsonRoad: tripJson,
-          langCode: langCode,
           alternative: false,
         );
 }

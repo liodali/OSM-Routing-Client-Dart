@@ -67,6 +67,7 @@ class OSRMManager with OSRMHelper {
       steps: steps,
       overview: overview,
       geometries: geometries,
+      roadType: roadType,
     );
     path += "&alternatives=$alternative";
     final response = await dio.get(path);
