@@ -83,22 +83,11 @@ class Road {
         if ((leg).containsKey("steps")) {
           final List<Map<String, dynamic>> steps = List.castFrom(leg["steps"]);
           //RoadInstruction? lastNode;
-          var lastName = "";
+
           final List<RoadStep> roadSteps = [];
           for (var step in steps) {
             final roadStep = RoadStep.fromJson(step);
-            roadSteps.add(roadStep);
-            // String instruction = OSRMManager.
-
-            if (roadStep.maneuver.maneuverType != "new name" &&
-                lastName != roadStep.name) {
-              //   lastNode.distance += distance;
-              //   lastNode.duration += duration;
-              // } else {
-              //instructions.add(roadInstruction);
-              //lastNode = roadInstruction;
-              lastName = roadStep.name;
-            }
+            roadSteps.add(roadStep);            
           }
           _roadLegs.add(roadSteps);
         }
