@@ -15,6 +15,8 @@ enum Languages {
   es,
   de,
   ar,
+  // ignore: constant_identifier_names
+  pt_br,
 }
 
 enum RoadType {
