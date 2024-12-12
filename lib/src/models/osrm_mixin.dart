@@ -7,47 +7,6 @@ import 'package:routing_client_dart/src/utilities/utils.dart';
 /// 
 /// this helper fpr OSRMManager that contain URL , intruction generator
 mixin OSRMHelper {
-  String generatePath(
-    String server,
-    String waypoints, {
-    Profile profile = Profile.route,
-    RoadType roadType = RoadType.car,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.polyline,
-  }) {
-    String url =
-        "$server/routed-${roadType.name}/${profile.name}/v1/driving/$waypoints";
-    var option = "";
-    option += "steps=$steps&";
-    option += "overview=${overview.value}&";
-    option += "geometries=${geometries.value}";
-    return "$url?$option";
-  }
-
-  String generateTripPath(
-    String server,
-    String waypoints, {
-    RoadType roadType = RoadType.car,
-    bool roundTrip = true,
-    SourceGeoPointOption source = SourceGeoPointOption.any,
-    DestinationGeoPointOption destination = DestinationGeoPointOption.any,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.polyline,
-  }) {
-    String baseGeneratedUrl = generatePath(
-      server,
-      waypoints,
-      roadType: roadType,
-      steps: steps,
-      overview: overview,
-      profile: Profile.trip,
-      geometries: geometries,
-    );
-
-    return "$baseGeneratedUrl&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";
-  }
 
   Future<Map<String, dynamic>> loadInstructionHelperJson({
     Languages language = Languages.en,

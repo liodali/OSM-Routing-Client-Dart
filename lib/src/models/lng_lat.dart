@@ -26,6 +26,11 @@ class LngLat {
   @override
   String toString() => "$lng,$lat";
 
+  Map<String, double> toMap() => {
+        'lat': lat,
+        'lon': lng,
+      };
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

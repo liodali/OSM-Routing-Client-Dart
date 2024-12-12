@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 
 const String oSRMServer = "https://routing.openstreetmap.de";
+const String osmValhallaServer = "https://valhalla1.openstreetmap.de/route";
 const double earthRadius = 6371009;
 typedef TurnByTurnInformation = ({
   RoadInstruction currentInstruction,
@@ -11,16 +14,23 @@ typedef TurnByTurnInformation = ({
 });
 
 enum Languages {
-  en,
-  es,
-  de,
-  ar,
+  en("en-US", 'en'),
+  es("es-ES", 'es'),
+  de("de-DE", 'de'),
+  ar("ar-AR", 'ar');
+
+  const Languages(this.name, this.code);
+  final String name;
+  final String code;
 }
 
 enum RoadType {
   car,
   foot,
   bike,
+  publicTransportation,
+  taxi,
+  truck,
 }
 
 enum Profile {
@@ -75,8 +85,58 @@ extension TransformToWaysOSRM on List<LngLat> {
   }
 }
 
+extension ExtMap on Map<String, dynamic> {
+  Map<String, dynamic> addIfNotNull(String key, dynamic value) {
+    if (value != null) {
+      putIfAbsent(key, () => value);
+    }
+    return this;
+  }
+}
+
 double parseToDouble(dynamic value) {
   return double.parse(value.toString());
+}
+
+extension ValhallaExt on String {
+  List<LngLat> decodeCoordinates(String str, [int precision = 6]) {
+    var index = 0,
+        lat = 0.0,
+        lng = 0.0,
+        coordinates = <LngLat>[],
+        factor = pow(10, precision);
+
+    while (index < str.length) {
+      var result = 0;
+      var shift = 0;
+
+      while (str.codeUnitAt(index) > 0x1f) {
+        result |= (str.codeUnitAt(index++) - 0x20) << shift;
+        shift += 5;
+      }
+
+      final latitudeChange = result >> 1;
+      result = 0;
+      shift = 0;
+
+      while (str.codeUnitAt(index) > 0x1f) {
+        result |= (str.codeUnitAt(index++) - 0x20) << shift;
+        shift += 5;
+      }
+
+      final longitudeChange = result >> 1;
+
+      lat += latitudeChange;
+      lng += longitudeChange;
+
+      coordinates.add(LngLat(
+        lng: lng / factor,
+        lat: lat / factor,
+      ));
+    }
+
+    return coordinates;
+  }
 }
 
 /// parseRoad

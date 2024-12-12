@@ -1,32 +1,50 @@
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 
 class RoadStep {
-  String name;
-  String? ref;
-  String? rotaryName;
-  String? destinations;
-  String? exits;
-  Maneuver maneuver;
-  double duration;
-  double distance;
-  List<Intersections> intersections;
-  String drivingSide;
+  final String name;
+  final String? ref;
+  final String? rotaryName;
+  final String? destinations;
+  final String? exits;
+  final Maneuver maneuver;
+  final double duration;
+  final double distance;
+  final String mode;
+  final List<Intersections> intersections;
+  final String drivingSide;
 
-  RoadStep.fromJson(Map<String, dynamic> json)
-      : name = json['name'] ?? '',
-        ref = json['ref'],
-        rotaryName = json['rotary_name'],
-        destinations = json['destinations'],
-        exits = json['exits'],
-        maneuver = Maneuver.fromJson(json['maneuver']!),
-        duration = double.parse(json['duration'].toString()),
-        distance = double.parse(json['distance'].toString()),
-        drivingSide = json['driving_side']!,
-        intersections = List<Intersections>.from(
-          (json['intersections'] as List<dynamic>).map(
-            (j) => Intersections.fromJson(j),
-          ),
-        );
+  factory RoadStep.fromJson({required Map<String, dynamic> json}) {
+    return RoadStep._(
+      name: json['name'] ?? '',
+      ref: json['ref'],
+      rotaryName: json['rotary_name'],
+      destinations: json['destinations'],
+      exits: json['exits'],
+      maneuver: Maneuver.fromJson(json['maneuver']!),
+      duration: double.parse(json['duration'].toString()),
+      distance: double.parse(json['distance'].toString()),
+      drivingSide: json['driving_side']!,
+      mode: json['mode'],
+      intersections: List<Intersections>.from(
+        (json['intersections'] as List<dynamic>).map(
+          (j) => Intersections.fromJson(j),
+        ),
+      ),
+    );
+  }
+  const RoadStep._({
+    required this.name,
+    required this.ref,
+    required this.rotaryName,
+    required this.destinations,
+    required this.exits,
+    required this.maneuver,
+    required this.duration,
+    required this.distance,
+    required this.drivingSide,
+    required this.mode,
+    required this.intersections,
+  });
 }
 
 class Intersections {
