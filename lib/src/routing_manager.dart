@@ -1,17 +1,26 @@
 import 'dart:math';
-
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
 import 'package:routing_client_dart/src/models/math_utils.dart';
 import 'package:routing_client_dart/src/models/osrm_mixin.dart';
-import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
+import 'package:routing_client_dart/src/models/request_helper.dart';
+import 'package:routing_client_dart/src/routes_services/osrm_service.dart';
+import 'package:routing_client_dart/src/routes_services/valhalla_service.dart';
 
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
-/// [OSRMManager]
+class RoutingManagerConfiguration {
+  final String osrmServer;
+  final String valhallaServer;
+
+  const RoutingManagerConfiguration({
+    this.osrmServer = oSRMServer,
+    this.valhallaServer = osmValhallaServer,
+  });
+}
+
+/// [RoutingManager]
 ///
 /// this class responsible to manage http call to get road from open-source osm server
 /// or custom server that should be specified in constructor based on osrm project
@@ -22,24 +31,14 @@ import 'package:routing_client_dart/src/utilities/utils.dart';
 ///
 ///
 /// [server]   : (String) represent the osm server or any custom server that based of OSRM project
-///
-/// [roadType] : (RoadType) represent the type of road that you want to use, car or foot,bike only for osm servers
-class OSRMManager with OSRMHelper {
-  final String server;
-  final RoadType roadType;
-  late final Dio dio;
-
-  OSRMManager()
-      : server = oSRMServer,
-        roadType = RoadType.car,
-        dio = Dio();
-
-  OSRMManager.custom({
-    required this.server,
-    this.roadType = RoadType.car,
-    Dio? dio,
+class RoutingManager
+    with OSRMRoutingService, ValhallaRoutingService, OSRMHelper {
+  final RoutingManagerConfiguration configuration;
+  RoutingManager({
+    this.configuration = const RoutingManagerConfiguration(),
   }) {
-    this.dio = dio ?? Dio();
+    setOSRMURLServer(server: configuration.osrmServer);
+    setValhallaServer(server: configuration.osrmServer);
   }
 
   /// [getRoad]
@@ -52,89 +51,20 @@ class OSRMManager with OSRMHelper {
   /// that will help to draw road in the map or show important information to the user
   /// you should take a specific case when road object will contain empty values like 0.0 or empty string
   /// in case of any problem
-  Future<Road> getRoad({
-    required List<LngLat> waypoints,
-    RoadType roadType = RoadType.car,
-    bool alternative = false,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.geojson,
-    Languages language = Languages.en,
-  }) async {
-    String path = generatePath(
-      server,
-      waypoints.toWaypoints(),
-      steps: steps,
-      overview: overview,
-      geometries: geometries,
-      roadType: roadType,
-    );
-    path += "&alternatives=$alternative";
-    final response = await dio.get(path);
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = response.data;
-      return compute(
-        parseRoad,
-        ParserRoadComputeArg(
-          jsonRoad: responseJson,
-          langCode: language.name,
-          alternative: alternative,
-        ),
-      );
-    } else {
-      return Road.withError();
-    }
-  }
-
-  /// [getTrip]
-  /// 
-  /// this method used to get route from trip service api
+  ///
+  /// if [request] is not a instance of [OSRMRequest] and [OSRMRequest.profile] is trip
+  /// then this method used to get route from trip service api
   /// used if you have more that 10 waypoint to generate route will more accurate
   /// than [getRoad].
-  ///
   /// Please note that if one sets [roundTrip] to false, then
   /// [source] and [destination] must be provided.
-  Future<Road> getTrip({
-    required List<LngLat> waypoints,
-    RoadType roadType = RoadType.car,
-    bool roundTrip = true,
-    SourceGeoPointOption source = SourceGeoPointOption.any,
-    DestinationGeoPointOption destination = DestinationGeoPointOption.any,
-    bool steps = true,
-    Overview overview = Overview.full,
-    Geometries geometries = Geometries.polyline,
-    Languages language = Languages.en,
-  }) async {
-    if (!roundTrip &&
-        (source == SourceGeoPointOption.any ||
-            destination == DestinationGeoPointOption.any)) {
-      return Road.empty();
-    }
-    String urlReq = generateTripPath(
-      oSRMServer,
-      waypoints.toWaypoints(),
-      roadType: roadType,
-      roundTrip: roundTrip,
-      source: source,
-      destination: destination,
-      steps: steps,
-      overview: overview,
-      geometries: geometries,
-    );
-    final response = await dio.get(urlReq);
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = response.data;
-      return compute(
-        parseTrip,
-        ParserTripComputeArg(
-          tripJson: responseJson,
-          langCode: language.name,
-        ),
-      );
-    } else {
-      return Road.withError();
-    }
-  }
+  ///
+  ///
+  Future<Road> getRoad({required BaseRequest request}) => switch (request) {
+        OSRMRequest _ => getOSRMRoad(request),
+        ValhallaRequest _ => getValhallaRoad(request),
+        _ => Future.value(Road.empty()),
+      };
 
   /// [buildInstructions]
   ///
@@ -253,7 +183,7 @@ class OSRMManager with OSRMHelper {
   }
 }
 
-extension RoadManagerUtils on OSRMManager {
+extension RoadManagerUtils on RoutingManager {
   /// [indexOfLocationFromRoad]
   ///
   /// this method will return int that index of Location from [polylines] and current [location]

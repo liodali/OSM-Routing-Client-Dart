@@ -5,13 +5,13 @@ import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/osrm_mixin.dart';
 import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/models/road_helper.dart';
-import 'package:routing_client_dart/src/osrm_manager.dart';
+import 'package:routing_client_dart/src/routing_manager.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class FakeOSRMMixin with OSRMHelper {}
 
-class FakeOSRMManager extends OSRMManager {
+class FakeOSRMManager extends RoutingManager {
   @override
   Future<Map<String, dynamic>> loadInstructionHelperJson(
       {Languages language = Languages.en}) async {
@@ -22,7 +22,7 @@ class FakeOSRMManager extends OSRMManager {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   group('test orsm manager', () {
-    late OSRMManager manager;
+    late RoutingManager manager;
     late DioAdapter dioAdapter;
     setUpAll(() async {
       manager = FakeOSRMManager();
@@ -1576,7 +1576,7 @@ void main() {
       "duration": 9.4,
       "distance": 31.2
     };
-    final roadStep = RoadStep.fromJson(json);
+    final roadStep = RoadStep.fromJson(json: json);
     expect(roadStep.maneuver.maneuverType, "depart");
     expect(roadStep.maneuver.modifier, "right");
     expect(roadStep.name, "");
@@ -1610,7 +1610,7 @@ void main() {
       "duration": 9.4,
       "distance": 31.2
     };
-    final roadStep = RoadStep.fromJson(json);
+    final roadStep = RoadStep.fromJson(json: json);
     final instruction = osrmHelper.buildInstruction(
       roadStep,
       instructionHelper,
@@ -1656,7 +1656,7 @@ void main() {
       "duration": 14.1,
       "distance": 157.6
     };
-    final roadStep = RoadStep.fromJson(json);
+    final roadStep = RoadStep.fromJson(json: json);
     final instruction = osrmHelper.buildInstruction(
       roadStep,
       instructionHelper,
@@ -1669,7 +1669,7 @@ void main() {
   });
 
   test('test isOnPath', () async {
-    final roadManager = OSRMManager();
+    final roadManager = RoutingManager();
     final road = Road.fromOSRMJson(
         route: (_responseRandomRoute["routes"]! as List).first);
 
@@ -1680,7 +1680,7 @@ void main() {
   });
 
   test('test instruction', () async {
-    final roadManager = OSRMManager();
+    final roadManager = RoutingManager();
     final road = Road.fromOSRMJson(
       route: (_responseRandomRoute["routes"]! as List).first,
     );
@@ -1734,7 +1734,7 @@ void main() {
     expect(dis2 < dis1, true);
   });
   test('test isOnPath 2', () async {
-    final roadManager = OSRMManager();
+    final roadManager = RoutingManager();
     final road =
         Road.fromOSRMJson(route: (_response2ndRoute["routes"]! as List).first);
 
@@ -1744,7 +1744,7 @@ void main() {
     expect(isOnPath, false);
   });
   test('test instruction 2', () async {
-    final roadManager = OSRMManager();
+    final roadManager = RoutingManager();
     final road = Road.fromOSRMJson(
       route: (_response2ndRoute["routes"]! as List).first,
     );
