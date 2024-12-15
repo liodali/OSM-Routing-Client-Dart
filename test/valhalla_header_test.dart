@@ -4,7 +4,8 @@ import 'package:routing_client_dart/src/models/request_helper.dart';
 
 void main() {
   test('test assert empty waypoints in valhalla header', () {
-    expect(() => ValhallaRequest(waypoints: []), throwsA(isA<AssertionError>()));
+    expect(
+        () => ValhallaRequest(waypoints: []), throwsA(isA<AssertionError>()));
     expect(
       () => ValhallaRequest(waypoints: [
         LngLat(

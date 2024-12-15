@@ -26,6 +26,7 @@ extension TripValhallaExt on Trip {
               verbalPostinstruction: m.verbalPostTransitionInstruction,
               verbalPreinstruction: m.verbalPreTransitionInstruction,
               location: shapes[m.beginShapeIndex],
+              endInstructionLocation: shapes[m.endShapeIndex],
             ),
           ),
         )
