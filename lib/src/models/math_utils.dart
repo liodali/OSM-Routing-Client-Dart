@@ -1,7 +1,7 @@
 import 'dart:math';
 
 /// Utility functions that are used my both PolyUtil and SphericalUtil.
-/// 
+///
 /// credit from [https://github.com/KohlsAdrian/google_maps_utils/blob/master/lib/utils/math_utils.dart]
 class MathUtil {
   /// Restrict x to the range [low, high].

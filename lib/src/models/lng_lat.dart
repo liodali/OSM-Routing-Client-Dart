@@ -1,9 +1,8 @@
 import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
 import 'package:routing_client_dart/src/models/math_utils.dart';
-import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
-///  [LngLat] representative class  of geographic point for longitude and latitude
+/// [LngLat] representative class  of geographic point for longitude and latitude
 ///
 /// [lng] : (double) longitude value
 ///
@@ -59,14 +58,10 @@ extension ExtLngLat on LngLat {
 
 extension PrvExtLngLat on LngLat {
   LngLat alignWithPrecision({int precision = 5}) {
-    final precisedLngLat = PrivateRoad.decodePoylinesGeometry(
-      PrivateRoad.encode(
-        [this],
-        precision: precision,
-      ),
+    var output = [this].encodeGeometry(precision: precision);
+    final precisedLngLat = output.decodeGeometry(
       precision: precision,
     );
-
     return precisedLngLat.first;
   }
 }

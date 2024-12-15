@@ -29,6 +29,7 @@ class OSRMRequest extends BaseRequest<String> {
   final bool roundTrip;
   final SourceGeoPointOption source;
   final DestinationGeoPointOption destination;
+  final bool? hasAlternative;
   const OSRMRequest.route({
     required super.waypoints,
     super.languages,
@@ -36,9 +37,11 @@ class OSRMRequest extends BaseRequest<String> {
     this.steps = true,
     this.overview = Overview.full,
     this.geometries = Geometries.polyline,
+    bool? alternatives = false,
   })  : profile = Profile.route,
         roundTrip = false,
         source = SourceGeoPointOption.any,
+        hasAlternative = alternatives,
         destination = DestinationGeoPointOption.any;
   const OSRMRequest.trip({
     required super.waypoints,
@@ -50,15 +53,20 @@ class OSRMRequest extends BaseRequest<String> {
     this.roundTrip = true,
     this.source = SourceGeoPointOption.any,
     this.destination = DestinationGeoPointOption.any,
-  }) : profile = Profile.trip;
+  })  : profile = Profile.trip,
+        hasAlternative = null;
   @override
   String encodeHeader() {
     String baseURLOptions =
-        "/routed-${roadType.name}/${profile.name}/v1/driving/$waypoints";
+        "/routed-${roadType.name}/${profile.name}/v1/driving/${waypoints.toWaypoints()}";
     var option = "";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";
     option += "geometries=${geometries.value}";
+    if (hasAlternative != null) {
+      option += "&alternatives=$hasAlternative";
+    }
+
     if (profile == Profile.trip) {
       option +=
           "&source=${source.name}&destination=${destination.name}&roundtrip=$roundTrip";

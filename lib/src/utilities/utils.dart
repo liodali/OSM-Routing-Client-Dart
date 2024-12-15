@@ -1,15 +1,17 @@
-import 'dart:math';
-
+import 'dart:math' as math;
+import 'dart:convert' show ascii;
 import 'package:routing_client_dart/src/models/lng_lat.dart';
-import 'package:routing_client_dart/src/models/road.dart';
+import 'package:routing_client_dart/src/models/osrm/road.dart';
+import 'package:routing_client_dart/src/models/route.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
+import 'package:fixnum/fixnum.dart';
 
 const String oSRMServer = "https://routing.openstreetmap.de";
 const String osmValhallaServer = "https://valhalla1.openstreetmap.de/route";
 const double earthRadius = 6371009;
 typedef TurnByTurnInformation = ({
-  RoadInstruction currentInstruction,
-  RoadInstruction? nextInstruction,
+  RouteInstruction currentInstruction,
+  RouteInstruction? nextInstruction,
   double distance
 });
 
@@ -80,9 +82,13 @@ extension GeometriesExtension on Geometries {
 
 extension TransformToWaysOSRM on List<LngLat> {
   String toWaypoints() {
-    return map((e) => e.toString())
+    return map((lngLat) => lngLat.toString())
         .reduce((value, element) => "$value;$element");
   }
+}
+
+extension ExtList on List? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
 }
 
 extension ExtMap on Map<String, dynamic> {
@@ -98,41 +104,84 @@ double parseToDouble(dynamic value) {
   return double.parse(value.toString());
 }
 
-extension ValhallaExt on String {
-  List<LngLat> decodeCoordinates(String str, [int precision = 6]) {
+extension EncodeExt on List<LngLat> {
+  /// Encodes `List<List<num>>` of [coordinates] into a `String` via
+  /// [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en)
+  ///
+  /// For mode detailed info about encoding refer to [encodePoint].
+  String encodeGeometry({int precision = 5}) {
+    if (isEmpty) {
+      return "";
+    }
+
+    final factor = math.pow(10, precision);
+    var output =
+        _encode(this[0].lat, 0, factor) + _encode(this[0].lng, 0, factor);
+
+    for (var i = 1; i < length; i++) {
+      var current = this[i], previous = this[i - 1];
+      output += _encode(current.lat, previous.lat, factor);
+      output += _encode(current.lng, previous.lng, factor);
+    }
+
+    return output;
+  }
+}
+
+extension EncodeGeoPointExt on num {
+  String encodePoint({num previous = 0, int accuracyExponent = 5}) {
+    return _encode(this, previous, math.pow(10, accuracyExponent));
+  }
+}
+
+extension DecodingExt on String {
+  List<LngLat> decodeGeometry({int precision = 5}) {
+    final List<LngLat> coordinates = [];
+
     var index = 0,
-        lat = 0.0,
-        lng = 0.0,
-        coordinates = <LngLat>[],
-        factor = pow(10, precision);
+        lat = 0,
+        lng = 0,
+        shift = 0,
+        result = 0,
+        factor = math.pow(10, precision);
 
-    while (index < str.length) {
-      var result = 0;
-      var shift = 0;
+    int? latitudeChange, longitudeChange, byte;
 
-      while (str.codeUnitAt(index) > 0x1f) {
-        result |= (str.codeUnitAt(index++) - 0x20) << shift;
-        shift += 5;
-      }
-
-      final latitudeChange = result >> 1;
-      result = 0;
+    // Coordinates have variable length when encoded, so just keep
+    // track of whether we've hit the end of the string. In each
+    // loop iteration, a single coordinate is decoded.
+    while (index < length) {
+      // Reset shift, result, and byte
+      byte = null;
       shift = 0;
+      result = 0;
 
-      while (str.codeUnitAt(index) > 0x1f) {
-        result |= (str.codeUnitAt(index++) - 0x20) << shift;
+      do {
+        byte = codeUnitAt(index++) - 63;
+        result |= ((Int32(byte) & Int32(0x1f)) << shift).toInt();
         shift += 5;
-      }
+      } while (byte >= 0x20);
 
-      final longitudeChange = result >> 1;
+      latitudeChange =
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
+              .toInt();
+
+      shift = result = 0;
+
+      do {
+        byte = codeUnitAt(index++) - 63;
+        result |= ((Int32(byte) & Int32(0x1f)) << shift).toInt();
+        shift += 5;
+      } while (byte >= 0x20);
+
+      longitudeChange =
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
+              .toInt();
 
       lat += latitudeChange;
       lng += longitudeChange;
 
-      coordinates.add(LngLat(
-        lng: lng / factor,
-        lat: lat / factor,
-      ));
+      coordinates.add(LngLat(lat: lat / factor, lng: lng / factor));
     }
 
     return coordinates;
@@ -146,23 +195,23 @@ extension ValhallaExt on String {
 /// fix parsing problem [#1]
 /// return [Road] object that contain list of waypoint
 /// and distance and duration of the road
-Future<Road> parseRoad(ParserRoadComputeArg data) async {
+Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.jsonRoad;
   bool alternative = data.alternative;
-  var road = Road.empty();
+  var road = const OSRMRoad.empty();
   final List<Map<String, dynamic>> routes =
       List.castFrom(jsonResponse["routes"]);
 
   final route = routes.first;
 
-  road = Road.fromOSRMJson(
+  road = OSRMRoad.fromOSRMJson(
     route: route,
   );
 
   if (routes.length > 1 && alternative) {
     routes.removeAt(0);
     for (var route in routes) {
-      final alternative = Road.fromOSRMJson(
+      final alternative = OSRMRoad.fromOSRMJson(
         route: route,
       );
       road.addAlternativeRoute(alternative);
@@ -180,15 +229,41 @@ Future<Road> parseRoad(ParserRoadComputeArg data) async {
 /// return [Road] object that contain list of waypoint and other information
 /// this road represent trip that will pass by all geopoint entered as args
 /// and this road will not be the shortes route
-Future<Road> parseTrip(ParserTripComputeArg data) async {
+Future<OSRMRoad> parseTrip(ParserTripComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.jsonRoad;
-  var road = Road.empty();
+  var road = const OSRMRoad.empty();
   final List<Map<String, dynamic>> routes =
       List.castFrom(jsonResponse["trips"]);
   final route = routes.first;
-  road = Road.fromOSRMJson(
+  road = OSRMRoad.fromOSRMJson(
     route: route,
   );
 
   return road;
+}
+
+num _py2Round(num value) {
+  return (value.abs() + 0.5).floor() * (value >= 0 ? 1 : -1);
+}
+
+String _encode(num current, num previous, num factor) {
+  current = _py2Round(current * factor);
+  previous = _py2Round(previous * factor);
+  Int32 coordinate = Int32(current as int) - Int32(previous as int) as Int32;
+  coordinate <<= 1;
+  if (current - previous < 0) {
+    coordinate = ~coordinate;
+  }
+  var output = "";
+  while (coordinate >= Int32(0x20)) {
+    try {
+      Int32 v = (Int32(0x20) | (coordinate & Int32(0x1f))) + 63 as Int32;
+      output += String.fromCharCodes([v.toInt()]);
+    } catch (err) {
+      rethrow;
+    }
+    coordinate >>= 5;
+  }
+  output += ascii.decode([coordinate.toInt() + 63]);
+  return output;
 }

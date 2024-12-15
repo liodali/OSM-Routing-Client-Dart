@@ -1,20 +1,52 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:routing_client_dart/src/models/road_helper.dart';
-import 'package:routing_client_dart/src/utilities/utils.dart';
+import 'package:flutter/services.dart';
+import 'package:routing_client_dart/routing_client_dart.dart';
+import 'package:routing_client_dart/src/models/osrm/road.dart';
+import 'package:routing_client_dart/src/models/osrm/road_helper.dart';
+import 'package:routing_client_dart/src/models/route.dart';
+
 /// [OSRMHelper]
-/// 
+///
 /// this helper fpr OSRMManager that contain URL , intruction generator
 mixin OSRMHelper {
-
   Future<Map<String, dynamic>> loadInstructionHelperJson({
     Languages language = Languages.en,
   }) async {
     final loadedJson = await rootBundle.loadString(
-        'packages/routing_client_dart/src/assets/${language.name}.json',
+        'packages/routing_client_dart/src/assets/${language.code}.json',
         cache: false);
     return json.decode(loadedJson);
+  }
+
+  Future<List<RouteInstruction>> buildInstructions(
+    OSRMRoad road, {
+    Languages language = Languages.en,
+  }) async {
+    final legs = road.roadLegs;
+    final legCounts = legs.length - 1;
+    final instructionsHelper =
+        await loadInstructionHelperJson(language: language);
+    final List<RouteInstruction> instructions = [];
+    legs.asMap().forEach((indexLeg, leg) {
+      for (var step in leg.steps) {
+        final instruction = buildInstruction(
+          step,
+          instructionsHelper,
+          {
+            "legIndex": indexLeg,
+            "legCount": legCounts,
+          },
+        );
+        RouteInstruction roadInstruction = RouteInstruction(
+          distance: step.distance,
+          duration: step.duration,
+          instruction: instruction,
+          location: step.maneuver.location,
+        );
+        instructions.add(roadInstruction);
+      }
+    });
+    return instructions;
   }
 
   String buildInstruction(
@@ -115,7 +147,7 @@ mixin OSRMHelper {
         }
       }
     } catch (e) {
-      debugPrint(e.toString());
+      rethrow;
     }
     String modifierInstruction = "";
     if (step.maneuver.modifier != null) {

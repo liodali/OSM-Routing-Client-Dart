@@ -1,3 +1,7 @@
+import 'package:routing_client_dart/src/models/route.dart';
+import 'package:routing_client_dart/src/models/valhalla/extensions.dart';
+import 'package:routing_client_dart/src/utilities/valhalla_utilities.dart';
+
 class ValhallaResponse {
   final Trip trip;
   final List<Trip>? alternates;
@@ -19,6 +23,17 @@ class ValhallaResponse {
           : null,
       id: json['id'],
     );
+  }
+  Route toRoute({
+    ValhallaUnit unit = ValhallaUnit.km,
+    int accuracyExponent = 5,
+  }) {
+    final alters = alternates?.map((e) => e.toRoute()).toList();
+    final road = trip.toRoute(
+      unit: unit,
+      accuracyExponent: accuracyExponent,
+    );
+    return road.copyWith(alternativesRoads: alters);
   }
 }
 
