@@ -1,22 +1,22 @@
 import 'dart:math';
+import 'package:dio/dio.dart';
 import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
 import 'package:routing_client_dart/src/models/math_utils.dart';
-import 'package:routing_client_dart/src/models/osrm_mixin.dart';
 import 'package:routing_client_dart/src/models/request_helper.dart';
+import 'package:routing_client_dart/src/models/route.dart';
 import 'package:routing_client_dart/src/routes_services/osrm_service.dart';
 import 'package:routing_client_dart/src/routes_services/valhalla_service.dart';
 
 import 'package:routing_client_dart/src/models/lng_lat.dart';
-import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class RoutingManagerConfiguration {
-  final String osrmServer;
-  final String valhallaServer;
+  final Dio? osrmServerDioClient;
+  final Dio? valhallaServerDioClient;
 
   const RoutingManagerConfiguration({
-    this.osrmServer = oSRMServer,
-    this.valhallaServer = osmValhallaServer,
+    this.osrmServerDioClient,
+    this.valhallaServerDioClient,
   });
 }
 
@@ -25,23 +25,34 @@ class RoutingManagerConfiguration {
 /// this class responsible to manage http call to get road from open-source osm server
 /// or custom server that should be specified in constructor based on osrm project
 /// contain only one public method [getRoad] to make the call
-/// and return [Road] object.
+/// and return [Route] object.
 ///
 /// for more detail see : https://github.com/Project-OSRM/osrm-backend
 ///
 ///
-/// [server]   : (String) represent the osm server or any custom server that based of OSRM project
-class RoutingManager
-    with OSRMRoutingService, ValhallaRoutingService, OSRMHelper {
+/// [configuration]   : (RoutingManagerConfiguration) represent the osm server config or any custom server that based of OSRM project
+class RoutingManager {
   final RoutingManagerConfiguration configuration;
+  final OSRMRoutingService _osrmService;
+  final ValhallaRoutingService _valhallaRoutingService;
   RoutingManager({
     this.configuration = const RoutingManagerConfiguration(),
-  }) {
-    setOSRMURLServer(server: configuration.osrmServer);
-    setValhallaServer(server: configuration.osrmServer);
-  }
+  })  : _osrmService = OSRMRoutingService.dioClient(
+          client: configuration.osrmServerDioClient ??
+              Dio(
+                BaseOptions(baseUrl: oSRMServer),
+              ),
+        ),
+        _valhallaRoutingService = ValhallaRoutingService.dioClient(
+          client: configuration.valhallaServerDioClient ??
+              Dio(
+                BaseOptions(
+                  baseUrl: osmValhallaServer,
+                ),
+              ),
+        );
 
-  /// [getRoad]
+  /// [getRoute]
   ///
   /// this method make http call to get road from specific server
   /// this method return Road that contain road information like distance and duration
@@ -55,66 +66,40 @@ class RoutingManager
   /// if [request] is not a instance of [OSRMRequest] and [OSRMRequest.profile] is trip
   /// then this method used to get route from trip service api
   /// used if you have more that 10 waypoint to generate route will more accurate
-  /// than [getRoad].
+  /// than [getRoute].
   /// Please note that if one sets [roundTrip] to false, then
   /// [source] and [destination] must be provided.
   ///
   ///
-  Future<Road> getRoad({required BaseRequest request}) => switch (request) {
-        OSRMRequest _ => getOSRMRoad(request),
-        ValhallaRequest _ => getValhallaRoad(request),
-        _ => Future.value(Road.empty()),
+  Future<Route> getRoute({
+    required BaseRequest request,
+  }) =>
+      switch (request) {
+        OSRMRequest _ => _osrmService.getOSRMRoad(request),
+        ValhallaRequest _ => _valhallaRoutingService.getValhallaRoad(request),
+        _ => Future.value(const Route.empty()),
       };
-
-  /// [buildInstructions]
-  ///
-  /// this method to generate instructions of specific [road]
-  Future<List<RoadInstruction>> buildInstructions(
-    Road road, {
-    Languages languages = Languages.en,
-  }) async {
-    final legs = road.roadLegs;
-    final instructionsHelper =
-        await loadInstructionHelperJson(language: languages);
-    final List<RoadInstruction> instructions = [];
-    legs.asMap().forEach((indexLeg, listSteps) {
-      for (var step in listSteps) {
-        final instruction = buildInstruction(
-          step,
-          instructionsHelper,
-          {
-            "legIndex": indexLeg,
-            "legCount": legs.length - 1,
-          },
-        );
-        RoadInstruction roadInstruction = RoadInstruction(
-          distance: step.distance,
-          duration: step.duration,
-          instruction: instruction,
-          location: step.maneuver.location,
-        );
-        instructions.add(roadInstruction);
-      }
-    });
-    return instructions;
-  }
 
   /// [isOnPath]
   ///
   /// this method to generate instructions of specific [road]
-  Future<bool> isOnPath(
-    Road road,
+  bool isOnPath(
+    Route road,
     LngLat currentLocation, {
     double tolerance = 0.1,
-  }) async {
+    int precision = 5,
+  }) {
     var polyline = road.polyline;
-    if (road.polyline == null && road.polylineEncoded == null) {
+    if (road.polyline.isNullOrEmpty && road.polylineEncoded == null) {
       throw Exception(
-          'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
-    } else if (road.polyline == null && road.polylineEncoded != null) {
-      polyline = PrivateRoad.decodePoylinesGeometry(road.polylineEncoded!);
+        'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null',
+      );
+    } else if (road.polyline.isNullOrEmpty && road.polylineEncoded != null) {
+      polyline = road.polylineEncoded?.decodeGeometry(
+        precision: precision,
+      );
     }
-    final location = currentLocation.alignWithPrecision(precision: 5);
+    final location = currentLocation.alignWithPrecision(precision: precision);
 
     final indexOfNextLocation = indexOfLocationFromRoad(
       location,
@@ -137,20 +122,22 @@ class RoutingManager
   /// Note that [tolerance] can effect the result which used to mesure location in road which close to [currentLocation]
   ///
   /// return Future of TurnByTurnInformation, can be null also if current location not in Path
-  Future<TurnByTurnInformation?> nextInstruction(
-    List<RoadInstruction> instructions,
-    Road road,
+  TurnByTurnInformation? nextInstruction(
+    List<RouteInstruction> instructions,
+    Route road,
     LngLat currentLocation, {
     double tolerance = 0.1,
-  }) async {
+    int precision = 5,
+  }) {
     var polyline = road.polyline;
-    if (road.polyline == null && road.polylineEncoded == null) {
+    if (road.polyline.isNullOrEmpty && road.polylineEncoded == null) {
       throw Exception(
-          'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null');
-    } else if (road.polyline == null && road.polylineEncoded != null) {
-      polyline = PrivateRoad.decodePoylinesGeometry(road.polylineEncoded!);
+        'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null',
+      );
+    } else if (road.polyline.isNullOrEmpty && road.polylineEncoded != null) {
+      polyline = road.polylineEncoded!.decodeGeometry(precision: precision);
     }
-    final location = currentLocation.alignWithPrecision(precision: 5);
+    final location = currentLocation.alignWithPrecision(precision: precision);
 
     final indexOfNextLocation = indexOfLocationFromRoad(
       location,
@@ -163,7 +150,7 @@ class RoutingManager
     }
     final nextLocation = polyline[indexOfNextLocation];
 
-    var currentInstruction = instructions.cast<RoadInstruction?>().firstWhere(
+    var currentInstruction = instructions.cast<RouteInstruction?>().firstWhere(
         (element) => element != null && element.location == nextLocation,
         orElse: () => null);
     currentInstruction ??=
@@ -188,6 +175,8 @@ extension RoadManagerUtils on RoutingManager {
   ///
   /// this method will return int that index of Location from [polylines] and current [location]
   /// within a specified [tolerance].
+  ///
+  /// tolerance (in meters)
   ///
   /// **note : our [location] use precision 5,it better to provide [LngLat] with the precision 5 means 5 digits after fraction
   ///
@@ -219,13 +208,14 @@ extension RoadManagerUtils on RoutingManager {
         var lngLat2 = point2.lngLatRadian;
 
         if (isOnSegmentGC(
-            prevRadian.latitude,
-            prevRadian.longitude,
-            lngLat2.latitude,
-            lngLat2.longitude,
-            lngLatRadian.latitude,
-            lngLatRadian.longitude,
-            havTolerance)) {
+          prevRadian.latitude,
+          prevRadian.longitude,
+          lngLat2.latitude,
+          lngLat2.longitude,
+          lngLatRadian.latitude,
+          lngLatRadian.longitude,
+          havTolerance,
+        )) {
           return max(0, idx - 1);
         }
         prevRadian = lngLat2;
@@ -284,8 +274,8 @@ extension RoadManagerUtils on RoutingManager {
     return -1;
   }
 
-  RoadInstruction? closeInstructionToLocation(
-    List<RoadInstruction> instructions,
+  RouteInstruction? closeInstructionToLocation(
+    List<RouteInstruction> instructions,
     LngLat location,
   ) {
     final instructionWithDistance = instructions
@@ -335,4 +325,9 @@ extension RoadManagerUtils on RoutingManager {
     // Compare with half-circle == pi using sign of sin().
     return sinSumAlongTrack > 0;
   }
+}
+
+extension PrvRoutingManager on RoutingManager {
+  OSRMRoutingService get osrmClient => _osrmService;
+  ValhallaRoutingService get valhallaClient => _valhallaRoutingService;
 }
