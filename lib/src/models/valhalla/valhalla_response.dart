@@ -124,10 +124,10 @@ class Maneuver {
   final String? verbalPostTransitionInstruction;
   final double time;
   final double length;
-  final double cost;
+  final int cost;
   final int beginShapeIndex;
   final int endShapeIndex;
-  final bool rough;
+  final bool? rough;
   final String travelMode;
   final String travelType;
 
@@ -142,7 +142,7 @@ class Maneuver {
     required this.cost,
     required this.beginShapeIndex,
     required this.endShapeIndex,
-    required this.rough,
+    this.rough,
     required this.travelMode,
     required this.travelType,
   });
@@ -156,8 +156,8 @@ class Maneuver {
       verbalPreTransitionInstruction: json['verbal_pre_transition_instruction'],
       verbalPostTransitionInstruction:
           json['verbal_post_transition_instruction'],
-      time: json['time'],
-      length: json['length'],
+      time: double.tryParse(json['time'].toString()) ?? 0.0,
+      length: double.tryParse(json['length'].toString()) ?? 0.0,
       cost: json['cost'],
       beginShapeIndex: json['begin_shape_index'],
       endShapeIndex: json['end_shape_index'],
@@ -179,7 +179,7 @@ class Summary {
   final double maxLon;
   final double time;
   final double length;
-  final double cost;
+  final int cost;
 
   const Summary._({
     required this.hasTimeRestrictions,

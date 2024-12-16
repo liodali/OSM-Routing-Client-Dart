@@ -10,7 +10,7 @@ extension TripValhallaExt on Trip {
   }) {
     final shapes = legs
         .map(
-          (e) => e.shape.decodeGeometry(),
+          (e) => e.shape.decodeGeometry(precision: 6),
         )
         .reduce((l1, l2) => l1 + l2);
     final insturctions = legs
@@ -42,6 +42,7 @@ extension TripValhallaExt on Trip {
       },
       duration: summary.time,
       instructions: insturctions ?? [],
+      polyline: shapes,
       polylineEncoded:
           legs.length == 1 ? legs.first.shape : shapes.encodeGeometry(),
     );

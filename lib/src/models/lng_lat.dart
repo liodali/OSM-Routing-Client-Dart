@@ -25,7 +25,7 @@ class LngLat {
   @override
   String toString() => "$lng,$lat";
 
-  Map<String, double> toMap() => {
+  Map<String, dynamic> toMap() => {
         'lat': lat,
         'lon': lng,
       };
@@ -39,7 +39,7 @@ class LngLat {
   }
 
   @override
-  int get hashCode => int.parse((lat + lng).toString());
+  int get hashCode => double.parse((lat + lng).toString()).toInt();
 }
 
 extension ExtLngLat on LngLat {
@@ -54,6 +54,8 @@ extension ExtLngLat on LngLat {
               (currentRadianLocation - radianLocation).longitude),
         );
   }
+
+  List<double> toList() => [lng, lat];
 }
 
 extension PrvExtLngLat on LngLat {

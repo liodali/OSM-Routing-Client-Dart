@@ -34,13 +34,13 @@ class CostingOption extends BaseCostingOption {
   });
   @override
   Map<String, dynamic> toMap() => {
-        "top_speed": topSpeed,
-        "useTolls": useTolls,
-        "speed_types": speedTypes,
-        "use_highways": useHighways,
-        "use_tracks": useTracks,
-        "use_living_streets": useLivingStreets,
-        "use_ferry": useFerry,
+        'top_speed': topSpeed,
+        'useTolls': useTolls,
+        'speed_types': speedTypes,
+        'use_highways': useHighways,
+        'use_tracks': useTracks,
+        'use_living_streets': useLivingStreets,
+        'use_ferry': useFerry,
       }
         ..addIfNotNull('height', height)
         ..addIfNotNull('width', width)
@@ -62,17 +62,17 @@ class TransitCostingOption extends BaseCostingOption {
     this.useRail = 0.5,
     this.useTransfers = 0.5,
   })  : assert(useBus >= 0 && useBus <= 1,
-            "useBus value should be only between [0,1]"),
+            'useBus value should be only between [0,1]'),
         assert(useRail >= 0 && useRail <= 1,
-            "useRail value should be only between [0,1]"),
+            'useRail value should be only between [0,1]'),
         assert(useTransfers >= 0 && useTransfers <= 1,
-            "useTransfers value should be only between [0,1]");
+            'useTransfers value should be only between [0,1]');
 
   @override
   Map<String, dynamic> toMap() => {
-        "use_bus": useBus,
-        "use_rail": useRail,
-        "use_transfers": useTransfers,
+        'use_bus': useBus,
+        'use_rail': useRail,
+        'use_transfers': useTransfers,
       };
 }
 
@@ -193,34 +193,89 @@ class BicycleCostingOption extends BaseCostingOption {
 class PedestrianCostingOption extends BaseCostingOption {
   final double walkingSpeed;
   final double walkwayFactor;
-  final double maxDistance;
+  final double? maxDistance;
   final double useLivingStreets;
   final double useTracks;
   final double useFerry;
   final bool shortest;
-
+  final int servicePenalty;
+  final int serviceFactor;
+  final double useHills;
+  final double sidewalkFactor;
+  final double alleyFactor;
+  final double drivewayFactor;
+  final int stepPenalty;
+  final int maxHikingDifficulty;
+  final int useLit;
+  final int? transitStartEndMaxDistance;
+  final int? transitTransferMaxDistance;
   PedestrianCostingOption({
     this.walkingSpeed = 5.1,
     this.walkwayFactor = 1.0,
     this.maxDistance = 100,
-    this.useLivingStreets = 0.7,
+    this.useLivingStreets = 0.5,
     this.useTracks = 0.5,
     this.useFerry = 0.5,
     this.shortest = false,
+    this.servicePenalty = 0,
+    this.serviceFactor = 1,
+    this.useHills = 0.5,
+    this.sidewalkFactor = 1,
+    this.alleyFactor = 2,
+    this.drivewayFactor = 5.0,
+    this.stepPenalty = 0,
+    this.maxHikingDifficulty = 1,
+    this.useLit = 0,
+    this.transitStartEndMaxDistance,
+    this.transitTransferMaxDistance,
   })  : assert(useFerry >= 0 || useFerry <= 1.0),
         assert(useTracks >= 0 || useTracks <= 1.0),
+        assert(useLit >= 0 || useLivingStreets <= 1.0),
         assert(useLivingStreets >= 0 || useLivingStreets <= 1.0),
+        assert(maxHikingDifficulty >= 0 || useLivingStreets <= 6.0),
         assert(walkingSpeed >= 0.5 || walkingSpeed <= 25.0);
   @override
-  Map<String, dynamic> toMap() => {
-        "walking_speed": walkingSpeed,
-        "walkway_factor": walkwayFactor,
-        "max_distance": maxDistance,
-        "use_tracks": useTracks,
-        "use_ferry": useFerry,
-        "use_living_streets": useLivingStreets,
-        "shortest": shortest,
-      };
+  Map<String, dynamic> toMap() {
+    final map = {
+      'walking_speed': walkingSpeed,
+      'walkway_factor': walkwayFactor,
+      'use_tracks': useTracks,
+      'use_ferry': useFerry,
+      'use_living_streets': useLivingStreets,
+      'shortest': shortest,
+      'service_penalty': servicePenalty,
+      'service_factor': 1,
+      'use_hills': 0.5,
+      'sidewalk_factor': 1,
+      'alley_factor': 2,
+      'driveway_factor': 5,
+      'step_penalty': 0,
+      'max_hiking_difficulty': 1,
+      'use_lit': 0,
+      'transit_start_end_max_distance': 2145,
+      'transit_transfer_max_distance': 800
+    };
+
+    if (maxDistance != null) {
+      map.putIfAbsent(
+        'max_distance',
+        () => maxDistance!,
+      );
+    }
+    if (transitStartEndMaxDistance != null) {
+      map.putIfAbsent(
+        'transit_start_end_max_distance',
+        () => transitStartEndMaxDistance!,
+      );
+    }
+    if (transitTransferMaxDistance != null) {
+      map.putIfAbsent(
+        'transit_transfer_max_distance',
+        () => transitTransferMaxDistance!,
+      );
+    }
+    return map;
+  }
 }
 
 String costingOptionNameKey(BaseCostingOption option) => switch (option) {

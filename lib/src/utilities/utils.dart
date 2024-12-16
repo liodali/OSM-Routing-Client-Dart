@@ -85,6 +85,10 @@ extension TransformToWaysOSRM on List<LngLat> {
     return map((lngLat) => lngLat.toString())
         .reduce((value, element) => "$value;$element");
   }
+
+  List<List<double>> toMapList() => map(
+        (lngLat) => [lngLat.lng, lngLat.lat],
+      ).toList();
 }
 
 extension ExtList on List? {
@@ -93,8 +97,10 @@ extension ExtList on List? {
 
 extension ExtMap on Map<String, dynamic> {
   Map<String, dynamic> addIfNotNull(String key, dynamic value) {
-    if (value != null) {
+    if (value != null && value is Object) {
       putIfAbsent(key, () => value);
+    } else if (value != null) {
+      putIfAbsent(key, () => value as dynamic);
     }
     return this;
   }

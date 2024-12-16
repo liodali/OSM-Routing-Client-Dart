@@ -92,15 +92,23 @@ class OpenRouteHeader extends BaseRequest<Map<String, dynamic>> {
 }
 
 class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
+  final String? id;
   final ValhallaFormat valhallaFormat;
   final Geometries? valhallaShapeFormat;
   final ValhallaDirectionsType directionsType;
+  final List<LngLat>? excludeLocations;
+  final List<dynamic>? excludePolygones;
   final Costing costing;
   final BaseCostingOption? costingOption;
   final ValhallaUnit units;
   final DateTime? time;
+  final bool? bannerInstructions;
+  final bool? voiceInstructions;
   ValhallaRequest({
+    this.id,
     required super.waypoints,
+    this.excludeLocations,
+    this.excludePolygones,
     this.directionsType = ValhallaDirectionsType.instructions,
     this.costingOption,
     this.costing = Costing.auto,
@@ -109,6 +117,8 @@ class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
     this.time,
     this.valhallaFormat = ValhallaFormat.json,
     this.valhallaShapeFormat,
+    this.bannerInstructions,
+    this.voiceInstructions,
     super.alternatives,
   })  : assert(
           waypoints.length == 2,
@@ -125,18 +135,70 @@ class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
         );
 
   @override
-  Map<String, dynamic> encodeHeader() => {
-        'locations': waypoints.map((e) => e.toMap()).toList(),
-        'costing': costing.name,
-        'units': units.name,
-        'language': languages.name,
-        'directions_type': directionsType.name,
-        'format': valhallaFormat.name,
-        'alternates': alternatives,
-      }..addIfNotNull(
-          'shape_format',
-          valhallaFormat == ValhallaFormat.orsm && valhallaShapeFormat != null
-              ? (valhallaShapeFormat ?? Geometries.polyline6).name
-              : null,
-        );
+  Map<String, dynamic> encodeHeader() {
+    final mapHeader = {
+      'locations': waypoints.map((e) {
+        final mPoint = e.toMap();
+        mPoint['type'] = 'break';
+        return mPoint;
+      }).toList(),
+      'exclude_polygons': [],
+      'costing': costing.name,
+      'units': units.name,
+      'language': languages.name,
+      'directions_type': directionsType.name,
+      'format': valhallaFormat.name,
+      'alternates': alternatives,
+    }
+      ..addIfNotNull('id', id)
+      ..addIfNotNull(
+        'shape_format',
+        valhallaFormat == ValhallaFormat.orsm && valhallaShapeFormat != null
+            ? (valhallaShapeFormat ?? Geometries.polyline6).name
+            : null,
+      )
+      ..addIfNotNull(
+        'costing_options',
+        costingOption != null
+            ? {
+                costing.name: costingOption!.toMap(),
+              }
+            : null,
+      )
+      ..addIfNotNull(
+        'banner_instructions',
+        bannerInstructions,
+      )
+      ..addIfNotNull(
+        'voice_instructions',
+        voiceInstructions,
+      )
+      ..addIfNotNull(
+        'exclude_polygons',
+        excludePolygones != null
+            ? convertNestedLngLatToList(excludePolygones!)
+            : null,
+      )
+      ..addIfNotNull(
+        'exclude_locations',
+        excludeLocations?.toWaypoints(),
+      );
+
+    return mapHeader;
+  }
+}
+
+// Function to convert nested List<LngLat> to nested List<List<double>>
+List<dynamic> convertNestedLngLatToList(List<dynamic> nestedList) {
+  if (nestedList.isEmpty) {
+    return [];
+  }
+  return nestedList.map((element) {
+    if (element is List) {
+      return convertNestedLngLatToList(element);
+    } else if (element is LngLat) {
+      return element.toMap();
+    }
+    return element;
+  }).toList();
 }
