@@ -1,3 +1,13 @@
+## 1.0.0: add valhalla route API
+* break changes:
+    * replace OSRMManager with RoutingManager
+    * replace getRoad with getRoute
+    * remove buildInstruction ( becone integrated automatically with route object )
+    * replace Road by Route
+    * replace return of OSRM api to OSRMRoad
+* create OSRMService for osrm apis
+* create ValhallaService for valhalla apis
+
 ## 0.5.5: fix bug
 * fix bug related to generate path for getRoute
 ## 0.5.4:
