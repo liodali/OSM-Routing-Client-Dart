@@ -5,9 +5,13 @@
 > Package for osm routing client api 
 
 > we support routing API for osrm-backend
+
 > also Valhalla Route API (more APIs will be added )
+
 > openrouteservice (coming soon)
+
 > from 1.0.0 instruction will be included directly when requesting the route
+
 > you can use our osrm service or valhalla service directly insteado of our RoutingManager
 
 ### client api support
