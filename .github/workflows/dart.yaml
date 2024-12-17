@@ -1,4 +1,4 @@
-name: osm_flutter
+name: routing_dart_client
 
 on:
   push:
