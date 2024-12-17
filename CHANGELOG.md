@@ -1,3 +1,5 @@
+## 1.0.3:
+* change the name RoadType to `RoutingType`
 ## 1.0.2:
 * export route model 
 ## 1.0.1: 
