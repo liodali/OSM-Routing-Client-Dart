@@ -74,7 +74,7 @@ void main() {
 
       final urlGenerated = '$oSRMServer${OSRMRequest.route(
         waypoints: waypoints,
-        roadType: RoadType.bike,
+        routingType: RoutingType.bike,
         geometries: Geometries.polyline,
         steps: true,
         alternatives: null,

@@ -22,7 +22,7 @@ abstract class BaseRequest<T> {
 
 class OSRMRequest extends BaseRequest<String> {
   final Profile profile;
-  final RoadType roadType;
+  final RoutingType routingType;
   final bool steps;
   final Overview overview;
   final Geometries geometries;
@@ -33,7 +33,7 @@ class OSRMRequest extends BaseRequest<String> {
   const OSRMRequest.route({
     required super.waypoints,
     super.languages,
-    this.roadType = RoadType.car,
+    this.routingType = RoutingType.car,
     this.steps = true,
     this.overview = Overview.full,
     this.geometries = Geometries.polyline,
@@ -46,7 +46,7 @@ class OSRMRequest extends BaseRequest<String> {
   const OSRMRequest.trip({
     required super.waypoints,
     super.languages,
-    this.roadType = RoadType.car,
+    this.routingType = RoutingType.car,
     this.steps = true,
     this.overview = Overview.full,
     this.geometries = Geometries.polyline,
@@ -58,7 +58,7 @@ class OSRMRequest extends BaseRequest<String> {
   @override
   String encodeHeader() {
     String baseURLOptions =
-        "/routed-${roadType.name}/${profile.name}/v1/driving/${waypoints.toWaypoints()}";
+        "/routed-${routingType.name}/${profile.name}/v1/driving/${waypoints.toWaypoints()}";
     var option = "";
     option += "steps=$steps&";
     option += "overview=${overview.value}&";

@@ -10,4 +10,4 @@ export 'src/routes_services/osrm_service.dart';
 export 'src/routes_services/routing_service.dart';
 export 'src/routes_services/valhalla_service.dart';
 export 'src/utilities/utils.dart'
-    hide oSRMServer, GeometriesExtension, OverviewExtension, RoadTypeExtension;
+    hide oSRMServer, GeometriesExtension, OverviewExtension, RoutingTypeExtension;

@@ -26,7 +26,7 @@ enum Languages {
   final String code;
 }
 
-enum RoadType {
+enum RoutingType {
   car,
   foot,
   bike,
@@ -62,7 +62,7 @@ enum DestinationGeoPointOption {
   last,
 }
 
-extension RoadTypeExtension on RoadType {
+extension RoutingTypeExtension on RoutingType {
   String get value {
     return ["car", "foot", "bike"][index];
   }
