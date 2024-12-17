@@ -1,3 +1,5 @@
+## 1.0.1: 
+* forget to export OSRMRequest & ValhallaRequest
 ## 1.0.0: add valhalla route API
 * break changes:
     * replace OSRMManager with RoutingManager
