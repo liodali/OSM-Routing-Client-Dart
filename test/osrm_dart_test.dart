@@ -897,7 +897,7 @@ void main() {
       ]
     };
     OSRMRoad road = await parseRoad(ParserRoadComputeArg(
-      jsonRoad: responseApi,
+      json: responseApi,
       langCode: "en",
     ));
     expect(road.distance, 4.7238);
@@ -1571,7 +1571,7 @@ void main() {
       ]
     };
     OSRMRoad road = await parseRoad(ParserRoadComputeArg(
-      jsonRoad: responseApi,
+      json: responseApi,
       langCode: "en",
     ));
     expect(road.distance, 4.7238);
@@ -1640,7 +1640,8 @@ void main() {
       "distance": 31.2
     };
     final roadStep = RoadStep.fromJson(json: json);
-    final instruction = osrmHelper.buildInstruction(
+
+    final instruction = OSRMHelper.buildInstruction(
       roadStep,
       instructionHelper,
       {
@@ -1686,7 +1687,7 @@ void main() {
       "distance": 157.6
     };
     final roadStep = RoadStep.fromJson(json: json);
-    final instruction = osrmHelper.buildInstruction(
+    final instruction = OSRMHelper.buildInstruction(
       roadStep,
       instructionHelper,
       {
@@ -1718,7 +1719,10 @@ void main() {
       route: (responseRandomRoute["routes"]! as List).first,
     );
 
-    final instructions = await roadManager.osrmClient.buildInstructions(road);
+    final instructions = await OSRMHelper.buildInstructions(
+      road: road,
+      instructionsHelper: en,
+    );
 
     final currentLocation = LngLat.fromList(lnglat: [13.389147, 52.527549])
         .alignWithPrecision(precision: 5);
@@ -1790,7 +1794,7 @@ void main() {
       route: (response2ndRoute["routes"]! as List).first,
     );
 
-    final instructions = await roadManager.osrmClient.buildInstructions(road);
+    final instructions = await OSRMHelper.buildInstructions(road:road, instructionsHelper: en);
 
     final currentLocation = LngLat.fromList(lnglat: [8.26195, 50.009781]);
     final turnByTurnInformation = roadManager.nextInstruction(

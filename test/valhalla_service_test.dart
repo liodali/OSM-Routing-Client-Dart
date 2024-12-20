@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:routing_client_dart/routing_client_dart.dart';
-import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/valhalla/costing.dart';
 import 'package:routing_client_dart/src/models/valhalla/costing_option.dart';
 import 'package:routing_client_dart/src/utilities/valhalla_utilities.dart';
@@ -50,12 +49,12 @@ void main() {
     );
     const encodedPoly =
         'kyik~Akl|uN~F{@pDyB~Aw@tADpCxBvAbBnBx@|@QjAkApAs@r@@lAh@lDlB~@LnAwB^qCT{Ar@}AbDyClIuGbCsA';
+    final decodedPoly = encodedPoly.decodeGeometry(precision: 6);
     expect(response.polyline != null, true);
-    expect(response.polyline, encodedPoly.decodeGeometry(precision: 6));
-    expect(response.polylineEncoded, encodedPoly);
+    expect(response.polyline, decodedPoly);
+    expect(response.polylineEncoded, decodedPoly.encodeGeometry());
   });
 }
-
 
 final _esponseSimple1 = {
   "trip": {
