@@ -1,5 +1,5 @@
 ## Routing Client Dart Package
-![pub](https://img.shields.io/badge/pub-v1.0.3-blue)
+![pub](https://img.shields.io/badge/pub-v1.0.4-blue)
 
 
 > Package for osm routing client api 
@@ -27,7 +27,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^1.0.3
+      routing_client_dart: ^1.0.4
 
 
 ### example for osrm route service

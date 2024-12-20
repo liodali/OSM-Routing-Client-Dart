@@ -1,3 +1,5 @@
+## 1.0.4:
+* improve internally osrm_service,valhalla_service
 ## 1.0.3:
 * change the name RoadType to `RoutingType`
 ## 1.0.2:
