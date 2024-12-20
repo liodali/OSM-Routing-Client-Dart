@@ -202,7 +202,7 @@ extension DecodingExt on String {
 /// return [Road] object that contain list of waypoint
 /// and distance and duration of the road
 Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
-  Map<String, dynamic> jsonResponse = data.jsonRoad;
+  Map<String, dynamic> jsonResponse = data.json;
   bool alternative = data.alternative;
   var road = const OSRMRoad.empty();
   final List<Map<String, dynamic>> routes =
@@ -236,7 +236,7 @@ Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
 /// this road represent trip that will pass by all geopoint entered as args
 /// and this road will not be the shortes route
 Future<OSRMRoad> parseTrip(ParserTripComputeArg data) async {
-  Map<String, dynamic> jsonResponse = data.jsonRoad;
+  Map<String, dynamic> jsonResponse = data.json;
   var road = const OSRMRoad.empty();
   final List<Map<String, dynamic>> routes =
       List.castFrom(jsonResponse["trips"]);

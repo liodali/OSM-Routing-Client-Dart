@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:routing_client_dart/routing_client_dart.dart';
 import 'package:routing_client_dart/src/models/osrm/road.dart';
 import 'package:routing_client_dart/src/models/osrm/road_helper.dart';
-import 'package:routing_client_dart/src/models/route.dart';
 
 /// [OSRMHelper]
 ///
@@ -13,19 +12,36 @@ mixin OSRMHelper {
     Languages language = Languages.en,
   }) async {
     final loadedJson = await rootBundle.loadString(
-        'packages/routing_client_dart/src/assets/${language.code}.json',
-        cache: false);
+      'packages/routing_client_dart/src/assets/${language.code}.json',
+      cache: false,
+    );
     return json.decode(loadedJson);
   }
-
-  Future<List<RouteInstruction>> buildInstructions(
-    OSRMRoad road, {
-    Languages language = Languages.en,
+  
+  /// build instruction for given [road] and [instructionsHelper]
+  ///
+  /// given [road] will be used to construct instruction and [instructionsHelper] will be used to find the instruction phrase
+  ///
+  /// the instruction will contain the distance and duration of each step in [road]
+  ///
+  /// the instruction will be in List of [RouteInstruction]
+  ///
+  /// if [instructionsHelper] is empty, the instruction will be empty
+  ///
+  /// you can use [loadInstructionHelperJson] to load instruction helper
+  /// 
+  /// **Note**
+  /// the instruction helper should be loaded before using this method  using this method [loadInstructionHelperJson]
+  /// 
+  static Future<List<RouteInstruction>> buildInstructions({
+    required OSRMRoad road,
+    required Map<String, dynamic> instructionsHelper,
   }) async {
+    assert(instructionsHelper.isNotEmpty);
     final legs = road.roadLegs;
     final legCounts = legs.length - 1;
-    final instructionsHelper =
-        await loadInstructionHelperJson(language: language);
+    // final instructionsHelper =
+    //     await loadInstructionHelperJson(language: language);
     final List<RouteInstruction> instructions = [];
     legs.asMap().forEach((indexLeg, leg) {
       for (var step in leg.steps) {
@@ -49,7 +65,7 @@ mixin OSRMHelper {
     return instructions;
   }
 
-  String buildInstruction(
+  static String buildInstruction(
     RoadStep step,
     Map<String, dynamic> instructionsHelper,
     Map<String, dynamic> option,
@@ -182,80 +198,79 @@ mixin OSRMHelper {
       "nth": nthWaypoint,
     });
   }
+}
+String tokenize(String instruction, Map<String, String> tokens) {
+  String output = instruction;
+  tokens.forEach((key, value) {
+    output = output.replaceAll('{$key}', value);
+  });
+  output = output.replaceAll(RegExp(r' {2}'), ' ');
+  return output;
+}
 
-  String tokenize(String instruction, Map<String, String> tokens) {
-    String output = instruction;
-    tokens.forEach((key, value) {
-      output = output.replaceAll('{$key}', value);
-    });
-    output = output.replaceAll(RegExp(r' {2}'), ' ');
-    return output;
+String ordinalize({
+  required Map<String, dynamic> instructionsV5,
+  required String key,
+}) {
+  return (instructionsV5["constants"]["ordinalize"] as Map).containsKey(key)
+      ? instructionsV5["constants"]["ordinalize"][key]
+      : "";
+}
+
+String retrieveName(RoadStep step) {
+  final refN = step.ref?.split(';').first;
+  var n = step.name;
+  if (refN != null && refN == n) {
+    n = '';
   }
-
-  String ordinalize({
-    required Map<String, dynamic> instructionsV5,
-    required String key,
-  }) {
-    return (instructionsV5["constants"]["ordinalize"] as Map).containsKey(key)
-        ? instructionsV5["constants"]["ordinalize"][key]
-        : "";
+  if (n.isNotEmpty && refN != null) {
+    return '${step.name} ($refN)';
   }
+  return n;
+}
 
-  String retrieveName(RoadStep step) {
-    final refN = step.ref?.split(';').first;
-    var n = step.name;
-    if (refN != null && refN == n) {
-      n = '';
-    }
-    if (n.isNotEmpty && refN != null) {
-      return '${step.name} ($refN)';
-    }
-    return n;
+String directionFromDegree(double? degree) {
+  if (degree == null) {
+    return '';
   }
-
-  String directionFromDegree(double? degree) {
-    if (degree == null) {
-      return '';
-    }
-    if (degree >= 0 && degree <= 20) {
-      return 'north';
-    } else if (degree > 20 && degree < 70) {
-      return 'northeast';
-    } else if (degree >= 70 && degree <= 110) {
-      return 'east';
-    } else if (degree > 110 && degree < 160) {
-      return 'southeast';
-    } else if (degree >= 160 && degree <= 200) {
-      return 'south';
-    } else if (degree > 200 && degree < 250) {
-      return 'southwest';
-    } else if (degree >= 250 && degree <= 290) {
-      return 'west';
-    } else if (degree > 290 && degree < 340) {
-      return 'northwest';
-    } else if (degree >= 340 && degree <= 360) {
-      return 'north';
-    } else {
-      return '';
-    }
+  if (degree >= 0 && degree <= 20) {
+    return 'north';
+  } else if (degree > 20 && degree < 70) {
+    return 'northeast';
+  } else if (degree >= 70 && degree <= 110) {
+    return 'east';
+  } else if (degree > 110 && degree < 160) {
+    return 'southeast';
+  } else if (degree >= 160 && degree <= 200) {
+    return 'south';
+  } else if (degree > 200 && degree < 250) {
+    return 'southwest';
+  } else if (degree >= 250 && degree <= 290) {
+    return 'west';
+  } else if (degree > 290 && degree < 340) {
+    return 'northwest';
+  } else if (degree >= 340 && degree <= 360) {
+    return 'north';
+  } else {
+    return '';
   }
+}
 
-  String? laneConfig(RoadStep step) {
-    if (step.intersections.isEmpty || step.intersections.first.lanes == null) {
-      return null;
-    }
-    final config = <String>[];
-    bool? validity;
-    step.intersections.first.lanes?.forEach((lane) {
-      if (validity == null || validity != lane.valid) {
-        if (lane.valid) {
-          config.add('o');
-        } else {
-          config.add('x');
-        }
-        validity = lane.valid;
+String? laneConfig(RoadStep step) {
+  if (step.intersections.isEmpty || step.intersections.first.lanes == null) {
+    return null;
+  }
+  final config = <String>[];
+  bool? validity;
+  step.intersections.first.lanes?.forEach((lane) {
+    if (validity == null || validity != lane.valid) {
+      if (lane.valid) {
+        config.add('o');
+      } else {
+        config.add('x');
       }
-    });
-    return config.join();
-  }
+      validity = lane.valid;
+    }
+  });
+  return config.join();
 }

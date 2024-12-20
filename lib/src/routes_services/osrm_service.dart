@@ -22,34 +22,41 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
   Future<OSRMRoad> getOSRMRoad(OSRMRequest request) async {
     final urlOption = request.encodeHeader();
     final response = await dio.get(dio.options.baseUrl + urlOption);
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = response.data;
-      final road = await switch (request.profile) {
-        Profile.route => compute(
-            parseRoad,
-            ParserRoadComputeArg(
-              jsonRoad: responseJson,
-              langCode: request.languages.code,
-              alternative: request.hasAlternative ?? false,
-            ),
-          ),
-        Profile.trip => compute(
-            parseTrip,
-            ParserTripComputeArg(
-              tripJson: responseJson,
-              langCode: request.languages.code,
-            ),
-          ),
-      };
-      final instructions = await buildInstructions(
-        road,
-        language: request.languages,
-      );
-      return road.copyWith(
-        instructions: instructions,
-      );
-    } else {
+    final Map<String, dynamic> responseJson = Map.from(response.data);
+    if (response.statusCode != null && response.statusCode! > 299 ||
+        response.statusCode! < 200) {
       return OSRMRoad.withError();
     }
+    final instructionsHelper =
+        await loadInstructionHelperJson(language: request.languages);
+    final computeData =
+        (json: responseJson, request: request, helper: instructionsHelper);
+    return compute(
+      (message) async {
+        final route = await switch (message.request.profile) {
+          Profile.route => parseRoad(
+              ParserRoadComputeArg(
+                json: message.json,
+                langCode: message.request.languages.code,
+                alternative: request.hasAlternative ?? false,
+              ),
+            ),
+          Profile.trip => parseTrip(
+              ParserTripComputeArg(
+                tripJson: message.json,
+                langCode: message.request.languages.code,
+              ),
+            ),
+        };
+        final instructions = await OSRMHelper.buildInstructions(
+          road: route,
+          instructionsHelper: message.helper,
+        );
+        return route.copyWith(
+          instructions: instructions,
+        );
+      },
+      computeData,
+    );
   }
 }
