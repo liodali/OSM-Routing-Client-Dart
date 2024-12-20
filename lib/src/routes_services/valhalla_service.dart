@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/route.dart';
@@ -20,16 +21,17 @@ class ValhallaRoutingService extends RoutingService {
     final response = await dio.get(osmValhallaServer, queryParameters: {
       'json': jsonHeaderRequest,
     });
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = response.data;
-      final valhallaResp = ValhallaResponse.fromJson(responseJson);
-      return compute(
-        (_) => valhallaResp.toRoute(),
-        null,
-      );
-    } else {
+    if (response.statusCode != null && response.statusCode! > 299 ||
+        response.statusCode! < 200) {
       throw Exception("cannot get route");
     }
+    return compute<Response<dynamic>, Route>(
+      (response) async {
+        final Map<String, dynamic> responseJson = response.data;
+        final valhallaResp = ValhallaResponse.fromJson(responseJson);
+        return valhallaResp.toRoute();
+      },
+      response,
+    );
   }
 }

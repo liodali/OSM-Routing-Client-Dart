@@ -43,8 +43,7 @@ extension TripValhallaExt on Trip {
       duration: summary.time,
       instructions: insturctions ?? [],
       polyline: shapes,
-      polylineEncoded:
-          legs.length == 1 ? legs.first.shape : shapes.encodeGeometry(),
+      polylineEncoded: shapes.encodeGeometry(),
     );
 
     return road;
