@@ -1,3 +1,5 @@
+## 1.0.5:
+* fix copy instruction in getOSRMRoad #26
 ## 1.0.4:
 * improve internally osrm_service,valhalla_service
 ## 1.0.3:
