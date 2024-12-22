@@ -27,7 +27,7 @@
 Add the following to your `pubspec.yaml` file:
 
     dependencies:
-      routing_client_dart: ^1.0.4
+      routing_client_dart: ^1.0.5
 
 
 ### example for osrm route service
