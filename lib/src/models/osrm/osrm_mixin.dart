@@ -17,7 +17,7 @@ mixin OSRMHelper {
     );
     return json.decode(loadedJson);
   }
-  
+
   /// build instruction for given [road] and [instructionsHelper]
   ///
   /// given [road] will be used to construct instruction and [instructionsHelper] will be used to find the instruction phrase
@@ -29,14 +29,14 @@ mixin OSRMHelper {
   /// if [instructionsHelper] is empty, the instruction will be empty
   ///
   /// you can use [loadInstructionHelperJson] to load instruction helper
-  /// 
+  ///
   /// **Note**
   /// the instruction helper should be loaded before using this method  using this method [loadInstructionHelperJson]
-  /// 
-  static Future<List<RouteInstruction>> buildInstructions({
+  ///
+  static List<RouteInstruction> buildInstructions({
     required OSRMRoad road,
     required Map<String, dynamic> instructionsHelper,
-  }) async {
+  }) {
     assert(instructionsHelper.isNotEmpty);
     final legs = road.roadLegs;
     final legCounts = legs.length - 1;

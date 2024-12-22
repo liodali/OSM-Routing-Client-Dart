@@ -39,6 +39,7 @@ class OSRMRoad extends Route {
     super.alternativesRoads,
     super.polyline,
     List<RoadLeg>? legs,
+    super.instructions,
   })  : _isError = false,
         _roadLegs = legs ?? const <RoadLeg>[];
 
@@ -116,6 +117,7 @@ class OSRMRoad extends Route {
         polylineEncoded: polylineEncoded ?? this.polylineEncoded,
         polyline: polyline ?? this.polyline,
         alternativesRoads: alternativesRoads,
+        instructions: instructions ?? this.instructions,
         legs: _roadLegs,
       );
 }

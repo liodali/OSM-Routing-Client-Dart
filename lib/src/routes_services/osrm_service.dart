@@ -48,7 +48,7 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
               ),
             ),
         };
-        final instructions = await OSRMHelper.buildInstructions(
+        final instructions = OSRMHelper.buildInstructions(
           road: route,
           instructionsHelper: message.helper,
         );
