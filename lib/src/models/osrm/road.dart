@@ -76,7 +76,9 @@ class OSRMRoad extends Route {
                         lat: e.last,
                       ))
                   .toList()
-              : const <LngLat>[],
+              : route["geometry"] is String
+                  ? (route["geometry"] as String).decodeGeometry()
+                  : <LngLat>[],
         );
 
   OSRMRoad.withError()
