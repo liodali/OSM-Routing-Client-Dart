@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:routing_client_dart/src/models/lng_lat.dart';
 import 'package:routing_client_dart/src/models/osrm/osrm_mixin.dart';
@@ -10,6 +8,7 @@ import 'package:routing_client_dart/src/routes_services/osrm_service.dart';
 import 'package:routing_client_dart/src/routing_manager.dart';
 import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
+import 'package:test/test.dart';
 
 import 'response_data_osrm.dart';
 
@@ -25,7 +24,35 @@ class FakeOSRMMService extends OSRMRoutingService {
 }
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  group('test translation', () {
+    test('test translation en', () async {
+      final osrmHelper = FakeOSRMMixin();
+      final instructionHelper = await osrmHelper.loadInstructionHelperJson();
+      expect(instructionHelper.isNotEmpty, true);
+    });
+    test('test translation ar', () async {
+      final osrmHelper = FakeOSRMMixin();
+      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+        language: Languages.ar,
+      );
+      expect(instructionHelper.isNotEmpty, true);
+    });
+    test('test translation es', () async {
+      final osrmHelper = FakeOSRMMixin();
+      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+        language: Languages.es,
+      );
+      expect(instructionHelper.isNotEmpty, true);
+    });
+    test('test translation de', () async {
+      final osrmHelper = FakeOSRMMixin();
+      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+        language: Languages.de,
+      );
+      expect(instructionHelper.isNotEmpty, true);
+    });
+  });
+
   group('test orsm manager', () {
     late RoutingManager manager;
     late DioAdapter dioAdapter;
@@ -130,6 +157,7 @@ void main() {
               .isEmpty,
           true);
     });
+
     test("test get road without overview geometry", () async {
       List<LngLat> waypoints = [
         LngLat(lng: 13.388860, lat: 52.517037),
@@ -1735,7 +1763,7 @@ void main() {
       precision: 5,
     );
     //You have arrived at your {nth} destination, on the right
-    debugPrint(turnByTurnInformation.toString());
+    print(turnByTurnInformation.toString());
     expect(turnByTurnInformation != null, true);
     expect(
       turnByTurnInformation?.currentInstruction.instruction,
@@ -1773,7 +1801,7 @@ void main() {
     );
     final dis1 = currentLocation.distance(location: startLoc);
     final dis2 = currentLocation.distance(location: stepLoc);
-    debugPrint('dis1:$dis1,dis2:$dis2');
+    print('dis1:$dis1,dis2:$dis2');
     expect(dis2 < dis1, true);
   });
   test('test isOnPath 2', () async {
@@ -1809,13 +1837,13 @@ void main() {
     );
     //You have arrived at your {nth} destination, on the right
     for (var e in instructions) {
-      debugPrint('$e\n');
+      print('$e\n');
     }
 
-    debugPrint(
+    print(
       '${instructions.first.location},$currentLocation = distance : ${currentLocation.distance(location: instructions.first.location)}',
     );
-    debugPrint(turnByTurnInformation.toString());
+    print(turnByTurnInformation.toString());
     expect(turnByTurnInformation != null, true);
     expect(
       turnByTurnInformation?.currentInstruction.instruction,

@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
+import 'dart:isolate';
 import 'package:routing_client_dart/routing_client_dart.dart';
 import 'package:routing_client_dart/src/models/osrm/road.dart';
 import 'package:routing_client_dart/src/models/osrm/road_helper.dart';
+import 'package:routing_client_dart/src/models/translation.dart';
 
 /// [OSRMHelper]
 ///
@@ -11,11 +12,9 @@ mixin OSRMHelper {
   Future<Map<String, dynamic>> loadInstructionHelperJson({
     Languages language = Languages.en,
   }) async {
-    final loadedJson = await rootBundle.loadString(
-      'packages/routing_client_dart/src/assets/${language.code}.json',
-      cache: false,
-    );
-    return json.decode(loadedJson);
+    return Isolate.run(() {
+      return json.decode(translation)[language.code] as Map<String, dynamic>;
+    });
   }
 
   /// build instruction for given [road] and [instructionsHelper]

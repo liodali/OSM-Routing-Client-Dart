@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:isolate';
 import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/route.dart';
 import 'package:routing_client_dart/src/models/valhalla/valhalla_response.dart';
@@ -25,13 +24,12 @@ class ValhallaRoutingService extends RoutingService {
         response.statusCode! < 200) {
       throw Exception("cannot get route");
     }
-    return compute<Response<dynamic>, Route>(
-      (response) async {
+    return Isolate.run(
+      () async {
         final Map<String, dynamic> responseJson = response.data;
         final valhallaResp = ValhallaResponse.fromJson(responseJson);
         return valhallaResp.toRoute();
       },
-      response,
     );
   }
 }

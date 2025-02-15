@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'dart:isolate';
 import 'package:routing_client_dart/src/models/osrm/osrm_mixin.dart';
 import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/osrm/road.dart';
@@ -29,10 +29,11 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
     }
     final instructionsHelper =
         await loadInstructionHelperJson(language: request.languages);
-    final computeData =
-        (json: responseJson, request: request, helper: instructionsHelper);
-    return compute(
-      (message) async {
+
+    return Isolate.run(
+      () async {
+        final message =
+            (json: responseJson, request: request, helper: instructionsHelper);
         final route = await switch (message.request.profile) {
           Profile.route => parseRoad(
               ParserRoadComputeArg(
@@ -56,7 +57,6 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
           instructions: instructions,
         );
       },
-      computeData,
     );
   }
 }
