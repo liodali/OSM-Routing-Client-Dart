@@ -27,7 +27,7 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
       return OSRMRoad.withError();
     }
     final instructionsHelper =
-         loadInstructionHelperJson(language: request.languages);
+        loadInstructionHelperJson(language: request.languages);
 
     final data =
         (json: responseJson, request: request, helper: instructionsHelper);

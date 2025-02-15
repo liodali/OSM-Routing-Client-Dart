@@ -155,7 +155,7 @@ extension EncodeExt on List<LngLat> {
 
 extension EncodeGeoPointExt on num {
   /// [encodePoint]
-  /// 
+  ///
   /// Encodes a single geographic point into a `String` via
   /// [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en).
   ///
@@ -171,9 +171,8 @@ extension EncodeGeoPointExt on num {
 }
 
 extension DecodingExt on String {
-  
   /// [decodeGeometry]
-  /// 
+  ///
   /// Decodes an encoded polyline string into a list of [LngLat] coordinates.
   ///
   /// The [precision] parameter determines the precision of the encoded
@@ -239,7 +238,7 @@ extension DecodingExt on String {
 }
 
 /// [parseRoad]
-/// 
+///
 /// this method used to parse json get it  from route service to [Road] object
 /// we use this method in another thread like compute
 /// the [data] is [ParserRoadComputeArg] that will to be parsed to [Road]
