@@ -15,10 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@v1
-      - name: flutter setup
-        uses: britannio/action-install-flutter@v1
+      - uses: dart-lang/setup-dart@v1.4
       - name: fomarting files
         run : dart format --output=none  .
       - name: Publish package
-        run: flutter pub publish -f
+        run: dart pub publish -f
