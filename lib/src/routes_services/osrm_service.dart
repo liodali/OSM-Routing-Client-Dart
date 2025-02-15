@@ -1,4 +1,3 @@
-import 'dart:isolate';
 import 'package:routing_client_dart/src/models/osrm/osrm_mixin.dart';
 import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/osrm/road.dart';
@@ -30,33 +29,29 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
     final instructionsHelper =
         await loadInstructionHelperJson(language: request.languages);
 
-    return Isolate.run(
-      () async {
-        final message =
-            (json: responseJson, request: request, helper: instructionsHelper);
-        final route = await switch (message.request.profile) {
-          Profile.route => parseRoad(
-              ParserRoadComputeArg(
-                json: message.json,
-                langCode: message.request.languages.code,
-                alternative: request.hasAlternative ?? false,
-              ),
-            ),
-          Profile.trip => parseTrip(
-              ParserTripComputeArg(
-                tripJson: message.json,
-                langCode: message.request.languages.code,
-              ),
-            ),
-        };
-        final instructions = OSRMHelper.buildInstructions(
-          road: route,
-          instructionsHelper: message.helper,
-        );
-        return route.copyWith(
-          instructions: instructions,
-        );
-      },
+    final data =
+        (json: responseJson, request: request, helper: instructionsHelper);
+    final route = await switch (data.request.profile) {
+      Profile.route => parseRoad(
+          ParserRoadComputeArg(
+            json: data.json,
+            langCode: data.request.languages.code,
+            alternative: request.hasAlternative ?? false,
+          ),
+        ),
+      Profile.trip => parseTrip(
+          ParserTripComputeArg(
+            tripJson: data.json,
+            langCode: data.request.languages.code,
+          ),
+        ),
+    };
+    final instructions = OSRMHelper.buildInstructions(
+      road: route,
+      instructionsHelper: data.helper,
+    );
+    return route.copyWith(
+      instructions: instructions,
     );
   }
 }

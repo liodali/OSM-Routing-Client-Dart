@@ -16,11 +16,10 @@ class FakeOSRMMixin with OSRMHelper {}
 
 class FakeOSRMMService extends OSRMRoutingService {
   @override
-  Future<Map<String, dynamic>> loadInstructionHelperJson({
+  Map<String, dynamic> loadInstructionHelperJson({
     Languages language = Languages.en,
-  }) async {
-    return en;
-  }
+  }) =>
+      en;
 }
 
 void main() {

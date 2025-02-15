@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:isolate';
 import 'package:routing_client_dart/routing_client_dart.dart';
 import 'package:routing_client_dart/src/models/osrm/road.dart';
 import 'package:routing_client_dart/src/models/osrm/road_helper.dart';
@@ -9,13 +8,10 @@ import 'package:routing_client_dart/src/models/translation.dart';
 ///
 /// this helper fpr OSRMManager that contain URL , intruction generator
 mixin OSRMHelper {
-  Future<Map<String, dynamic>> loadInstructionHelperJson({
+  Map<String, dynamic> loadInstructionHelperJson({
     Languages language = Languages.en,
-  }) async {
-    return Isolate.run(() {
-      return json.decode(translation)[language.code] as Map<String, dynamic>;
-    });
-  }
+  }) =>
+      json.decode(translation)[language.code] as Map<String, dynamic>;
 
   /// build instruction for given [road] and [instructionsHelper]
   ///
