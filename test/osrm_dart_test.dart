@@ -26,26 +26,26 @@ void main() {
   group('test translation', () {
     test('test translation en', () async {
       final osrmHelper = FakeOSRMMixin();
-      final instructionHelper = await osrmHelper.loadInstructionHelperJson();
+      final instructionHelper = osrmHelper.loadInstructionHelperJson();
       expect(instructionHelper.isNotEmpty, true);
     });
     test('test translation ar', () async {
       final osrmHelper = FakeOSRMMixin();
-      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+      final instructionHelper = osrmHelper.loadInstructionHelperJson(
         language: Languages.ar,
       );
       expect(instructionHelper.isNotEmpty, true);
     });
     test('test translation es', () async {
       final osrmHelper = FakeOSRMMixin();
-      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+      final instructionHelper = osrmHelper.loadInstructionHelperJson(
         language: Languages.es,
       );
       expect(instructionHelper.isNotEmpty, true);
     });
     test('test translation de', () async {
       final osrmHelper = FakeOSRMMixin();
-      final instructionHelper = await osrmHelper.loadInstructionHelperJson(
+      final instructionHelper = osrmHelper.loadInstructionHelperJson(
         language: Languages.de,
       );
       expect(instructionHelper.isNotEmpty, true);
@@ -1642,7 +1642,7 @@ void main() {
 
   test('test buildInstruction 1', () async {
     final osrmHelper = FakeOSRMMixin();
-    final instructionHelper = await osrmHelper.loadInstructionHelperJson();
+    final instructionHelper = osrmHelper.loadInstructionHelperJson();
     final json = {
       "geometry": "}b~`Hmzur@DPb@_@",
       "maneuver": {
@@ -1681,7 +1681,7 @@ void main() {
   });
   test('test buildInstruction 2', () async {
     final osrmHelper = FakeOSRMMixin();
-    final instructionHelper = await osrmHelper.loadInstructionHelperJson();
+    final instructionHelper = osrmHelper.loadInstructionHelperJson();
     final json = {
       "geometry": "mh~`Hgqur@KJUHg@POBM@SCGAIEQOKSEEM]EGMYGOG[",
       "maneuver": {
@@ -1747,7 +1747,7 @@ void main() {
       route: (responseRandomRoute["routes"]! as List).first,
     );
 
-    final instructions = await OSRMHelper.buildInstructions(
+    final instructions = OSRMHelper.buildInstructions(
       road: road,
       instructionsHelper: en,
     );
