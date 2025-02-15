@@ -1,3 +1,6 @@
+## 1.0.7:
+* remove isolate to support wasm
+* bump dart sdk to 3.7
 ## 1.0.6:
 * fix nextInstruction implementation
 * decode geometry in osrm road if geometry as given is string
