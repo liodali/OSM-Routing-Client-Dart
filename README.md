@@ -1,5 +1,5 @@
 ## Routing Client Dart Package
-![pub](https://img.shields.io/badge/pub-v1.0.5-blue)
+![pub](https://img.shields.io/badge/pub-v1.0.6-blue)
 
 
 > Package for osm routing client api 

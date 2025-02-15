@@ -1,3 +1,6 @@
+## 1.0.6:
+* fix nextInstruction implementation
+* decode geometry in osrm road if geometry as given is string
 ## 1.0.5:
 * fix copy instruction in getOSRMRoad #26
 ## 1.0.4:
