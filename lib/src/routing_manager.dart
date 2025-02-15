@@ -127,7 +127,7 @@ class RoutingManager {
     Route road,
     LngLat currentLocation, {
     double tolerance = 0.1,
-    int precision = 5,
+    int precision = 6,
   }) {
     var polyline = road.polyline;
     if (road.polyline.isNullOrEmpty && road.polylineEncoded == null) {
@@ -221,7 +221,7 @@ extension RoadManagerUtils on RoutingManager {
         prevRadian = lngLat2;
         idx++;
       }
-    } else if (!geodesic) {
+    } else {
       final (minAcceptable, maxAcceptable) = (
         lngLatRadian.latitude - toleranceCalc,
         lngLatRadian.latitude + toleranceCalc
@@ -235,8 +235,8 @@ extension RoadManagerUtils on RoutingManager {
       for (final lngLat in polylines) {
         final point2 = lngLat.lngLatRadian;
         final y2 = MathUtil.mercator(point2.latitude);
-        if (max(prev.lat, point2.latitude) >= minAcceptable &&
-            min(prev.lat, point2.latitude) <= maxAcceptable) {
+        if (max(prevRadian.latitude, point2.latitude) >= minAcceptable &&
+            min(prevRadian.latitude, point2.latitude) <= maxAcceptable) {
           final x2 = MathUtil.wrap(
             point2.longitude - prevRadian.longitude,
             -pi,
@@ -265,10 +265,10 @@ extension RoadManagerUtils on RoutingManager {
               return max(0, idx - 1);
             }
           }
-          prevRadian = point2;
-          y1 = y2;
-          idx++;
         }
+        prevRadian = point2;
+        y1 = y2;
+        idx++;
       }
     }
     return -1;

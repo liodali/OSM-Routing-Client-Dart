@@ -81,6 +81,12 @@ extension GeometriesExtension on Geometries {
 }
 
 extension TransformToWaysOSRM on List<LngLat> {
+  /// Converts the list of [LngLat] objects to a semicolon-separated string
+  /// of waypoints.
+  ///
+  /// Returns a [String] where each [LngLat] is represented by its string
+  /// representation, separated by semicolons.
+
   String toWaypoints() {
     return map((lngLat) => lngLat.toString())
         .reduce((value, element) => "$value;$element");
@@ -96,6 +102,19 @@ extension ExtList on List? {
 }
 
 extension ExtMap on Map<String, dynamic> {
+  /// Adds [value] to map using [key] if and only if [value] is not null.
+  ///
+  /// If [value] is not null but is not an Object, it is added to the map as a
+  /// dynamic value. This is useful for adding primitive types like int, double,
+  /// String, etc. to the map.
+  ///
+  /// This is a convenience method that is equivalent to:
+  ///
+  ///     if (value != null) {
+  ///       map[key] = value;
+  ///     }
+  ///
+  /// but is more concise and easier to read.
   Map<String, dynamic> addIfNotNull(String key, dynamic value) {
     if (value != null && value is Object) {
       putIfAbsent(key, () => value);
@@ -135,12 +154,37 @@ extension EncodeExt on List<LngLat> {
 }
 
 extension EncodeGeoPointExt on num {
+  /// [encodePoint]
+  /// 
+  /// Encodes a single geographic point into a `String` via
+  /// [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en).
+  ///
+  /// The [previous] parameter is the previous geographic point, used
+  /// to calculate the delta between the two points. The [accuracyExponent]
+  /// parameter determines the precision of the encoded coordinates,
+  /// with a default value of 5.
+  ///
+  /// Returns a `String` representing the encoded geographic point.
   String encodePoint({num previous = 0, int accuracyExponent = 5}) {
     return _encode(this, previous, math.pow(10, accuracyExponent));
   }
 }
 
 extension DecodingExt on String {
+  
+  /// [decodeGeometry]
+  /// 
+  /// Decodes an encoded polyline string into a list of [LngLat] coordinates.
+  ///
+  /// The [precision] parameter determines the precision of the encoded
+  /// coordinates, with a default value of 6. This function decodes the
+  /// encoded polyline using the algorithm described in Google's Encoded
+  /// Polyline Algorithm Format.
+  ///
+  ///
+  /// Returns a list of [LngLat] objects representing the decoded
+  /// geographic points.
+
   List<LngLat> decodeGeometry({int precision = 5}) {
     final List<LngLat> coordinates = [];
 
@@ -194,7 +238,8 @@ extension DecodingExt on String {
   }
 }
 
-/// parseRoad
+/// [parseRoad]
+/// 
 /// this method used to parse json get it  from route service to [Road] object
 /// we use this method in another thread like compute
 /// the [data] is [ParserRoadComputeArg] that will to be parsed to [Road]

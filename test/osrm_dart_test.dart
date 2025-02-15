@@ -105,6 +105,7 @@ void main() {
       expect(road.distance.toStringAsFixed(2), 4.7338.toStringAsFixed(2));
       expect(road.duration >= 615.0, true);
       expect(road.polylineEncoded != null, true);
+      expect(road.polyline?.isNotEmpty, true);
     });
     test("test get road without steps", () async {
       List<LngLat> waypoints = [
@@ -1794,19 +1795,26 @@ void main() {
       route: (response2ndRoute["routes"]! as List).first,
     );
 
-    final instructions = await OSRMHelper.buildInstructions(road:road, instructionsHelper: en);
+    final instructions = OSRMHelper.buildInstructions(
+      road: road,
+      instructionsHelper: en,
+    );
 
     final currentLocation = LngLat.fromList(lnglat: [8.26195, 50.009781]);
     final turnByTurnInformation = roadManager.nextInstruction(
       instructions,
       road,
       currentLocation,
-      tolerance: 20,
+      tolerance: 10,
     );
     //You have arrived at your {nth} destination, on the right
-    debugPrint(instructions.toString());
+    for (var e in instructions) {
+      debugPrint('$e\n');
+    }
+
     debugPrint(
-        '${instructions.first.location},$currentLocation = distance : ${currentLocation.distance(location: instructions.first.location)}');
+      '${instructions.first.location},$currentLocation = distance : ${currentLocation.distance(location: instructions.first.location)}',
+    );
     debugPrint(turnByTurnInformation.toString());
     expect(turnByTurnInformation != null, true);
     expect(
@@ -1816,7 +1824,7 @@ void main() {
     expect(turnByTurnInformation?.nextInstruction?.instruction,
         "Make a slight right");
     final distance = currentLocation
-        .alignWithPrecision()
+        //.alignWithPrecision()
         .distance(location: LngLat.fromList(lnglat: [8.262933, 50.008737]));
     expect(
       turnByTurnInformation?.distance,

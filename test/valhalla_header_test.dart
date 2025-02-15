@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routing_client_dart/routing_client_dart.dart';
-import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/valhalla/costing.dart';
 import 'package:routing_client_dart/src/models/valhalla/costing_option.dart';
 import 'package:routing_client_dart/src/utilities/valhalla_utilities.dart';

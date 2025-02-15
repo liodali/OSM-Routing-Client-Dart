@@ -76,3 +76,5 @@ build/
 /coverage/lcov.info
 /tagManager.sh
 pubspec.lock
+*.toml
+.qodo
