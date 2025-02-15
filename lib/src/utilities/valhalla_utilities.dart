@@ -1,32 +1,12 @@
-enum ValhallaFormat {
-  json,
-  orsm,
-  gpx,
-  pbf,
-}
+enum ValhallaFormat { json, orsm, gpx, pbf }
 
 enum ValhallaUnit { miles, km }
 
-enum ValhallaDirectionsType {
-  instructions,
-  maneuvers,
-  none,
-}
+enum ValhallaDirectionsType { instructions, maneuvers, none }
 
-enum ValhallaCoasting {
-  auto,
-  bus,
-  taxi,
-  pedestrian,
-  bicycle,
-}
+enum ValhallaCoasting { auto, bus, taxi, pedestrian, bicycle }
 
-enum ValhallaSpeedTypes {
-  freeflow,
-  constrained,
-  predicted,
-  current,
-}
+enum ValhallaSpeedTypes { freeflow, constrained, predicted, current }
 
 enum ValhallaBicycleType {
   /// a road-style bicycle with narrow tires that is generally lightweight and designed for speed on paved surfaces.

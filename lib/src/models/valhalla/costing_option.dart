@@ -33,15 +33,16 @@ class CostingOption extends BaseCostingOption {
     this.useFerry = 0.5,
   });
   @override
-  Map<String, dynamic> toMap() => {
-        'top_speed': topSpeed,
-        'useTolls': useTolls,
-        'speed_types': speedTypes,
-        'use_highways': useHighways,
-        'use_tracks': useTracks,
-        'use_living_streets': useLivingStreets,
-        'use_ferry': useFerry,
-      }
+  Map<String, dynamic> toMap() =>
+      {
+          'top_speed': topSpeed,
+          'useTolls': useTolls,
+          'speed_types': speedTypes,
+          'use_highways': useHighways,
+          'use_tracks': useTracks,
+          'use_living_streets': useLivingStreets,
+          'use_ferry': useFerry,
+        }
         ..addIfNotNull('height', height)
         ..addIfNotNull('width', width)
         ..addIfNotNull('fixed_speed', fixedSpeed);
@@ -61,19 +62,25 @@ class TransitCostingOption extends BaseCostingOption {
     this.useBus = 0.5,
     this.useRail = 0.5,
     this.useTransfers = 0.5,
-  })  : assert(useBus >= 0 && useBus <= 1,
-            'useBus value should be only between [0,1]'),
-        assert(useRail >= 0 && useRail <= 1,
-            'useRail value should be only between [0,1]'),
-        assert(useTransfers >= 0 && useTransfers <= 1,
-            'useTransfers value should be only between [0,1]');
+  }) : assert(
+         useBus >= 0 && useBus <= 1,
+         'useBus value should be only between [0,1]',
+       ),
+       assert(
+         useRail >= 0 && useRail <= 1,
+         'useRail value should be only between [0,1]',
+       ),
+       assert(
+         useTransfers >= 0 && useTransfers <= 1,
+         'useTransfers value should be only between [0,1]',
+       );
 
   @override
   Map<String, dynamic> toMap() => {
-        'use_bus': useBus,
-        'use_rail': useRail,
-        'use_transfers': useTransfers,
-      };
+    'use_bus': useBus,
+    'use_rail': useRail,
+    'use_transfers': useTransfers,
+  };
 }
 
 class TruckCostingOption extends CostingOption {
@@ -103,15 +110,15 @@ class TruckCostingOption extends CostingOption {
   });
 
   @override
-  Map<String, dynamic> toMap() => super.toMap()
-    ..addAll({
-      "length": length,
-      "weight": weight,
-      "axle_oad": axleLoad,
-      "axlecount": axleCount,
-      "hazmat": hazmat,
-      "use_truck_route": useTruckRoute,
-    });
+  Map<String, dynamic> toMap() =>
+      super.toMap()..addAll({
+        "length": length,
+        "weight": weight,
+        "axle_oad": axleLoad,
+        "axlecount": axleCount,
+        "hazmat": hazmat,
+        "use_truck_route": useTruckRoute,
+      });
 }
 
 class MotorScooterCostingOption extends BaseCostingOption {
@@ -145,11 +152,11 @@ class MotorScooterCostingOption extends BaseCostingOption {
 
   @override
   Map<String, dynamic> toMap() => {
-        "top_speed": topSpeed,
-        "use_Primary": usePrimary,
-        "use_hills": useHills,
-        "shortest": shortest,
-      };
+    "top_speed": topSpeed,
+    "use_Primary": usePrimary,
+    "use_hills": useHills,
+    "shortest": shortest,
+  };
 }
 
 class BicycleCostingOption extends BaseCostingOption {
@@ -171,23 +178,23 @@ class BicycleCostingOption extends BaseCostingOption {
     this.useLivingStreets = 0.5,
     this.avoidBadAurfaces = 0.25,
     this.shortest = false,
-  })  : assert(useFerry >= 0 || useFerry <= 1.0),
-        assert(useHills >= 0 || useHills <= 1.0),
-        assert(useLivingStreets >= 0 || useLivingStreets <= 1.0),
-        assert(avoidBadAurfaces >= 0 || avoidBadAurfaces <= 1.0),
-        assert(useRoads >= 0 || useRoads <= 1.0);
+  }) : assert(useFerry >= 0 || useFerry <= 1.0),
+       assert(useHills >= 0 || useHills <= 1.0),
+       assert(useLivingStreets >= 0 || useLivingStreets <= 1.0),
+       assert(avoidBadAurfaces >= 0 || avoidBadAurfaces <= 1.0),
+       assert(useRoads >= 0 || useRoads <= 1.0);
 
   @override
   Map<String, dynamic> toMap() => {
-        "bicycle_type": bicycleType.name,
-        "cycling_speed": cyclingSpeed,
-        "use_roads": useRoads,
-        "use_hills": useHills,
-        "use_ferry": useFerry,
-        "use_living_streets": useLivingStreets,
-        "avoid_bad_surfaces": avoidBadAurfaces,
-        "shortest": shortest,
-      };
+    "bicycle_type": bicycleType.name,
+    "cycling_speed": cyclingSpeed,
+    "use_roads": useRoads,
+    "use_hills": useHills,
+    "use_ferry": useFerry,
+    "use_living_streets": useLivingStreets,
+    "avoid_bad_surfaces": avoidBadAurfaces,
+    "shortest": shortest,
+  };
 }
 
 class PedestrianCostingOption extends BaseCostingOption {
@@ -228,12 +235,12 @@ class PedestrianCostingOption extends BaseCostingOption {
     this.useLit = 0,
     this.transitStartEndMaxDistance,
     this.transitTransferMaxDistance,
-  })  : assert(useFerry >= 0 || useFerry <= 1.0),
-        assert(useTracks >= 0 || useTracks <= 1.0),
-        assert(useLit >= 0 || useLivingStreets <= 1.0),
-        assert(useLivingStreets >= 0 || useLivingStreets <= 1.0),
-        assert(maxHikingDifficulty >= 0 || useLivingStreets <= 6.0),
-        assert(walkingSpeed >= 0.5 || walkingSpeed <= 25.0);
+  }) : assert(useFerry >= 0 || useFerry <= 1.0),
+       assert(useTracks >= 0 || useTracks <= 1.0),
+       assert(useLit >= 0 || useLivingStreets <= 1.0),
+       assert(useLivingStreets >= 0 || useLivingStreets <= 1.0),
+       assert(maxHikingDifficulty >= 0 || useLivingStreets <= 6.0),
+       assert(walkingSpeed >= 0.5 || walkingSpeed <= 25.0);
   @override
   Map<String, dynamic> toMap() {
     final map = {
@@ -253,14 +260,11 @@ class PedestrianCostingOption extends BaseCostingOption {
       'max_hiking_difficulty': 1,
       'use_lit': 0,
       'transit_start_end_max_distance': 2145,
-      'transit_transfer_max_distance': 800
+      'transit_transfer_max_distance': 800,
     };
 
     if (maxDistance != null) {
-      map.putIfAbsent(
-        'max_distance',
-        () => maxDistance!,
-      );
+      map.putIfAbsent('max_distance', () => maxDistance!);
     }
     if (transitStartEndMaxDistance != null) {
       map.putIfAbsent(
@@ -279,11 +283,11 @@ class PedestrianCostingOption extends BaseCostingOption {
 }
 
 String costingOptionNameKey(BaseCostingOption option) => switch (option) {
-      PedestrianCostingOption _ => 'pedestrian',
-      BicycleCostingOption _ => 'bicycle',
-      MotorScooterCostingOption _ => 'transit',
-      TruckCostingOption _ => 'truck',
-      TransitCostingOption _ => 'transit',
-      CostingOption option => option.automobileCostingOption.name,
-      _ => throw Exception('Unkonw BaseCostingOption type'),
-    };
+  PedestrianCostingOption _ => 'pedestrian',
+  BicycleCostingOption _ => 'bicycle',
+  MotorScooterCostingOption _ => 'transit',
+  TruckCostingOption _ => 'truck',
+  TransitCostingOption _ => 'transit',
+  CostingOption option => option.automobileCostingOption.name,
+  _ => throw Exception('Unkonw BaseCostingOption type'),
+};

@@ -53,17 +53,18 @@ class Intersections {
   LngLat location;
 
   Intersections.fromJson(Map<String, dynamic> json)
-      : location = LngLat.fromList(
-          lnglat: (json['location'] as List).cast<double>(),
-        ),
-        bearings = List<int>.from(json['bearings']),
-        lanes = json['lanes'] != null
-            ? List<Lane>.from(
+    : location = LngLat.fromList(
+        lnglat: (json['location'] as List).cast<double>(),
+      ),
+      bearings = List<int>.from(json['bearings']),
+      lanes =
+          json['lanes'] != null
+              ? List<Lane>.from(
                 (json['lanes'] as List<dynamic>).map(
                   (value) => Lane.fromJson(value),
                 ),
               )
-            : null;
+              : null;
 }
 
 class Maneuver {
@@ -75,14 +76,14 @@ class Maneuver {
   LngLat location;
 
   Maneuver.fromJson(Map<String, dynamic> json)
-      : location = LngLat.fromList(
-          lnglat: (json['location'] as List).cast<double>(),
-        ),
-        maneuverType = json['type']!,
-        modifier = json['modifier'],
-        bearingBefore = double.parse(json['bearing_before']!.toString()),
-        bearingAfter = double.parse(json['bearing_after']!.toString()),
-        exit = json['exit'];
+    : location = LngLat.fromList(
+        lnglat: (json['location'] as List).cast<double>(),
+      ),
+      maneuverType = json['type']!,
+      modifier = json['modifier'],
+      bearingBefore = double.parse(json['bearing_before']!.toString()),
+      bearingAfter = double.parse(json['bearing_after']!.toString()),
+      exit = json['exit'];
 }
 
 class Lane {
@@ -90,6 +91,6 @@ class Lane {
   bool valid;
 
   Lane.fromJson(Map<String, dynamic> json)
-      : indications = List<String>.from(json['indications']),
-        valid = json['valid']!;
+    : indications = List<String>.from(json['indications']),
+      valid = json['valid']!;
 }

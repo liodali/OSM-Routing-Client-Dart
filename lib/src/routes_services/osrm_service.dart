@@ -6,13 +6,9 @@ import 'package:routing_client_dart/src/utilities/computes_utilities.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
 class OSRMRoutingService extends RoutingService with OSRMHelper {
-  OSRMRoutingService({
-    String? serverURL,
-    super.header,
-  }) : super(serverURL: serverURL ?? oSRMServer);
-  OSRMRoutingService.dioClient({
-    required super.client,
-  }) : super.dioClient();
+  OSRMRoutingService({String? serverURL, super.header})
+    : super(serverURL: serverURL ?? oSRMServer);
+  OSRMRoutingService.dioClient({required super.client}) : super.dioClient();
 
   void setOSRMURLServer({String server = oSRMServer}) {
     dio.options.baseUrl = server;
@@ -26,32 +22,34 @@ class OSRMRoutingService extends RoutingService with OSRMHelper {
         response.statusCode! < 200) {
       return OSRMRoad.withError();
     }
-    final instructionsHelper =
-        loadInstructionHelperJson(language: request.languages);
+    final instructionsHelper = loadInstructionHelperJson(
+      language: request.languages,
+    );
 
-    final data =
-        (json: responseJson, request: request, helper: instructionsHelper);
+    final data = (
+      json: responseJson,
+      request: request,
+      helper: instructionsHelper,
+    );
     final route = await switch (data.request.profile) {
       Profile.route => parseRoad(
-          ParserRoadComputeArg(
-            json: data.json,
-            langCode: data.request.languages.code,
-            alternative: request.hasAlternative ?? false,
-          ),
+        ParserRoadComputeArg(
+          json: data.json,
+          langCode: data.request.languages.code,
+          alternative: request.hasAlternative ?? false,
         ),
+      ),
       Profile.trip => parseTrip(
-          ParserTripComputeArg(
-            tripJson: data.json,
-            langCode: data.request.languages.code,
-          ),
+        ParserTripComputeArg(
+          tripJson: data.json,
+          langCode: data.request.languages.code,
         ),
+      ),
     };
     final instructions = OSRMHelper.buildInstructions(
       road: route,
       instructionsHelper: data.helper,
     );
-    return route.copyWith(
-      instructions: instructions,
-    );
+    return route.copyWith(instructions: instructions);
   }
 }

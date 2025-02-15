@@ -7,14 +7,12 @@ import 'package:routing_client_dart/src/utilities/valhalla_utilities.dart';
 
 void main() {
   final service = ValhallaRoutingService();
-  final dioAdapter = DioAdapter(
-    dio: service.dio,
-  );
+  final dioAdapter = DioAdapter(dio: service.dio);
   test('test simple request', () async {
     final valhallaReq = ValhallaRequest(
       waypoints: [
         LngLat(lng: 8.239853382110597, lat: 50.00949382441468),
-        LngLat(lng: 8.24029862880707, lat: 50.00832510754319)
+        LngLat(lng: 8.24029862880707, lat: 50.00832510754319),
       ],
       alternatives: 1,
       valhallaFormat: ValhallaFormat.json,
@@ -25,17 +23,17 @@ void main() {
         transitTransferMaxDistance: 800,
       ),
     );
-    dioAdapter.onGet('https://valhalla1.openstreetmap.de/route',
-        (server) => server.reply(200, _esponseSimple1),
-        queryParameters: {
-          'json': valhallaReq.encodeHeader(),
-        });
+    dioAdapter.onGet(
+      'https://valhalla1.openstreetmap.de/route',
+      (server) => server.reply(200, _esponseSimple1),
+      queryParameters: {'json': valhallaReq.encodeHeader()},
+    );
     print(valhallaReq.encodeHeader());
     final response = await service.getValhallaRoad(
       ValhallaRequest(
         waypoints: [
           LngLat(lng: 8.239853382110597, lat: 50.00949382441468),
-          LngLat(lng: 8.24029862880707, lat: 50.00832510754319)
+          LngLat(lng: 8.24029862880707, lat: 50.00832510754319),
         ],
         alternatives: 1,
         valhallaFormat: ValhallaFormat.json,
@@ -60,7 +58,7 @@ final _esponseSimple1 = {
   "trip": {
     "locations": [
       {"type": "break", "lat": 50.009493, "lon": 8.239853, "original_index": 0},
-      {"type": "break", "lat": 50.008325, "lon": 8.240298, "original_index": 1}
+      {"type": "break", "lat": 50.008325, "lon": 8.240298, "original_index": 1},
     ],
     "legs": [
       {
@@ -78,7 +76,7 @@ final _esponseSimple1 = {
             "end_shape_index": 14,
             "rough": true,
             "travel_mode": "pedestrian",
-            "travel_type": "foot"
+            "travel_type": "foot",
           },
           {
             "type": 15,
@@ -94,7 +92,7 @@ final _esponseSimple1 = {
             "end_shape_index": 21,
             "rough": true,
             "travel_mode": "pedestrian",
-            "travel_type": "foot"
+            "travel_type": "foot",
           },
           {
             "type": 4,
@@ -109,8 +107,8 @@ final _esponseSimple1 = {
             "begin_shape_index": 21,
             "end_shape_index": 21,
             "travel_mode": "pedestrian",
-            "travel_type": "foot"
-          }
+            "travel_type": "foot",
+          },
         ],
         "summary": {
           "has_time_restrictions": false,
@@ -123,11 +121,11 @@ final _esponseSimple1 = {
           "max_lon": 8.240278,
           "time": 106.898,
           "length": 0.152,
-          "cost": 152
+          "cost": 152,
         },
         "shape":
-            "kyik~Akl|uN~F{@pDyB~Aw@tADpCxBvAbBnBx@|@QjAkApAs@r@@lAh@lDlB~@LnAwB^qCT{Ar@}AbDyClIuGbCsA"
-      }
+            "kyik~Akl|uN~F{@pDyB~Aw@tADpCxBvAbBnBx@|@QjAkApAs@r@@lAh@lDlB~@LnAwB^qCT{Ar@}AbDyClIuGbCsA",
+      },
     ],
     "summary": {
       "has_time_restrictions": false,
@@ -140,12 +138,12 @@ final _esponseSimple1 = {
       "max_lon": 8.240278,
       "time": 106.898,
       "length": 0.152,
-      "cost": 152
+      "cost": 152,
     },
     "status_message": "Found route between points",
     "status": 0,
     "units": "kilometers",
-    "language": "en-US"
+    "language": "en-US",
   },
   "alternates": [
     {
@@ -155,14 +153,14 @@ final _esponseSimple1 = {
             "type": "break",
             "lat": 50.009493,
             "lon": 8.239853,
-            "original_index": 0
+            "original_index": 0,
           },
           {
             "type": "break",
             "lat": 50.008325,
             "lon": 8.240298,
-            "original_index": 1
-          }
+            "original_index": 1,
+          },
         ],
         "legs": [
           {
@@ -180,7 +178,7 @@ final _esponseSimple1 = {
                 "begin_shape_index": 0,
                 "end_shape_index": 10,
                 "travel_mode": "pedestrian",
-                "travel_type": "foot"
+                "travel_type": "foot",
               },
               {
                 "type": 15,
@@ -198,7 +196,7 @@ final _esponseSimple1 = {
                 "begin_shape_index": 10,
                 "end_shape_index": 17,
                 "travel_mode": "pedestrian",
-                "travel_type": "foot"
+                "travel_type": "foot",
               },
               {
                 "type": 15,
@@ -216,7 +214,7 @@ final _esponseSimple1 = {
                 "begin_shape_index": 17,
                 "end_shape_index": 26,
                 "travel_mode": "pedestrian",
-                "travel_type": "foot"
+                "travel_type": "foot",
               },
               {
                 "type": 4,
@@ -231,8 +229,8 @@ final _esponseSimple1 = {
                 "begin_shape_index": 26,
                 "end_shape_index": 26,
                 "travel_mode": "pedestrian",
-                "travel_type": "foot"
-              }
+                "travel_type": "foot",
+              },
             ],
             "summary": {
               "has_time_restrictions": false,
@@ -245,11 +243,11 @@ final _esponseSimple1 = {
               "max_lon": 8.240278,
               "time": 167.407,
               "length": 0.24,
-              "cost": 240
+              "cost": 240,
             },
             "shape":
-                "kyik~Akl|uNz@fCP`Ck@pECfDPzAf@rA`@h@jPpAlP~@~[jBzAcGt@yCl@wB`@IjEq@`@I^Ek@mFqA{JIm@QkAWwBMeAq@iF]qCU}A"
-          }
+                "kyik~Akl|uNz@fCP`Ck@pECfDPzAf@rA`@h@jPpAlP~@~[jBzAcGt@yCl@wB`@IjEq@`@I^Ek@mFqA{JIm@QkAWwBMeAq@iF]qCU}A",
+          },
         ],
         "summary": {
           "has_time_restrictions": false,
@@ -262,14 +260,14 @@ final _esponseSimple1 = {
           "max_lon": 8.240278,
           "time": 167.407,
           "length": 0.24,
-          "cost": 240
+          "cost": 240,
         },
         "status_message": "Found route between points",
         "status": 0,
         "units": "kilometers",
-        "language": "en-US"
-      }
-    }
+        "language": "en-US",
+      },
+    },
   ],
-  "id": "valhalla_directions"
+  "id": "valhalla_directions",
 };

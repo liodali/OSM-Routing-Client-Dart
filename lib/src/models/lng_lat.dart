@@ -11,24 +11,17 @@ class LngLat {
   final double lng;
   final double lat;
 
-  LngLat({
-    required this.lng,
-    required this.lat,
-  });
+  LngLat({required this.lng, required this.lat});
 
-  LngLat.fromList({
-    required List<double> lnglat,
-  })  : assert(lnglat.length == 2),
-        lat = lnglat.last,
-        lng = lnglat.first;
+  LngLat.fromList({required List<double> lnglat})
+    : assert(lnglat.length == 2),
+      lat = lnglat.last,
+      lng = lnglat.first;
 
   @override
   String toString() => "$lng,$lat";
 
-  Map<String, dynamic> toMap() => {
-        'lat': lat,
-        'lon': lng,
-      };
+  Map<String, dynamic> toMap() => {'lat': lat, 'lon': lng};
 
   @override
   bool operator ==(Object other) {
@@ -49,9 +42,10 @@ extension ExtLngLat on LngLat {
     return earthRadius *
         MathUtil.inverseHaversine(
           MathUtil.havDistance(
-              currentRadianLocation.latitude,
-              radianLocation.latitude,
-              (currentRadianLocation - radianLocation).longitude),
+            currentRadianLocation.latitude,
+            radianLocation.latitude,
+            (currentRadianLocation - radianLocation).longitude,
+          ),
         );
   }
 
@@ -61,9 +55,7 @@ extension ExtLngLat on LngLat {
 extension PrvExtLngLat on LngLat {
   LngLat alignWithPrecision({int precision = 5}) {
     var output = [this].encodeGeometry(precision: precision);
-    final precisedLngLat = output.decodeGeometry(
-      precision: precision,
-    );
+    final precisedLngLat = output.decodeGeometry(precision: precision);
     return precisedLngLat.first;
   }
 }

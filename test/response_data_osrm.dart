@@ -14,7 +14,7 @@ const response = {
                 "bearing_after": 355,
                 "bearing_before": 0,
                 "location": [13.388798, 52.517033],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -24,103 +24,103 @@ const response = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [355],
-                  "location": [13.388798, 52.517033]
+                  "location": [13.388798, 52.517033],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.38878, 52.517149]
+                  "location": [13.38878, 52.517149],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.388643, 52.518027]
+                  "location": [13.388643, 52.518027],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true, false],
                   "bearings": [30, 90, 180, 270, 315],
-                  "location": [13.388544, 52.518716]
+                  "location": [13.388544, 52.518716],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true, false],
                   "bearings": [0, 165, 180, 285],
-                  "location": [13.388255, 52.520395]
+                  "location": [13.388255, 52.520395],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 45, 180, 225],
-                  "location": [13.388022, 52.521758]
+                  "location": [13.388022, 52.521758],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 225],
-                  "location": [13.387885, 52.522524]
+                  "location": [13.387885, 52.522524],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.387799, 52.523401]
+                  "location": [13.387799, 52.523401],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["none"]
+                      "indications": ["none"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 270],
-                  "location": [13.387748, 52.523877]
+                  "location": [13.387748, 52.523877],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.3877, 52.524433]
+                  "location": [13.3877, 52.524433],
                 },
                 {
                   "out": 3,
                   "in": 1,
                   "entry": [true, false, false, true],
                   "bearings": [105, 165, 300, 345],
-                  "location": [13.387337, 52.526239]
+                  "location": [13.387337, 52.526239],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [0, 105, 165, 255],
-                  "location": [13.387283, 52.526386]
-                }
+                  "location": [13.387283, 52.526386],
+                },
               ],
               "weight": 138.3,
               "duration": 135.5,
-              "distance": 1136.9
+              "distance": 1136.9,
             },
             {
               "geometry":
@@ -130,7 +130,7 @@ const response = {
                 "bearing_before": 8,
                 "location": [13.387228, 52.527168],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -141,54 +141,54 @@ const response = {
                   "in": 1,
                   "entry": [true, false, true, true],
                   "bearings": [75, 195, 255, 330],
-                  "location": [13.387228, 52.527168]
+                  "location": [13.387228, 52.527168],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.389147, 52.527549]
+                  "location": [13.389147, 52.527549],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 330],
-                  "location": [13.391396, 52.528032]
+                  "location": [13.391396, 52.528032],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [75, 165, 255],
-                  "location": [13.392425, 52.528233]
+                  "location": [13.392425, 52.528233],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [75, 120, 255, 330],
-                  "location": [13.393814, 52.528526]
+                  "location": [13.393814, 52.528526],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.395724, 52.528996]
+                  "location": [13.395724, 52.528996],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [90, 180, 255, 345],
-                  "location": [13.397565, 52.529429]
-                }
+                  "location": [13.397565, 52.529429],
+                },
               ],
               "weight": 124.6,
               "duration": 124.6,
-              "distance": 750.1
+              "distance": 750.1,
             },
             {
               "geometry": "}sr_IevwpA",
@@ -196,7 +196,7 @@ const response = {
                 "bearing_after": 0,
                 "bearing_before": 86,
                 "location": [13.39763, 52.529432],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -206,18 +206,18 @@ const response = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [266],
-                  "location": [13.39763, 52.529432]
-                }
+                  "location": [13.39763, 52.529432],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Friedrichstraße, Torstraße",
           "weight": 262.9,
           "duration": 260.1,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [
@@ -228,7 +228,7 @@ const response = {
                 "bearing_after": 85,
                 "bearing_before": 0,
                 "location": [13.39763, 52.529432],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -238,109 +238,109 @@ const response = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [85],
-                  "location": [13.39763, 52.529432]
+                  "location": [13.39763, 52.529432],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [90, 150, 270, 330],
-                  "location": [13.401337, 52.529605]
+                  "location": [13.401337, 52.529605],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, true],
                   "bearings": [90, 165, 285],
-                  "location": [13.401541, 52.529618]
+                  "location": [13.401541, 52.529618],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 195, 285],
-                  "location": [13.405456, 52.529405]
+                  "location": [13.405456, 52.529405],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 105, 210, 285],
-                  "location": [13.409405, 52.528711]
+                  "location": [13.409405, 52.528711],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 165, 285],
-                  "location": [13.409967, 52.528591]
+                  "location": [13.409967, 52.528591],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [105, 165, 285, 330],
-                  "location": [13.410146, 52.52855]
+                  "location": [13.410146, 52.52855],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 210, 285],
-                  "location": [13.411852, 52.528201]
-                }
+                  "location": [13.411852, 52.528201],
+                },
               ],
               "weight": 203.400000000,
               "duration": 203.400000000,
-              "distance": 1275.6
+              "distance": 1275.6,
             },
             {
               "geometry": "gdr_Iie{pAJS@C@A@CJSWWEECEECOQ",
@@ -349,7 +349,7 @@ const response = {
                 "bearing_before": 133,
                 "location": [13.415405, 52.526922],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -359,64 +359,64 @@ const response = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415405, 52.526922]
+                  "location": [13.415405, 52.526922],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415657, 52.52677]
-                }
+                  "location": [13.415657, 52.52677],
+                },
               ],
               "weight": 12,
               "duration": 12,
-              "distance": 60.6
+              "distance": 60.6,
             },
             {
               "geometry": "aer_Iuh{pAe@a@CCUQaCkB{@y@GESO",
@@ -425,7 +425,7 @@ const response = {
                 "bearing_before": 32,
                 "location": [13.415945, 52.527047],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -435,27 +435,27 @@ const response = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [30, 120, 210, 315],
-                  "location": [13.415945, 52.527047]
-                }
+                  "location": [13.415945, 52.527047],
+                },
               ],
               "weight": 18.2,
               "duration": 18.2,
-              "distance": 177.6
+              "distance": 177.6,
             },
             {
               "geometry":
@@ -465,7 +465,7 @@ const response = {
                 "bearing_before": 28,
                 "location": [13.417166, 52.528458],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -476,26 +476,26 @@ const response = {
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [30, 90, 210, 315],
-                  "location": [13.417166, 52.528458]
+                  "location": [13.417166, 52.528458],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [45, 120, 225, 285],
-                  "location": [13.423592, 52.528206]
+                  "location": [13.423592, 52.528206],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [45, 105, 210, 300],
-                  "location": [13.423868, 52.528136]
-                }
+                  "location": [13.423868, 52.528136],
+                },
               ],
               "weight": 57,
               "duration": 57,
-              "distance": 548.7
+              "distance": 548.7,
             },
             {
               "geometry":
@@ -505,7 +505,7 @@ const response = {
                 "bearing_before": 67,
                 "location": [13.424993, 52.528068],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -516,33 +516,33 @@ const response = {
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [60, 150, 255, 345],
-                  "location": [13.424993, 52.528068]
+                  "location": [13.424993, 52.528068],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 225, 300],
-                  "location": [13.425818, 52.52763]
+                  "location": [13.425818, 52.52763],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.428041, 52.526565]
+                  "location": [13.428041, 52.526565],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.429337, 52.525737]
-                }
+                  "location": [13.429337, 52.525737],
+                },
               ],
               "weight": 52.400000000,
               "duration": 52.400000000,
-              "distance": 510.1
+              "distance": 510.1,
             },
             {
               "geometry": "_xq_Iac~pAFAL?J@HBFBr@XNH^NHDTJNFTRRJd@LXFB@B?VB",
@@ -551,7 +551,7 @@ const response = {
                 "bearing_before": 163,
                 "location": [13.430405, 52.524964],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -562,12 +562,12 @@ const response = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 180, 345],
-                  "location": [13.430405, 52.524964]
-                }
+                  "location": [13.430405, 52.524964],
+                },
               ],
               "weight": 20.6,
               "duration": 20.6,
-              "distance": 196.6
+              "distance": 196.6,
             },
             {
               "geometry": "mmq_Io~}pA@V?N?F@jA@dB",
@@ -576,7 +576,7 @@ const response = {
                 "bearing_before": 189,
                 "location": [13.429678, 52.523269],
                 "modifier": "right",
-                "type": "continue"
+                "type": "continue",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -586,31 +586,31 @@ const response = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight", "left"]
+                      "indications": ["straight", "left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 3,
                   "in": 0,
                   "entry": [false, false, true, true],
                   "bearings": [15, 90, 180, 270],
-                  "location": [13.429678, 52.523269]
-                }
+                  "location": [13.429678, 52.523269],
+                },
               ],
               "weight": 6.9,
               "duration": 6.9,
-              "distance": 76.4
+              "distance": 76.4,
             },
             {
               "geometry": "gmq_Imw}pA",
@@ -618,7 +618,7 @@ const response = {
                 "bearing_after": 0,
                 "bearing_before": 268,
                 "location": [13.428554, 52.523239],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -628,25 +628,25 @@ const response = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [88],
-                  "location": [13.428554, 52.523239]
-                }
+                  "location": [13.428554, 52.523239],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Torstraße, Friedenstraße",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
-        }
+          "distance": 2845.5,
+        },
       ],
       "weight_name": "routability",
       "weight": 633.4,
       "duration": 630.6,
-      "distance": 4732.5
-    }
+      "distance": 4732.5,
+    },
   ],
   "waypoints": [
     {
@@ -654,23 +654,23 @@ const response = {
           "XP8JgPUvmoUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAAC8-QAA_kvMAKlYIQM8TMwArVghAwAA7wqGF9Uq",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "hint":
           "7jfdgR8ZiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAAC8-QAAfm7MABiJIQOCbswA_4ghAwAAXwWGF9Uq",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "hint":
           "WCoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAAC8-QAASufMAOdwIQNL58wA03AhAwQAvxCGF9Uq",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const responseWithoutSteps = {
@@ -685,21 +685,21 @@ const responseWithoutSteps = {
           "summary": "",
           "weight": 263.2,
           "duration": 260.4,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
-        }
+          "distance": 2845.5,
+        },
       ],
       "weight_name": "routability",
       "weight": 633.7,
       "duration": 630.9,
-      "distance": 4732.5
-    }
+      "distance": 4732.5,
+    },
   ],
   "waypoints": [
     {
@@ -707,23 +707,23 @@ const responseWithoutSteps = {
           "TP8JgEs9moUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABo-gAA_kvMAKlYIQM8TMwArVghAwAA7wogccr9",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "hint":
           "fTvdgTsuiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAABo-gAAfm7MABiJIQOCbswA_4ghAwAAXwUgccr9",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "hint":
           "WyoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAABo-gAASufMAOdwIQNL58wA03AhAwQAvxAgccr9",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const responseGeoJson = {
@@ -997,9 +997,9 @@ const responseGeoJson = {
           [13.429476, 52.523261],
           [13.429436, 52.52326],
           [13.429064, 52.52325],
-          [13.428554, 52.523239]
+          [13.428554, 52.523239],
         ],
-        "type": "LineString"
+        "type": "LineString",
       },
       "legs": [
         {
@@ -1007,21 +1007,21 @@ const responseGeoJson = {
           "summary": "",
           "weight": 263.2,
           "duration": 260.4,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
-        }
+          "distance": 2845.5,
+        },
       ],
       "weight_name": "routability",
       "weight": 633.7,
       "duration": 630.9,
-      "distance": 4732.5
-    }
+      "distance": 4732.5,
+    },
   ],
   "waypoints": [
     {
@@ -1029,23 +1029,23 @@ const responseGeoJson = {
           "TP8JgEs9moUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABo-gAA_kvMAKlYIQM8TMwArVghAwAA7wogccr9",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "hint":
           "fTvdgTsuiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAABo-gAAfm7MABiJIQOCbswA_4ghAwAAXwUgccr9",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "hint":
           "WyoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAABo-gAASufMAOdwIQNL58wA03AhAwQAvxAgccr9",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const responseTrip = {
@@ -1060,28 +1060,28 @@ const responseTrip = {
           "summary": "",
           "weight": 263.2,
           "duration": 260.4,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
+          "distance": 2845.5,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 339.8,
           "duration": 338.6,
-          "distance": 3279.8
-        }
+          "distance": 3279.8,
+        },
       ],
       "weight_name": "routability",
       "weight": 973.5,
       "duration": 969.5,
-      "distance": 8012.3
-    }
+      "distance": 8012.3,
+    },
   ],
   "waypoints": [
     {
@@ -1091,7 +1091,7 @@ const responseTrip = {
           "TP8JgEs9moUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABo-gAA_kvMAKlYIQM8TMwArVghAwAA7wogccr9",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "waypoint_index": 1,
@@ -1100,7 +1100,7 @@ const responseTrip = {
           "fTvdgTsuiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAABo-gAAfm7MABiJIQOCbswA_4ghAwAAXwUgccr9",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "waypoint_index": 2,
@@ -1109,9 +1109,9 @@ const responseTrip = {
           "WyoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAABo-gAASufMAOdwIQNL58wA03AhAwQAvxAgccr9",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const en = {
@@ -1128,7 +1128,7 @@ const en = {
         "7": "7th",
         "8": "8th",
         "9": "9th",
-        "10": "10th"
+        "10": "10th",
       },
       "direction": {
         "north": "north",
@@ -1138,7 +1138,7 @@ const en = {
         "south": "south",
         "southwest": "southwest",
         "west": "west",
-        "northwest": "northwest"
+        "northwest": "northwest",
       },
       "modifier": {
         "left": "left",
@@ -1148,21 +1148,21 @@ const en = {
         "slight left": "slight left",
         "slight right": "slight right",
         "straight": "straight",
-        "uturn": "U-turn"
+        "uturn": "U-turn",
       },
       "lanes": {
         "xo": "Keep right",
         "ox": "Keep left",
         "xox": "Keep in the middle",
-        "oxo": "Keep left or right"
-      }
+        "oxo": "Keep left or right",
+      },
     },
     "modes": {
       "ferry": {
         "default": "Take the ferry",
         "name": "Take the ferry {way_name}",
-        "destination": "Take the ferry towards {destination}"
-      }
+        "destination": "Take the ferry towards {destination}",
+      },
     },
     "phrase": {
       "two linked by distance":
@@ -1170,7 +1170,7 @@ const en = {
       "two linked": "{instruction_one}, then {instruction_two}",
       "one in distance": "In {distance}, {instruction_one}",
       "name and ref": "{name} ({ref})",
-      "exit with number": "exit {exit}"
+      "exit with number": "exit {exit}",
     },
     "arrive": {
       "default": {
@@ -1178,248 +1178,248 @@ const en = {
         "upcoming": "You will arrive at your {nth} destination",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}"
+        "named": "You have arrived at {waypoint_name}",
       },
       "left": {
         "default": "You have arrived at your {nth} destination, on the left",
         "upcoming": "You will arrive at your {nth} destination, on the left",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the left"
+        "named": "You have arrived at {waypoint_name}, on the left",
       },
       "right": {
         "default": "You have arrived at your {nth} destination, on the right",
         "upcoming": "You will arrive at your {nth} destination, on the right",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the right"
+        "named": "You have arrived at {waypoint_name}, on the right",
       },
       "sharp left": {
         "default": "You have arrived at your {nth} destination, on the left",
         "upcoming": "You will arrive at your {nth} destination, on the left",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the left"
+        "named": "You have arrived at {waypoint_name}, on the left",
       },
       "sharp right": {
         "default": "You have arrived at your {nth} destination, on the right",
         "upcoming": "You will arrive at your {nth} destination, on the right",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the right"
+        "named": "You have arrived at {waypoint_name}, on the right",
       },
       "slight right": {
         "default": "You have arrived at your {nth} destination, on the right",
         "upcoming": "You will arrive at your {nth} destination, on the right",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the right"
+        "named": "You have arrived at {waypoint_name}, on the right",
       },
       "slight left": {
         "default": "You have arrived at your {nth} destination, on the left",
         "upcoming": "You will arrive at your {nth} destination, on the left",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, on the left"
+        "named": "You have arrived at {waypoint_name}, on the left",
       },
       "straight": {
         "default": "You have arrived at your {nth} destination, straight ahead",
         "upcoming": "You will arrive at your {nth} destination, straight ahead",
         "short": "You have arrived",
         "short-upcoming": "You will arrive",
-        "named": "You have arrived at {waypoint_name}, straight ahead"
-      }
+        "named": "You have arrived at {waypoint_name}, straight ahead",
+      },
     },
     "continue": {
       "default": {
         "default": "Turn {modifier}",
         "name": "Turn {modifier} to stay on {way_name}",
         "destination": "Turn {modifier} towards {destination}",
-        "exit": "Turn {modifier} onto {way_name}"
+        "exit": "Turn {modifier} onto {way_name}",
       },
       "straight": {
         "default": "Continue straight",
         "name": "Continue straight to stay on {way_name}",
         "destination": "Continue towards {destination}",
         "distance": "Continue straight for {distance}",
-        "namedistance": "Continue on {way_name} for {distance}"
+        "namedistance": "Continue on {way_name} for {distance}",
       },
       "sharp left": {
         "default": "Make a sharp left",
         "name": "Make a sharp left to stay on {way_name}",
         "destination": "Make a sharp left towards {destination}",
-        "junction_name": "Make a sharp left at {junction_name}"
+        "junction_name": "Make a sharp left at {junction_name}",
       },
       "sharp right": {
         "default": "Make a sharp right",
         "name": "Make a sharp right to stay on {way_name}",
         "destination": "Make a sharp right towards {destination}",
-        "junction_name": "Make a sharp right at {junction_name}"
+        "junction_name": "Make a sharp right at {junction_name}",
       },
       "slight left": {
         "default": "Make a slight left",
         "name": "Make a slight left to stay on {way_name}",
         "destination": "Make a slight left towards {destination}",
-        "junction_name": "Make a slight left at {junction_name}"
+        "junction_name": "Make a slight left at {junction_name}",
       },
       "slight right": {
         "default": "Make a slight right",
         "name": "Make a slight right to stay on {way_name}",
         "destination": "Make a slight right towards {destination}",
-        "junction_name": "Make a slight right at {junction_name}"
+        "junction_name": "Make a slight right at {junction_name}",
       },
       "uturn": {
         "default": "Make a U-turn",
         "name": "Make a U-turn and continue on {way_name}",
         "destination": "Make a U-turn towards {destination}",
-        "junction_name": "Make a U-turn at {junction_name}"
-      }
+        "junction_name": "Make a U-turn at {junction_name}",
+      },
     },
     "depart": {
       "default": {
         "default": "Head {direction}",
         "name": "Head {direction} on {way_name}",
-        "namedistance": "Head {direction} on {way_name} for {distance}"
-      }
+        "namedistance": "Head {direction} on {way_name} for {distance}",
+      },
     },
     "end of road": {
       "default": {
         "default": "Turn {modifier}",
         "name": "Turn {modifier} onto {way_name}",
         "destination": "Turn {modifier} towards {destination}",
-        "junction_name": "Turn {modifier} at {junction_name}"
+        "junction_name": "Turn {modifier} at {junction_name}",
       },
       "straight": {
         "default": "Continue straight",
         "name": "Continue straight onto {way_name}",
         "destination": "Continue straight towards {destination}",
-        "junction_name": "Continue straight at {junction_name}"
+        "junction_name": "Continue straight at {junction_name}",
       },
       "uturn": {
         "default": "Make a U-turn at the end of the road",
         "name": "Make a U-turn onto {way_name} at the end of the road",
         "destination":
             "Make a U-turn towards {destination} at the end of the road",
-        "junction_name": "Make a U-turn at {junction_name}"
-      }
+        "junction_name": "Make a U-turn at {junction_name}",
+      },
     },
     "fork": {
       "default": {
         "default": "Keep {modifier} at the fork",
         "name": "Keep {modifier} onto {way_name}",
-        "destination": "Keep {modifier} towards {destination}"
+        "destination": "Keep {modifier} towards {destination}",
       },
       "slight left": {
         "default": "Keep left at the fork",
         "name": "Keep left onto {way_name}",
-        "destination": "Keep left towards {destination}"
+        "destination": "Keep left towards {destination}",
       },
       "slight right": {
         "default": "Keep right at the fork",
         "name": "Keep right onto {way_name}",
-        "destination": "Keep right towards {destination}"
+        "destination": "Keep right towards {destination}",
       },
       "sharp left": {
         "default": "Take a sharp left at the fork",
         "name": "Take a sharp left onto {way_name}",
-        "destination": "Take a sharp left towards {destination}"
+        "destination": "Take a sharp left towards {destination}",
       },
       "sharp right": {
         "default": "Take a sharp right at the fork",
         "name": "Take a sharp right onto {way_name}",
-        "destination": "Take a sharp right towards {destination}"
+        "destination": "Take a sharp right towards {destination}",
       },
       "uturn": {
         "default": "Make a U-turn",
         "name": "Make a U-turn onto {way_name}",
-        "destination": "Make a U-turn towards {destination}"
-      }
+        "destination": "Make a U-turn towards {destination}",
+      },
     },
     "merge": {
       "default": {
         "default": "Merge {modifier}",
         "name": "Merge {modifier} onto {way_name}",
-        "destination": "Merge {modifier} towards {destination}"
+        "destination": "Merge {modifier} towards {destination}",
       },
       "straight": {
         "default": "Merge",
         "name": "Merge onto {way_name}",
-        "destination": "Merge towards {destination}"
+        "destination": "Merge towards {destination}",
       },
       "slight left": {
         "default": "Merge left",
         "name": "Merge left onto {way_name}",
-        "destination": "Merge left towards {destination}"
+        "destination": "Merge left towards {destination}",
       },
       "slight right": {
         "default": "Merge right",
         "name": "Merge right onto {way_name}",
-        "destination": "Merge right towards {destination}"
+        "destination": "Merge right towards {destination}",
       },
       "sharp left": {
         "default": "Merge left",
         "name": "Merge left onto {way_name}",
-        "destination": "Merge left towards {destination}"
+        "destination": "Merge left towards {destination}",
       },
       "sharp right": {
         "default": "Merge right",
         "name": "Merge right onto {way_name}",
-        "destination": "Merge right towards {destination}"
+        "destination": "Merge right towards {destination}",
       },
       "uturn": {
         "default": "Make a U-turn",
         "name": "Make a U-turn onto {way_name}",
-        "destination": "Make a U-turn towards {destination}"
-      }
+        "destination": "Make a U-turn towards {destination}",
+      },
     },
     "new name": {
       "default": {
         "default": "Continue {modifier}",
         "name": "Continue {modifier} onto {way_name}",
-        "destination": "Continue {modifier} towards {destination}"
+        "destination": "Continue {modifier} towards {destination}",
       },
       "straight": {
         "default": "Continue straight",
         "name": "Continue onto {way_name}",
-        "destination": "Continue towards {destination}"
+        "destination": "Continue towards {destination}",
       },
       "sharp left": {
         "default": "Take a sharp left",
         "name": "Take a sharp left onto {way_name}",
-        "destination": "Take a sharp left towards {destination}"
+        "destination": "Take a sharp left towards {destination}",
       },
       "sharp right": {
         "default": "Take a sharp right",
         "name": "Take a sharp right onto {way_name}",
-        "destination": "Take a sharp right towards {destination}"
+        "destination": "Take a sharp right towards {destination}",
       },
       "slight left": {
         "default": "Continue slightly left",
         "name": "Continue slightly left onto {way_name}",
-        "destination": "Continue slightly left towards {destination}"
+        "destination": "Continue slightly left towards {destination}",
       },
       "slight right": {
         "default": "Continue slightly right",
         "name": "Continue slightly right onto {way_name}",
-        "destination": "Continue slightly right towards {destination}"
+        "destination": "Continue slightly right towards {destination}",
       },
       "uturn": {
         "default": "Make a U-turn",
         "name": "Make a U-turn onto {way_name}",
-        "destination": "Make a U-turn towards {destination}"
-      }
+        "destination": "Make a U-turn towards {destination}",
+      },
     },
     "notification": {
       "default": {
         "default": "Continue {modifier}",
         "name": "Continue {modifier} onto {way_name}",
-        "destination": "Continue {modifier} towards {destination}"
+        "destination": "Continue {modifier} towards {destination}",
       },
       "uturn": {
         "default": "Make a U-turn",
         "name": "Make a U-turn onto {way_name}",
-        "destination": "Make a U-turn towards {destination}"
-      }
+        "destination": "Make a U-turn towards {destination}",
+      },
     },
     "off ramp": {
       "default": {
@@ -1427,14 +1427,15 @@ const en = {
         "name": "Take the ramp onto {way_name}",
         "destination": "Take the ramp towards {destination}",
         "exit": "Take exit {exit}",
-        "exit_destination": "Take exit {exit} towards {destination}"
+        "exit_destination": "Take exit {exit} towards {destination}",
       },
       "left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
         "destination": "Take the ramp on the left towards {destination}",
         "exit": "Take exit {exit} on the left",
-        "exit_destination": "Take exit {exit} on the left towards {destination}"
+        "exit_destination":
+            "Take exit {exit} on the left towards {destination}",
       },
       "right": {
         "default": "Take the ramp on the right",
@@ -1442,14 +1443,15 @@ const en = {
         "destination": "Take the ramp on the right towards {destination}",
         "exit": "Take exit {exit} on the right",
         "exit_destination":
-            "Take exit {exit} on the right towards {destination}"
+            "Take exit {exit} on the right towards {destination}",
       },
       "sharp left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
         "destination": "Take the ramp on the left towards {destination}",
         "exit": "Take exit {exit} on the left",
-        "exit_destination": "Take exit {exit} on the left towards {destination}"
+        "exit_destination":
+            "Take exit {exit} on the left towards {destination}",
       },
       "sharp right": {
         "default": "Take the ramp on the right",
@@ -1457,14 +1459,15 @@ const en = {
         "destination": "Take the ramp on the right towards {destination}",
         "exit": "Take exit {exit} on the right",
         "exit_destination":
-            "Take exit {exit} on the right towards {destination}"
+            "Take exit {exit} on the right towards {destination}",
       },
       "slight left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
         "destination": "Take the ramp on the left towards {destination}",
         "exit": "Take exit {exit} on the left",
-        "exit_destination": "Take exit {exit} on the left towards {destination}"
+        "exit_destination":
+            "Take exit {exit} on the left towards {destination}",
       },
       "slight right": {
         "default": "Take the ramp on the right",
@@ -1472,73 +1475,73 @@ const en = {
         "destination": "Take the ramp on the right towards {destination}",
         "exit": "Take exit {exit} on the right",
         "exit_destination":
-            "Take exit {exit} on the right towards {destination}"
-      }
+            "Take exit {exit} on the right towards {destination}",
+      },
     },
     "on ramp": {
       "default": {
         "default": "Take the ramp",
         "name": "Take the ramp onto {way_name}",
-        "destination": "Take the ramp towards {destination}"
+        "destination": "Take the ramp towards {destination}",
       },
       "left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
-        "destination": "Take the ramp on the left towards {destination}"
+        "destination": "Take the ramp on the left towards {destination}",
       },
       "right": {
         "default": "Take the ramp on the right",
         "name": "Take the ramp on the right onto {way_name}",
-        "destination": "Take the ramp on the right towards {destination}"
+        "destination": "Take the ramp on the right towards {destination}",
       },
       "sharp left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
-        "destination": "Take the ramp on the left towards {destination}"
+        "destination": "Take the ramp on the left towards {destination}",
       },
       "sharp right": {
         "default": "Take the ramp on the right",
         "name": "Take the ramp on the right onto {way_name}",
-        "destination": "Take the ramp on the right towards {destination}"
+        "destination": "Take the ramp on the right towards {destination}",
       },
       "slight left": {
         "default": "Take the ramp on the left",
         "name": "Take the ramp on the left onto {way_name}",
-        "destination": "Take the ramp on the left towards {destination}"
+        "destination": "Take the ramp on the left towards {destination}",
       },
       "slight right": {
         "default": "Take the ramp on the right",
         "name": "Take the ramp on the right onto {way_name}",
-        "destination": "Take the ramp on the right towards {destination}"
-      }
+        "destination": "Take the ramp on the right towards {destination}",
+      },
     },
     "rotary": {
       "default": {
         "default": {
           "default": "Enter the roundabout",
           "name": "Enter the roundabout and exit onto {way_name}",
-          "destination": "Enter the roundabout and exit towards {destination}"
+          "destination": "Enter the roundabout and exit towards {destination}",
         },
         "name": {
           "default": "Enter {rotary_name}",
           "name": "Enter {rotary_name} and exit onto {way_name}",
-          "destination": "Enter {rotary_name} and exit towards {destination}"
+          "destination": "Enter {rotary_name} and exit towards {destination}",
         },
         "exit": {
           "default": "Enter the roundabout and take the {exit_number} exit",
           "name":
               "Enter the roundabout and take the {exit_number} exit onto {way_name}",
           "destination":
-              "Enter the roundabout and take the {exit_number} exit towards {destination}"
+              "Enter the roundabout and take the {exit_number} exit towards {destination}",
         },
         "name_exit": {
           "default": "Enter {rotary_name} and take the {exit_number} exit",
           "name":
               "Enter {rotary_name} and take the {exit_number} exit onto {way_name}",
           "destination":
-              "Enter {rotary_name} and take the {exit_number} exit towards {destination}"
-        }
-      }
+              "Enter {rotary_name} and take the {exit_number} exit towards {destination}",
+        },
+      },
     },
     "roundabout": {
       "default": {
@@ -1547,82 +1550,82 @@ const en = {
           "name":
               "Enter the roundabout and take the {exit_number} exit onto {way_name}",
           "destination":
-              "Enter the roundabout and take the {exit_number} exit towards {destination}"
+              "Enter the roundabout and take the {exit_number} exit towards {destination}",
         },
         "default": {
           "default": "Enter the roundabout",
           "name": "Enter the roundabout and exit onto {way_name}",
-          "destination": "Enter the roundabout and exit towards {destination}"
-        }
-      }
+          "destination": "Enter the roundabout and exit towards {destination}",
+        },
+      },
     },
     "roundabout turn": {
       "default": {
         "default": "Make a {modifier}",
         "name": "Make a {modifier} onto {way_name}",
-        "destination": "Make a {modifier} towards {destination}"
+        "destination": "Make a {modifier} towards {destination}",
       },
       "left": {
         "default": "Turn left",
         "name": "Turn left onto {way_name}",
-        "destination": "Turn left towards {destination}"
+        "destination": "Turn left towards {destination}",
       },
       "right": {
         "default": "Turn right",
         "name": "Turn right onto {way_name}",
-        "destination": "Turn right towards {destination}"
+        "destination": "Turn right towards {destination}",
       },
       "straight": {
         "default": "Continue straight",
         "name": "Continue straight onto {way_name}",
-        "destination": "Continue straight towards {destination}"
-      }
+        "destination": "Continue straight towards {destination}",
+      },
     },
     "exit roundabout": {
       "default": {
         "default": "Exit the roundabout",
         "name": "Exit the roundabout onto {way_name}",
-        "destination": "Exit the roundabout towards {destination}"
-      }
+        "destination": "Exit the roundabout towards {destination}",
+      },
     },
     "exit rotary": {
       "default": {
         "default": "Exit the roundabout",
         "name": "Exit the roundabout onto {way_name}",
-        "destination": "Exit the roundabout towards {destination}"
-      }
+        "destination": "Exit the roundabout towards {destination}",
+      },
     },
     "turn": {
       "default": {
         "default": "Make a {modifier}",
         "name": "Make a {modifier} onto {way_name}",
         "destination": "Make a {modifier} towards {destination}",
-        "junction_name": "Make a {modifier} at {junction_name}"
+        "junction_name": "Make a {modifier} at {junction_name}",
       },
       "left": {
         "default": "Turn left",
         "name": "Turn left onto {way_name}",
         "destination": "Turn left towards {destination}",
-        "junction_name": "Turn left at {junction_name}"
+        "junction_name": "Turn left at {junction_name}",
       },
       "right": {
         "default": "Turn right",
         "name": "Turn right onto {way_name}",
         "destination": "Turn right towards {destination}",
-        "junction_name": "Turn right at {junction_name}"
+        "junction_name": "Turn right at {junction_name}",
       },
       "straight": {
         "default": "Go straight",
         "name": "Go straight onto {way_name}",
         "destination": "Go straight towards {destination}",
-        "junction_name": "Go straight at {junction_name}"
-      }
+        "junction_name": "Go straight at {junction_name}",
+      },
     },
     "use lane": {
       "no_lanes": {"default": "Continue straight"},
-      "default": {"default": "{lane_instruction}"}
-    }
-  }
+      "default": {"default": "{lane_instruction}"},
+    },
+  },
 };
 
 const responseRandomRoute = {
@@ -1641,7 +1644,7 @@ const responseRandomRoute = {
                 "bearing_after": 355,
                 "bearing_before": 0,
                 "location": [13.388798, 52.517033],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -1651,103 +1654,103 @@ const responseRandomRoute = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [355],
-                  "location": [13.388798, 52.517033]
+                  "location": [13.388798, 52.517033],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.38878, 52.517149]
+                  "location": [13.38878, 52.517149],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.388643, 52.518027]
+                  "location": [13.388643, 52.518027],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true, false],
                   "bearings": [15, 90, 180, 270, 315],
-                  "location": [13.388544, 52.518716]
+                  "location": [13.388544, 52.518716],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true, false],
                   "bearings": [0, 165, 180, 285],
-                  "location": [13.388255, 52.520395]
+                  "location": [13.388255, 52.520395],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 45, 180, 225],
-                  "location": [13.388022, 52.521758]
+                  "location": [13.388022, 52.521758],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 255],
-                  "location": [13.387898, 52.52245]
+                  "location": [13.387898, 52.52245],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.387799, 52.523401]
+                  "location": [13.387799, 52.523401],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["none"]
+                      "indications": ["none"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 270],
-                  "location": [13.387748, 52.523877]
+                  "location": [13.387748, 52.523877],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.3877, 52.524433]
+                  "location": [13.3877, 52.524433],
                 },
                 {
                   "out": 3,
                   "in": 1,
                   "entry": [true, false, false, true],
                   "bearings": [105, 165, 300, 345],
-                  "location": [13.387337, 52.526239]
+                  "location": [13.387337, 52.526239],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [0, 105, 165, 255],
-                  "location": [13.387283, 52.526386]
-                }
+                  "location": [13.387283, 52.526386],
+                },
               ],
               "weight": 138.2,
               "duration": 135.3,
-              "distance": 1136.2
+              "distance": 1136.2,
             },
             {
               "geometry":
@@ -1757,7 +1760,7 @@ const responseRandomRoute = {
                 "bearing_before": 8,
                 "location": [13.387228, 52.527168],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -1768,54 +1771,54 @@ const responseRandomRoute = {
                   "in": 1,
                   "entry": [true, false, true, true],
                   "bearings": [75, 195, 255, 330],
-                  "location": [13.387228, 52.527168]
+                  "location": [13.387228, 52.527168],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.389147, 52.527549]
+                  "location": [13.389147, 52.527549],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 330],
-                  "location": [13.391396, 52.528032]
+                  "location": [13.391396, 52.528032],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [75, 165, 255, 345],
-                  "location": [13.392444, 52.528237]
+                  "location": [13.392444, 52.528237],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [75, 120, 255, 330],
-                  "location": [13.393814, 52.528526]
+                  "location": [13.393814, 52.528526],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.395724, 52.528996]
+                  "location": [13.395724, 52.528996],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [90, 180, 255, 345],
-                  "location": [13.397565, 52.529429]
-                }
+                  "location": [13.397565, 52.529429],
+                },
               ],
               "weight": 124.799999999,
               "duration": 124.799999999,
-              "distance": 750.1
+              "distance": 750.1,
             },
             {
               "geometry": "}sr_IevwpA",
@@ -1823,7 +1826,7 @@ const responseRandomRoute = {
                 "bearing_after": 0,
                 "bearing_before": 86,
                 "location": [13.39763, 52.529432],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -1833,18 +1836,18 @@ const responseRandomRoute = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [266],
-                  "location": [13.39763, 52.529432]
-                }
+                  "location": [13.39763, 52.529432],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Friedrichstraße, Torstraße",
           "weight": 263,
           "duration": 260.1,
-          "distance": 1886.3
+          "distance": 1886.3,
         },
         {
           "steps": [
@@ -1855,7 +1858,7 @@ const responseRandomRoute = {
                 "bearing_after": 85,
                 "bearing_before": 0,
                 "location": [13.39763, 52.529432],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -1865,109 +1868,109 @@ const responseRandomRoute = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [85],
-                  "location": [13.39763, 52.529432]
+                  "location": [13.39763, 52.529432],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [90, 150, 270, 330],
-                  "location": [13.401337, 52.529605]
+                  "location": [13.401337, 52.529605],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, true],
                   "bearings": [90, 165, 285],
-                  "location": [13.401541, 52.529618]
+                  "location": [13.401541, 52.529618],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 195, 285],
-                  "location": [13.405456, 52.529405]
+                  "location": [13.405456, 52.529405],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 105, 210, 285],
-                  "location": [13.409405, 52.528711]
+                  "location": [13.409405, 52.528711],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 165, 285],
-                  "location": [13.409967, 52.528591]
+                  "location": [13.409967, 52.528591],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [105, 165, 285, 330],
-                  "location": [13.410146, 52.52855]
+                  "location": [13.410146, 52.52855],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 210, 285],
-                  "location": [13.411852, 52.528201]
-                }
+                  "location": [13.411852, 52.528201],
+                },
               ],
               "weight": 203.4,
               "duration": 203.4,
-              "distance": 1275.5
+              "distance": 1275.5,
             },
             {
               "geometry": "gdr_Iie{pAJS@C@A@CJSWWEECEECOQ",
@@ -1976,7 +1979,7 @@ const responseRandomRoute = {
                 "bearing_before": 133,
                 "location": [13.415405, 52.526922],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -1986,64 +1989,64 @@ const responseRandomRoute = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415405, 52.526922]
+                  "location": [13.415405, 52.526922],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415657, 52.52677]
-                }
+                  "location": [13.415657, 52.52677],
+                },
               ],
               "weight": 12,
               "duration": 12,
-              "distance": 60.6
+              "distance": 60.6,
             },
             {
               "geometry": "aer_Iuh{pAe@a@CCUQaCkB{@y@GESO",
@@ -2052,7 +2055,7 @@ const responseRandomRoute = {
                 "bearing_before": 32,
                 "location": [13.415945, 52.527047],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2062,27 +2065,27 @@ const responseRandomRoute = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [30, 120, 210, 315],
-                  "location": [13.415945, 52.527047]
-                }
+                  "location": [13.415945, 52.527047],
+                },
               ],
               "weight": 18.2,
               "duration": 18.2,
-              "distance": 177.6
+              "distance": 177.6,
             },
             {
               "geometry":
@@ -2092,7 +2095,7 @@ const responseRandomRoute = {
                 "bearing_before": 28,
                 "location": [13.417166, 52.528458],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2103,26 +2106,26 @@ const responseRandomRoute = {
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [30, 90, 210, 315],
-                  "location": [13.417166, 52.528458]
+                  "location": [13.417166, 52.528458],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [45, 120, 225, 285],
-                  "location": [13.423592, 52.528206]
+                  "location": [13.423592, 52.528206],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [45, 120, 210, 300],
-                  "location": [13.423868, 52.528136]
-                }
+                  "location": [13.423868, 52.528136],
+                },
               ],
               "weight": 57.1,
               "duration": 57.1,
-              "distance": 548.7
+              "distance": 548.7,
             },
             {
               "geometry":
@@ -2132,7 +2135,7 @@ const responseRandomRoute = {
                 "bearing_before": 67,
                 "location": [13.424993, 52.528068],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2143,33 +2146,33 @@ const responseRandomRoute = {
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [60, 150, 255, 345],
-                  "location": [13.424993, 52.528068]
+                  "location": [13.424993, 52.528068],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 225, 300],
-                  "location": [13.425818, 52.52763]
+                  "location": [13.425818, 52.52763],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.428041, 52.526565]
+                  "location": [13.428041, 52.526565],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.429337, 52.525737]
-                }
+                  "location": [13.429337, 52.525737],
+                },
               ],
               "weight": 52.4,
               "duration": 52.4,
-              "distance": 510.1
+              "distance": 510.1,
             },
             {
               "geometry": "_xq_Iac~pAFAL?J@HBFBr@XNH^NHDTJNFTRRJd@LXFB@B?VB",
@@ -2178,7 +2181,7 @@ const responseRandomRoute = {
                 "bearing_before": 163,
                 "location": [13.430405, 52.524964],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2189,12 +2192,12 @@ const responseRandomRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 180, 345],
-                  "location": [13.430405, 52.524964]
-                }
+                  "location": [13.430405, 52.524964],
+                },
               ],
               "weight": 20.6,
               "duration": 20.6,
-              "distance": 196.6
+              "distance": 196.6,
             },
             {
               "geometry": "mmq_Io~}pA@V?N?F@jA@dB",
@@ -2203,7 +2206,7 @@ const responseRandomRoute = {
                 "bearing_before": 189,
                 "location": [13.429678, 52.523269],
                 "modifier": "right",
-                "type": "continue"
+                "type": "continue",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2213,31 +2216,31 @@ const responseRandomRoute = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight", "left"]
+                      "indications": ["straight", "left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 3,
                   "in": 0,
                   "entry": [false, false, true, true],
                   "bearings": [15, 90, 180, 270],
-                  "location": [13.429678, 52.523269]
-                }
+                  "location": [13.429678, 52.523269],
+                },
               ],
               "weight": 6.9,
               "duration": 6.9,
-              "distance": 76.4
+              "distance": 76.4,
             },
             {
               "geometry": "gmq_Imw}pA",
@@ -2245,7 +2248,7 @@ const responseRandomRoute = {
                 "bearing_after": 0,
                 "bearing_before": 268,
                 "location": [13.428554, 52.523239],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -2255,25 +2258,25 @@ const responseRandomRoute = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [88],
-                  "location": [13.428554, 52.523239]
-                }
+                  "location": [13.428554, 52.523239],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Torstraße, Friedenstraße",
           "weight": 370.6,
           "duration": 370.6,
-          "distance": 2845.5
-        }
+          "distance": 2845.5,
+        },
       ],
       "weight_name": "routability",
       "weight": 633.6,
       "duration": 630.7,
-      "distance": 4731.8
-    }
+      "distance": 4731.8,
+    },
   ],
   "waypoints": [
     {
@@ -2281,23 +2284,23 @@ const responseRandomRoute = {
           "T_4JgCfVmoUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABV_wAA_kvMAKlYIQM8TMwArVghAwAA7wpkjokY",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "hint":
           "KW_dgUMTi4cGAAAACQAAAAAAAAB3AAAAppONQCyhu0AAAAAA1J-EQgYAAAAJAAAAAAAAAHcAAABV_wAAfm7MABiJIQOCbswA_4ghAwAAXwVkjokY",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "hint":
           "cCgYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0IQ7CZCjsMGQh8AAABRAAAAJgAAAB4AAABV_wAASufMAOdwIQNL58wA03AhAwQAvxBkjokY",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const response2ndRoute = {
@@ -2316,7 +2319,7 @@ const response2ndRoute = {
                 "bearing_before": 0,
                 "location": [8.257762, 50.012695],
                 "modifier": "right",
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2326,26 +2329,26 @@ const response2ndRoute = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [135],
-                  "location": [8.257762, 50.012695]
+                  "location": [8.257762, 50.012695],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 135, 315],
-                  "location": [8.258744, 50.012051]
+                  "location": [8.258744, 50.012051],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.259881, 50.011274]
-                }
+                  "location": [8.259881, 50.011274],
+                },
               ],
               "weight": 31.72,
               "duration": 255.099999999,
-              "distance": 318.8
+              "distance": 318.8,
             },
             {
               "geometry": "oufpHkmlq@AQ",
@@ -2354,7 +2357,7 @@ const response2ndRoute = {
                 "bearing_before": 133,
                 "location": [8.260857, 50.010636],
                 "modifier": "slight left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2365,12 +2368,12 @@ const response2ndRoute = {
                   "in": 4,
                   "entry": [true, true, true, true, false],
                   "bearings": [45, 75, 150, 255, 315],
-                  "location": [8.260857, 50.010636]
-                }
+                  "location": [8.260857, 50.010636],
+                },
               ],
               "weight": 0.59,
               "duration": 5.2,
-              "distance": 6.5
+              "distance": 6.5,
             },
             {
               "geometry": "qufpH}mlq@pCyD@I",
@@ -2379,7 +2382,7 @@ const response2ndRoute = {
                 "bearing_before": 78,
                 "location": [8.260946, 50.010647],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2390,12 +2393,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [75, 135, 255],
-                  "location": [8.260946, 50.010647]
-                }
+                  "location": [8.260946, 50.010647],
+                },
               ],
               "weight": 9.07,
               "duration": 87.1,
-              "distance": 108.9
+              "distance": 108.9,
             },
             {
               "geometry": "}pfpHatlq@XCrBmBzAuA",
@@ -2404,7 +2407,7 @@ const response2ndRoute = {
                 "bearing_before": 126,
                 "location": [8.26193, 50.009907],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2415,26 +2418,26 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 180, 315],
-                  "location": [8.26193, 50.009907]
+                  "location": [8.26193, 50.009907],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true, true, true],
                   "bearings": [0, 45, 150, 225, 315],
-                  "location": [8.26195, 50.009781]
+                  "location": [8.26195, 50.009781],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [150, 210, 330],
-                  "location": [8.262502, 50.009195]
-                }
+                  "location": [8.262502, 50.009195],
+                },
               ],
               "weight": 13.52,
               "duration": 120,
-              "distance": 149.9
+              "distance": 149.9,
             },
             {
               "geometry": "sifpHizlq@NAPU`AsA",
@@ -2443,7 +2446,7 @@ const response2ndRoute = {
                 "bearing_before": 147,
                 "location": [8.262933, 50.008737],
                 "modifier": "slight right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2454,19 +2457,19 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [135, 180, 225, 330],
-                  "location": [8.262933, 50.008737]
+                  "location": [8.262933, 50.008737],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 180, 315],
-                  "location": [8.263052, 50.008573]
-                }
+                  "location": [8.263052, 50.008573],
+                },
               ],
               "weight": 5.75,
               "duration": 55.2,
-              "distance": 69
+              "distance": 69,
             },
             {
               "geometry": "offpHu}lq@?W",
@@ -2475,7 +2478,7 @@ const response2ndRoute = {
                 "bearing_before": 140,
                 "location": [8.263472, 50.00824],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2486,12 +2489,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [90, 225, 315],
-                  "location": [8.263472, 50.00824]
-                }
+                  "location": [8.263472, 50.00824],
+                },
               ],
               "weight": 0.69,
               "duration": 6.6,
-              "distance": 8.3
+              "distance": 8.3,
             },
             {
               "geometry": "offpHm~lq@NSvBqCDS",
@@ -2500,7 +2503,7 @@ const response2ndRoute = {
                 "bearing_before": 92,
                 "location": [8.263587, 50.008235],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2511,12 +2514,12 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false, true],
                   "bearings": [45, 135, 225, 270, 315],
-                  "location": [8.263587, 50.008235]
-                }
+                  "location": [8.263587, 50.008235],
+                },
               ],
               "weight": 10.3,
               "duration": 83.2,
-              "distance": 104
+              "distance": 104,
             },
             {
               "geometry": "abfpHgdmq@Na@`@qA`@qA",
@@ -2525,7 +2528,7 @@ const response2ndRoute = {
                 "bearing_before": 123,
                 "location": [8.26452, 50.007525],
                 "modifier": "straight",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2536,19 +2539,19 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 120, 210, 300],
-                  "location": [8.26452, 50.007525]
+                  "location": [8.26452, 50.007525],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 120, 300],
-                  "location": [8.265101, 50.007281]
-                }
+                  "location": [8.265101, 50.007281],
+                },
               ],
               "weight": 7.07,
               "duration": 67.8,
-              "distance": 84.8
+              "distance": 84.8,
             },
             {
               "geometry": "m_fpHmjmq@~@|@@@JD^KH@FDb@b@j@h@",
@@ -2557,7 +2560,7 @@ const response2ndRoute = {
                 "bearing_before": 122,
                 "location": [8.265514, 50.007111],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2568,26 +2571,26 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 120, 210, 300],
-                  "location": [8.265514, 50.007111]
+                  "location": [8.265514, 50.007111],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [30, 120, 210, 285],
-                  "location": [8.265199, 50.006789]
+                  "location": [8.265199, 50.006789],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [30, 150, 180, 300],
-                  "location": [8.265185, 50.006775]
-                }
+                  "location": [8.265185, 50.006775],
+                },
               ],
               "weight": 11.03,
               "duration": 105.9,
-              "distance": 132.4
+              "distance": 132.4,
             },
             {
               "geometry": "}xepH}emq@FQHO@CXq@FQFS",
@@ -2596,7 +2599,7 @@ const response2ndRoute = {
                 "bearing_before": 210,
                 "location": [8.264789, 50.006065],
                 "modifier": "left",
-                "type": "continue"
+                "type": "continue",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2607,33 +2610,33 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [30, 120, 210, 300],
-                  "location": [8.264789, 50.006065]
+                  "location": [8.264789, 50.006065],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 135, 315],
-                  "location": [8.26496, 50.005982]
+                  "location": [8.26496, 50.005982],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 210, 315],
-                  "location": [8.264976, 50.005974]
+                  "location": [8.264976, 50.005974],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 120, 315],
-                  "location": [8.265229, 50.005841]
-                }
+                  "location": [8.265229, 50.005841],
+                },
               ],
               "weight": 4.689999999,
               "duration": 45.1,
-              "distance": 56.3
+              "distance": 56.3,
             },
             {
               "geometry": "_wepH{imq@DD",
@@ -2642,7 +2645,7 @@ const response2ndRoute = {
                 "bearing_before": 120,
                 "location": [8.265418, 50.005762],
                 "modifier": "right",
-                "type": "end of road"
+                "type": "end of road",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2653,12 +2656,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 210, 300],
-                  "location": [8.265418, 50.005762]
-                }
+                  "location": [8.265418, 50.005762],
+                },
               ],
               "weight": 0.36,
               "duration": 3.4,
-              "distance": 4.3
+              "distance": 4.3,
             },
             {
               "geometry": "yvepHuimq@bA{Cp@yB`A{CDMl@}Av@kB@ELUJO",
@@ -2667,7 +2670,7 @@ const response2ndRoute = {
                 "bearing_before": 210,
                 "location": [8.265387, 50.005729],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2678,61 +2681,61 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [30, 120, 210],
-                  "location": [8.265387, 50.005729]
+                  "location": [8.265387, 50.005729],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 120, 210, 300],
-                  "location": [8.266168, 50.00539]
+                  "location": [8.266168, 50.00539],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 120, 210, 300],
-                  "location": [8.266781, 50.00514]
+                  "location": [8.266781, 50.00514],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 120, 300],
-                  "location": [8.267625, 50.004783]
+                  "location": [8.267625, 50.004783],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 135, 300],
-                  "location": [8.2681, 50.004551]
+                  "location": [8.2681, 50.004551],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 225, 315],
-                  "location": [8.268639, 50.004271]
+                  "location": [8.268639, 50.004271],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 135, 210, 300],
-                  "location": [8.268665, 50.004262]
+                  "location": [8.268665, 50.004262],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.268779, 50.004189]
-                }
+                  "location": [8.268779, 50.004189],
+                },
               ],
               "weight": 25.859999999,
               "duration": 245.199999999,
-              "distance": 306.4
+              "distance": 306.4,
             },
             {
               "geometry": "ylepHk_nq@BEJQlAkCZKhAeAb@e@fA_AZUPe@LM",
@@ -2741,7 +2744,7 @@ const response2ndRoute = {
                 "bearing_before": 136,
                 "location": [8.268861, 50.004132],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2752,33 +2755,33 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [8.268861, 50.004132]
+                  "location": [8.268861, 50.004132],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 135, 315],
-                  "location": [8.268978, 50.004052]
+                  "location": [8.268978, 50.004052],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 165, 210, 315],
-                  "location": [8.269676, 50.00366]
+                  "location": [8.269676, 50.00366],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 150, 240, 330],
-                  "location": [8.270275, 50.002967]
-                }
+                  "location": [8.270275, 50.002967],
+                },
               ],
               "weight": 21.4,
               "duration": 205.6,
-              "distance": 256.9
+              "distance": 256.9,
             },
             {
               "geometry": "maepHqlnq@JKf@[LIp@e@VG~@Uj@K\\Sl@e@VGJA",
@@ -2787,7 +2790,7 @@ const response2ndRoute = {
                 "bearing_before": 143,
                 "location": [8.27097, 50.002312],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2798,61 +2801,61 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 150, 240, 330],
-                  "location": [8.27097, 50.002312]
+                  "location": [8.27097, 50.002312],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 150, 330],
-                  "location": [8.271171, 50.002054]
+                  "location": [8.271171, 50.002054],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 165, 240, 330],
-                  "location": [8.271408, 50.001727]
+                  "location": [8.271408, 50.001727],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [165, 255, 345],
-                  "location": [8.271451, 50.001608]
+                  "location": [8.271451, 50.001608],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 165, 240, 345],
-                  "location": [8.271562, 50.001293]
+                  "location": [8.271562, 50.001293],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 150, 330],
-                  "location": [8.271718, 50.000923]
+                  "location": [8.271718, 50.000923],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [90, 165, 240, 330],
-                  "location": [8.271912, 50.000694]
+                  "location": [8.271912, 50.000694],
                 },
                 {
                   "out": 2,
                   "in": 5,
                   "entry": [true, true, true, true, true, false],
                   "bearings": [75, 150, 165, 300, 330, 345],
-                  "location": [8.271946, 50.000567]
-                }
+                  "location": [8.271946, 50.000567],
+                },
               ],
               "weight": 18.029999999,
               "duration": 172,
-              "distance": 215
+              "distance": 215,
             },
             {
               "geometry": "evdpHwrnq@HATCHA",
@@ -2861,7 +2864,7 @@ const response2ndRoute = {
                 "bearing_before": 168,
                 "location": [8.271964, 50.000506],
                 "modifier": "straight",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2872,26 +2875,26 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [180, 225, 345],
-                  "location": [8.271964, 50.000506]
+                  "location": [8.271964, 50.000506],
                 },
                 {
                   "out": 1,
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [0, 165, 195],
-                  "location": [8.271969, 50.000458]
+                  "location": [8.271969, 50.000458],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [15, 165, 345],
-                  "location": [8.271993, 50.000345]
-                }
+                  "location": [8.271993, 50.000345],
+                },
               ],
               "weight": 1.9,
               "duration": 18.2,
-              "distance": 22.8
+              "distance": 22.8,
             },
             {
               "geometry": "{tdpH_snq@PHj@LR@f@]x@i@",
@@ -2900,7 +2903,7 @@ const response2ndRoute = {
                 "bearing_before": 171,
                 "location": [8.272002, 50.000303],
                 "modifier": "slight right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2911,26 +2914,26 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 180, 195, 345],
-                  "location": [8.272002, 50.000303]
+                  "location": [8.272002, 50.000303],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [0, 45, 150, 240],
-                  "location": [8.27187, 49.999891]
+                  "location": [8.27187, 49.999891],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 150, 240, 330],
-                  "location": [8.272018, 49.999689]
-                }
+                  "location": [8.272018, 49.999689],
+                },
               ],
               "weight": 9.01,
               "duration": 86.5,
-              "distance": 108.1
+              "distance": 108.1,
             },
             {
               "geometry": "godpHmtnq@BH@F",
@@ -2939,7 +2942,7 @@ const response2ndRoute = {
                 "bearing_before": 154,
                 "location": [8.272233, 49.999395],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2950,12 +2953,12 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [135, 150, 240, 330],
-                  "location": [8.272233, 49.999395]
-                }
+                  "location": [8.272233, 49.999395],
+                },
               ],
               "weight": 0.64,
               "duration": 6.2,
-              "distance": 7.7
+              "distance": 7.7,
             },
             {
               "geometry": "aodpH{snq@b@ULQHGFELIDCbBkADA",
@@ -2964,7 +2967,7 @@ const response2ndRoute = {
                 "bearing_before": 244,
                 "location": [8.272135, 49.999366],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -2975,19 +2978,19 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [60, 165, 240, 330],
-                  "location": [8.272135, 49.999366]
+                  "location": [8.272135, 49.999366],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 150, 240, 345],
-                  "location": [8.272246, 49.999191]
-                }
+                  "location": [8.272246, 49.999191],
+                },
               ],
               "weight": 10.74,
               "duration": 95.8,
-              "distance": 119.8
+              "distance": 119.8,
             },
             {
               "geometry": "_idpHmxnq@BU",
@@ -2996,7 +2999,7 @@ const response2ndRoute = {
                 "bearing_before": 153,
                 "location": [8.272869, 49.998403],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3007,12 +3010,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 210, 330],
-                  "location": [8.272869, 49.998403]
-                }
+                  "location": [8.272869, 49.998403],
+                },
               ],
               "weight": 0.71,
               "duration": 6.8,
-              "distance": 8.5
+              "distance": 8.5,
             },
             {
               "geometry": "{hdpHcynq@F?r@a@?G?EEWAC@E?G",
@@ -3021,7 +3024,7 @@ const response2ndRoute = {
                 "bearing_before": 105,
                 "location": [8.272982, 49.998381],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3032,19 +3035,19 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [15, 165, 285],
-                  "location": [8.272982, 49.998381]
+                  "location": [8.272982, 49.998381],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [75, 240, 315],
-                  "location": [8.273186, 49.998083]
-                }
+                  "location": [8.273186, 49.998083],
+                },
               ],
               "weight": 4.79,
               "duration": 45.9,
-              "distance": 57.4
+              "distance": 57.4,
             },
             {
               "geometry": "egdpH}{nq@BAbAUF@",
@@ -3053,7 +3056,7 @@ const response2ndRoute = {
                 "bearing_before": 81,
                 "location": [8.273434, 49.99811],
                 "modifier": "right",
-                "type": "continue"
+                "type": "continue",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3064,19 +3067,19 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 180, 270],
-                  "location": [8.273434, 49.99811]
+                  "location": [8.273434, 49.99811],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [0, 90, 165],
-                  "location": [8.273438, 49.99809]
-                }
+                  "location": [8.273438, 49.99809],
+                },
               ],
               "weight": 3.81,
               "duration": 36.599999999,
-              "distance": 45.7
+              "distance": 45.7,
             },
             {
               "geometry": "uddpHs|nq@ROBETYb@w@Tc@P_@|@eBNWT_@tAmC",
@@ -3085,7 +3088,7 @@ const response2ndRoute = {
                 "bearing_before": 178,
                 "location": [8.273539, 49.997708],
                 "modifier": "slight left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3096,61 +3099,61 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [0, 150, 225, 270],
-                  "location": [8.273539, 49.997708]
+                  "location": [8.273539, 49.997708],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 150, 330],
-                  "location": [8.273622, 49.997614]
+                  "location": [8.273622, 49.997614],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [150, 225, 330],
-                  "location": [8.273652, 49.997587]
+                  "location": [8.273652, 49.997587],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 330],
-                  "location": [8.273775, 49.997479]
+                  "location": [8.273775, 49.997479],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 135, 315],
-                  "location": [8.274057, 49.997302]
+                  "location": [8.274057, 49.997302],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [8.274402, 49.997096]
+                  "location": [8.274402, 49.997096],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [8.275028, 49.996706]
+                  "location": [8.275028, 49.996706],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 135, 315],
-                  "location": [8.275185, 49.996599]
-                }
+                  "location": [8.275185, 49.996599],
+                },
               ],
               "weight": 20.15,
               "duration": 193.5,
-              "distance": 241.9
+              "distance": 241.9,
             },
             {
               "geometry": "a{cpHkkoq@P_@Vq@Ra@^W",
@@ -3159,7 +3162,7 @@ const response2ndRoute = {
                 "bearing_before": 132,
                 "location": [8.275904, 49.996168],
                 "modifier": "slight right",
-                "type": "fork"
+                "type": "fork",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3170,26 +3173,26 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [129, 130, 223, 313],
-                  "location": [8.275904, 49.996168]
+                  "location": [8.275904, 49.996168],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, true],
                   "bearings": [30, 135, 240, 315],
-                  "location": [8.276306, 49.995955]
+                  "location": [8.276306, 49.995955],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [90, 150, 315],
-                  "location": [8.276477, 49.995858]
-                }
+                  "location": [8.276477, 49.995858],
+                },
               ],
               "weight": 6.71,
               "duration": 58.8,
-              "distance": 73.4
+              "distance": 73.4,
             },
             {
               "geometry": "cxcpHwooq@LUdAyBLU|@kB|A{C|@kB?AHOJQ",
@@ -3198,7 +3201,7 @@ const response2ndRoute = {
                 "bearing_before": 153,
                 "location": [8.276596, 49.995698],
                 "modifier": "slight left",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3209,26 +3212,26 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 210, 330],
-                  "location": [8.276596, 49.995698]
+                  "location": [8.276596, 49.995698],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 135, 240, 315],
-                  "location": [8.278754, 49.994434]
+                  "location": [8.278754, 49.994434],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 135, 240, 315],
-                  "location": [8.279375, 49.994067]
-                }
+                  "location": [8.279375, 49.994067],
+                },
               ],
               "weight": 27.86,
               "duration": 224.7,
-              "distance": 278.6
+              "distance": 278.6,
             },
             {
               "geometry": "qmcpHuapq@IQ",
@@ -3237,7 +3240,7 @@ const response2ndRoute = {
                 "bearing_before": 133,
                 "location": [8.279466, 49.994011],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3248,12 +3251,12 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 135, 240, 315],
-                  "location": [8.279466, 49.994011]
-                }
+                  "location": [8.279466, 49.994011],
+                },
               ],
               "weight": 0.72,
               "duration": 6.9,
-              "distance": 8.6
+              "distance": 8.6,
             },
             {
               "geometry": "{mcpHgbpq@PYVm@Pq@JB",
@@ -3262,7 +3265,7 @@ const response2ndRoute = {
                 "bearing_before": 53,
                 "location": [8.279564, 49.994056],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3273,12 +3276,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [45, 135, 240, 315],
-                  "location": [8.279564, 49.994056]
-                }
+                  "location": [8.279564, 49.994056],
+                },
               ],
               "weight": 5.18,
               "duration": 49.8,
-              "distance": 62.2
+              "distance": 62.2,
             },
             {
               "geometry": "skcpH}epq@L}@X}A",
@@ -3287,7 +3290,7 @@ const response2ndRoute = {
                 "bearing_before": 172,
                 "location": [8.280145, 49.993696],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3298,12 +3301,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [0, 105, 195, 300],
-                  "location": [8.280145, 49.993696]
-                }
+                  "location": [8.280145, 49.993696],
+                },
               ],
               "weight": 5.99,
               "duration": 48,
-              "distance": 59.9
+              "distance": 59.9,
             },
             {
               "geometry": "kjcpHyjpq@|@b@d@{C",
@@ -3312,7 +3315,7 @@ const response2ndRoute = {
                 "bearing_before": 111,
                 "location": [8.280925, 49.993503],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3323,12 +3326,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 195, 285],
-                  "location": [8.280925, 49.993503]
-                }
+                  "location": [8.280925, 49.993503],
+                },
               ],
               "weight": 9.7,
               "duration": 77.5,
-              "distance": 97
+              "distance": 97,
             },
             {
               "geometry": "ggcpHqnpq@OK",
@@ -3337,7 +3340,7 @@ const response2ndRoute = {
                 "bearing_before": 109,
                 "location": [8.281533, 49.992998],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3348,12 +3351,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 210, 285],
-                  "location": [8.281533, 49.992998]
-                }
+                  "location": [8.281533, 49.992998],
+                },
               ],
               "weight": 0.86,
               "duration": 8.3,
-              "distance": 10.4
+              "distance": 10.4,
             },
             {
               "geometry": "wgcpH}npq@FyA@MAAEQ",
@@ -3362,7 +3365,7 @@ const response2ndRoute = {
                 "bearing_before": 22,
                 "location": [8.281589, 49.993084],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3373,12 +3376,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 105, 210],
-                  "location": [8.281589, 49.993084]
-                }
+                  "location": [8.281589, 49.993084],
+                },
               ],
               "weight": 4.53,
               "duration": 31.6,
-              "distance": 45.9
+              "distance": 45.9,
             },
             {
               "geometry": "ugcpHyrpq@NM\\U\\W\\SVQFG",
@@ -3387,7 +3390,7 @@ const response2ndRoute = {
                 "bearing_before": 66,
                 "location": [8.28221, 49.993067],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "ref": "L 431",
@@ -3399,19 +3402,19 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [60, 150, 240, 330],
-                  "location": [8.28221, 49.993067]
+                  "location": [8.28221, 49.993067],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 150, 330],
-                  "location": [8.282279, 49.992985]
-                }
+                  "location": [8.282279, 49.992985],
+                },
               ],
               "weight": 10.67,
               "duration": 72.3,
-              "distance": 85.3
+              "distance": 85.3,
             },
             {
               "geometry": "kccpHcvpq@TRFFHLBL@F",
@@ -3420,7 +3423,7 @@ const response2ndRoute = {
                 "bearing_before": 153,
                 "location": [8.282744, 49.992383],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "ref": "K 9",
@@ -3432,12 +3435,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 210, 330],
-                  "location": [8.282744, 49.992383]
-                }
+                  "location": [8.282744, 49.992383],
+                },
               ],
               "weight": 3.99,
               "duration": 28.8,
-              "distance": 35.9
+              "distance": 35.9,
             },
             {
               "geometry": "}acpHctpq@HIn@e@^_@b@e@Vy@",
@@ -3446,7 +3449,7 @@ const response2ndRoute = {
                 "bearing_before": 239,
                 "location": [8.282423, 49.992147],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3457,33 +3460,33 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [60, 150, 270],
-                  "location": [8.282423, 49.992147]
+                  "location": [8.282423, 49.992147],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 150, 330],
-                  "location": [8.282469, 49.992096]
+                  "location": [8.282469, 49.992096],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [90, 150, 330],
-                  "location": [8.282655, 49.991856]
+                  "location": [8.282655, 49.991856],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 150, 330],
-                  "location": [8.282824, 49.991701]
-                }
+                  "location": [8.282824, 49.991701],
+                },
               ],
               "weight": 8.86,
               "duration": 85,
-              "distance": 106.1
+              "distance": 106.1,
             },
             {
               "geometry": "g}bpHsypq@Dc@Ns@Fu@HkAHoA`@yBx@gC",
@@ -3492,7 +3495,7 @@ const response2ndRoute = {
                 "bearing_before": 120,
                 "location": [8.283299, 49.991404],
                 "modifier": "slight left",
-                "type": "fork"
+                "type": "fork",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3503,19 +3506,19 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 135, 300],
-                  "location": [8.283299, 49.991404]
+                  "location": [8.283299, 49.991404],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [105, 165, 285, 330],
-                  "location": [8.284392, 49.991203]
-                }
+                  "location": [8.284392, 49.991203],
+                },
               ],
               "weight": 18.08,
               "duration": 173.6,
-              "distance": 216.9
+              "distance": 216.9,
             },
             {
               "geometry": "yxbpH_kqq@f@Qd@_@x@sA",
@@ -3524,7 +3527,7 @@ const response2ndRoute = {
                 "bearing_before": 122,
                 "location": [8.286077, 49.990689],
                 "modifier": "slight right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3535,12 +3538,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 165, 300],
-                  "location": [8.286077, 49.990689]
-                }
+                  "location": [8.286077, 49.990689],
+                },
               ],
               "weight": 7.59,
               "duration": 72.9,
-              "distance": 91
+              "distance": 91,
             },
             {
               "geometry": "qtbpHeoqq@ZKZQ",
@@ -3549,7 +3552,7 @@ const response2ndRoute = {
                 "bearing_before": 135,
                 "location": [8.286751, 49.990013],
                 "modifier": "slight right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3560,12 +3563,12 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [90, 165, 270, 315],
-                  "location": [8.286751, 49.990013]
-                }
+                  "location": [8.286751, 49.990013],
+                },
               ],
               "weight": 2.81,
               "duration": 26.9,
-              "distance": 33.7
+              "distance": 33.7,
             },
             {
               "geometry": "yrbpHcpqq@XoAb@oABKBIV}@Lc@JUZk@`@i@FM",
@@ -3574,7 +3577,7 @@ const response2ndRoute = {
                 "bearing_before": 157,
                 "location": [8.286897, 49.989726],
                 "modifier": "slight left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3585,40 +3588,40 @@ const response2ndRoute = {
                   "in": 4,
                   "entry": [true, true, true, true, false],
                   "bearings": [60, 120, 195, 270, 345],
-                  "location": [8.286897, 49.989726]
+                  "location": [8.286897, 49.989726],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [120, 300, 330],
-                  "location": [8.287704, 49.98942]
+                  "location": [8.287704, 49.98942],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 180, 300],
-                  "location": [8.287762, 49.989397]
+                  "location": [8.287762, 49.989397],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [15, 135, 300],
-                  "location": [8.2883, 49.989192]
+                  "location": [8.2883, 49.989192],
                 },
                 {
                   "out": 0,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [135, 210, 270, 315],
-                  "location": [8.28841, 49.989125]
-                }
+                  "location": [8.28841, 49.989125],
+                },
               ],
               "weight": 15.24,
               "duration": 144.7,
-              "distance": 180.8
+              "distance": 180.8,
             },
             {
               "geometry": "{lbpHu|qq@LFVPVNd@L",
@@ -3627,7 +3630,7 @@ const response2ndRoute = {
                 "bearing_before": 132,
                 "location": [8.288913, 49.988779],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3638,12 +3641,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 210, 315],
-                  "location": [8.288913, 49.988779]
-                }
+                  "location": [8.288913, 49.988779],
+                },
               ],
               "weight": 4.94,
               "duration": 47.4,
-              "distance": 59.3
+              "distance": 59.3,
             },
             {
               "geometry": "wibpH}zqq@p@sAZw@",
@@ -3652,7 +3655,7 @@ const response2ndRoute = {
                 "bearing_before": 192,
                 "location": [8.288627, 49.988281],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3663,12 +3666,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [15, 135, 315],
-                  "location": [8.288627, 49.988281]
-                }
+                  "location": [8.288627, 49.988281],
+                },
               ],
               "weight": 5.55,
               "duration": 53.3,
-              "distance": 66.6
+              "distance": 66.6,
             },
             {
               "geometry": "igbpHi_rq@~CxAd@f@",
@@ -3677,7 +3680,7 @@ const response2ndRoute = {
                 "bearing_before": 126,
                 "location": [8.289327, 49.987888],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3688,19 +3691,19 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [0, 120, 195, 315],
-                  "location": [8.289327, 49.987888]
+                  "location": [8.289327, 49.987888],
                 },
                 {
                   "out": 2,
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [15, 135, 210],
-                  "location": [8.28888, 49.987093]
-                }
+                  "location": [8.28888, 49.987093],
+                },
               ],
               "weight": 10.02,
               "duration": 96.1,
-              "distance": 120.2
+              "distance": 120.2,
             },
             {
               "geometry": "cabpHg{qq@jEqH",
@@ -3709,7 +3712,7 @@ const response2ndRoute = {
                 "bearing_before": 212,
                 "location": [8.288679, 49.986897],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3720,12 +3723,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [30, 135, 210],
-                  "location": [8.288679, 49.986897]
-                }
+                  "location": [8.288679, 49.986897],
+                },
               ],
               "weight": 13.11,
               "duration": 125.8,
-              "distance": 157.3
+              "distance": 157.3,
             },
             {
               "geometry": "wzapHydrq@NX",
@@ -3734,7 +3737,7 @@ const response2ndRoute = {
                 "bearing_before": 135,
                 "location": [8.290209, 49.985884],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3745,12 +3748,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 225, 315],
-                  "location": [8.290209, 49.985884]
-                }
+                  "location": [8.290209, 49.985884],
+                },
               ],
               "weight": 1.09,
               "duration": 10.5,
-              "distance": 13.1
+              "distance": 13.1,
             },
             {
               "geometry": "gzapH_drq@LSlEaIR^BB",
@@ -3759,7 +3762,7 @@ const response2ndRoute = {
                 "bearing_before": 225,
                 "location": [8.290078, 49.985802],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3770,19 +3773,19 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.290078, 49.985802]
+                  "location": [8.290078, 49.985802],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 135, 210, 315],
-                  "location": [8.290175, 49.985732]
-                }
+                  "location": [8.290175, 49.985732],
+                },
               ],
               "weight": 17.34,
               "duration": 153.3,
-              "distance": 191.7
+              "distance": 191.7,
             },
             {
               "geometry": "srapHqmrq@Xa@",
@@ -3791,7 +3794,7 @@ const response2ndRoute = {
                 "bearing_before": 222,
                 "location": [8.291612, 49.984584],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3802,12 +3805,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.291612, 49.984584]
-                }
+                  "location": [8.291612, 49.984584],
+                },
               ],
               "weight": 1.96,
               "duration": 15.7,
-              "distance": 19.6
+              "distance": 19.6,
             },
             {
               "geometry": "yqapHsnrq@JN",
@@ -3816,7 +3819,7 @@ const response2ndRoute = {
                 "bearing_before": 140,
                 "location": [8.291784, 49.984447],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3827,12 +3830,12 @@ const response2ndRoute = {
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [15, 135, 225, 315],
-                  "location": [8.291784, 49.984447]
-                }
+                  "location": [8.291784, 49.984447],
+                },
               ],
               "weight": 0.75,
               "duration": 7.2,
-              "distance": 9
+              "distance": 9,
             },
             {
               "geometry": "mqapHcnrq@Ta@R[NU\\k@|@wA",
@@ -3841,7 +3844,7 @@ const response2ndRoute = {
                 "bearing_before": 220,
                 "location": [8.291702, 49.984386],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "ref": "K 7",
@@ -3853,19 +3856,19 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true, true],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.291702, 49.984386]
+                  "location": [8.291702, 49.984386],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 135, 315],
-                  "location": [8.291865, 49.984279]
-                }
+                  "location": [8.291865, 49.984279],
+                },
               ],
               "weight": 12.61,
               "duration": 90.899999999,
-              "distance": 113.6
+              "distance": 113.6,
             },
             {
               "geometry": "wlapH{trq@HL\\n@",
@@ -3874,7 +3877,7 @@ const response2ndRoute = {
                 "bearing_before": 136,
                 "location": [8.292783, 49.98364],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3885,12 +3888,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [8.292783, 49.98364]
-                }
+                  "location": [8.292783, 49.98364],
+                },
               ],
               "weight": 3.15,
               "duration": 25.2,
-              "distance": 31.5
+              "distance": 31.5,
             },
             {
               "geometry": "okapH}rrq@HMNYN[NUHM",
@@ -3899,7 +3902,7 @@ const response2ndRoute = {
                 "bearing_before": 225,
                 "location": [8.29247, 49.983441],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3910,12 +3913,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [45, 135, 225],
-                  "location": [8.29247, 49.983441]
-                }
+                  "location": [8.29247, 49.983441],
+                },
               ],
               "weight": 4.43,
               "duration": 42.5,
-              "distance": 53.1
+              "distance": 53.1,
             },
             {
               "geometry": "kiapHevrq@fBfD",
@@ -3924,7 +3927,7 @@ const response2ndRoute = {
                 "bearing_before": 135,
                 "location": [8.292993, 49.983103],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3935,12 +3938,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 225, 315],
-                  "location": [8.292993, 49.983103]
-                }
+                  "location": [8.292993, 49.983103],
+                },
               ],
               "weight": 7.04,
               "duration": 67.6,
-              "distance": 84.5
+              "distance": 84.5,
             },
             {
               "geometry": "cfapH}prq@tA{BRc@t@mAl@kA",
@@ -3949,7 +3952,7 @@ const response2ndRoute = {
                 "bearing_before": 225,
                 "location": [8.292146, 49.982575],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3960,12 +3963,12 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [45, 135, 315],
-                  "location": [8.292146, 49.982575]
-                }
+                  "location": [8.292146, 49.982575],
+                },
               ],
               "weight": 16.11,
               "duration": 128.8,
-              "distance": 161.1
+              "distance": 161.1,
             },
             {
               "geometry": "u_apHwzrq@BFHZ@D",
@@ -3974,7 +3977,7 @@ const response2ndRoute = {
                 "bearing_before": 133,
                 "location": [8.293724, 49.981545],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -3985,12 +3988,12 @@ const response2ndRoute = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [60, 240, 315],
-                  "location": [8.293724, 49.981545]
-                }
+                  "location": [8.293724, 49.981545],
+                },
               ],
               "weight": 1.79,
               "duration": 14.4,
-              "distance": 18
+              "distance": 18,
             },
             {
               "geometry":
@@ -4000,7 +4003,7 @@ const response2ndRoute = {
                 "bearing_before": 239,
                 "location": [8.293505, 49.981467],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -4011,61 +4014,61 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [false, true, true],
                   "bearings": [60, 150, 240],
-                  "location": [8.293505, 49.981467]
+                  "location": [8.293505, 49.981467],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false],
                   "bearings": [150, 330],
-                  "location": [8.293536, 49.981431]
+                  "location": [8.293536, 49.981431],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [60, 135, 240, 330],
-                  "location": [8.29461, 49.980112]
+                  "location": [8.29461, 49.980112],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [30, 135, 315],
-                  "location": [8.295944, 49.979231]
+                  "location": [8.295944, 49.979231],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.296545, 49.978845]
+                  "location": [8.296545, 49.978845],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [45, 135, 225, 315],
-                  "location": [8.297218, 49.978448]
+                  "location": [8.297218, 49.978448],
                 },
                 {
                   "out": 1,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [45, 135, 315],
-                  "location": [8.297822, 49.97807]
+                  "location": [8.297822, 49.97807],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [8.298439, 49.977679]
-                }
+                  "location": [8.298439, 49.977679],
+                },
               ],
               "weight": 57.739999999,
               "duration": 477.499999999,
-              "distance": 596.7
+              "distance": 596.7,
             },
             {
               "geometry": "{e`pHuzsq@",
@@ -4074,7 +4077,7 @@ const response2ndRoute = {
                 "bearing_before": 136,
                 "location": [8.298834, 49.977417],
                 "modifier": "left",
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "walking",
               "driving_side": "right",
@@ -4084,25 +4087,25 @@ const response2ndRoute = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [316],
-                  "location": [8.298834, 49.977417]
-                }
+                  "location": [8.298834, 49.977417],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Wallaustraße, Im Leimen",
           "weight": 498.25,
           "duration": 4412.9,
-          "distance": 5514.6
-        }
+          "distance": 5514.6,
+        },
       ],
       "weight_name": "routability",
       "weight": 498.25,
       "duration": 4412.9,
-      "distance": 5514.6
-    }
+      "distance": 5514.6,
+    },
   ],
   "waypoints": [
     {
@@ -4110,16 +4113,16 @@ const response2ndRoute = {
           "LUwbgOKVl4gCAAAAPQEAAOsDAAAAAAAAJ8U5PgcJ_kG1d8hCAAAAAAEAAAD-AAAAIgMAAAAAAABKAAAA4gB-ABci-wI_AH4AsSH7AgIAvxN7Bvp4",
       "distance": 16.283393665,
       "name": "Wallaustraße",
-      "location": [8.257762, 50.012695]
+      "location": [8.257762, 50.012695],
     },
     {
       "hint":
           "6ucsgEOFlYBxAQAA-gIAAAAAAAAAAAAAdpUiQqBvp0IAAAAAAAAAAEUBAACeAgAAAAAAAAAAAABKAAAAUqF-AEmY-gLZoX4AnZj6AgAAfwh7Bvp4",
       "distance": 13.456381067,
       "name": "Töpferweg",
-      "location": [8.298834, 49.977417]
-    }
-  ]
+      "location": [8.298834, 49.977417],
+    },
+  ],
 };
 
 const responseWithoutGeometry = {
@@ -4136,7 +4139,7 @@ const responseWithoutGeometry = {
                 "bearing_after": 355,
                 "bearing_before": 0,
                 "location": [13.388798, 52.517033],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4146,103 +4149,103 @@ const responseWithoutGeometry = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [355],
-                  "location": [13.388798, 52.517033]
+                  "location": [13.388798, 52.517033],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.38878, 52.517149]
+                  "location": [13.38878, 52.517149],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 90, 180, 270],
-                  "location": [13.388643, 52.518027]
+                  "location": [13.388643, 52.518027],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true, false],
                   "bearings": [30, 90, 180, 270, 315],
-                  "location": [13.388544, 52.518716]
+                  "location": [13.388544, 52.518716],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true, false],
                   "bearings": [0, 165, 180, 285],
-                  "location": [13.388255, 52.520395]
+                  "location": [13.388255, 52.520395],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [0, 45, 180, 225],
-                  "location": [13.388022, 52.521758]
+                  "location": [13.388022, 52.521758],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 225],
-                  "location": [13.387885, 52.522524]
+                  "location": [13.387885, 52.522524],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.387799, 52.523401]
+                  "location": [13.387799, 52.523401],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["none"]
+                      "indications": ["none"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [0, 180, 270],
-                  "location": [13.387748, 52.523877]
+                  "location": [13.387748, 52.523877],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [0, 90, 180],
-                  "location": [13.3877, 52.524433]
+                  "location": [13.3877, 52.524433],
                 },
                 {
                   "out": 3,
                   "in": 1,
                   "entry": [true, false, false, true],
                   "bearings": [105, 165, 300, 345],
-                  "location": [13.387337, 52.526239]
+                  "location": [13.387337, 52.526239],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [0, 105, 165, 255],
-                  "location": [13.387283, 52.526386]
-                }
+                  "location": [13.387283, 52.526386],
+                },
               ],
               "weight": 138.3,
               "duration": 135.5,
-              "distance": 1136.9
+              "distance": 1136.9,
             },
             {
               "geometry":
@@ -4252,7 +4255,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 8,
                 "location": [13.387228, 52.527168],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4263,54 +4266,54 @@ const responseWithoutGeometry = {
                   "in": 1,
                   "entry": [true, false, true, true],
                   "bearings": [75, 195, 255, 330],
-                  "location": [13.387228, 52.527168]
+                  "location": [13.387228, 52.527168],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.389147, 52.527549]
+                  "location": [13.389147, 52.527549],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 330],
-                  "location": [13.391396, 52.528032]
+                  "location": [13.391396, 52.528032],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [75, 165, 255],
-                  "location": [13.392425, 52.528233]
+                  "location": [13.392425, 52.528233],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [75, 120, 255, 330],
-                  "location": [13.393814, 52.528526]
+                  "location": [13.393814, 52.528526],
                 },
                 {
                   "out": 0,
                   "in": 1,
                   "entry": [true, false, true],
                   "bearings": [75, 255, 345],
-                  "location": [13.395724, 52.528996]
+                  "location": [13.395724, 52.528996],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [90, 180, 255, 345],
-                  "location": [13.397565, 52.529429]
-                }
+                  "location": [13.397565, 52.529429],
+                },
               ],
               "weight": 124.6,
               "duration": 124.6,
-              "distance": 750.1
+              "distance": 750.1,
             },
             {
               "geometry": "}sr_IevwpA",
@@ -4318,7 +4321,7 @@ const responseWithoutGeometry = {
                 "bearing_after": 0,
                 "bearing_before": 86,
                 "location": [13.39763, 52.529432],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4328,18 +4331,18 @@ const responseWithoutGeometry = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [266],
-                  "location": [13.39763, 52.529432]
-                }
+                  "location": [13.39763, 52.529432],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Friedrichstraße, Torstraße",
           "weight": 262.9,
           "duration": 260.1,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [
@@ -4350,7 +4353,7 @@ const responseWithoutGeometry = {
                 "bearing_after": 85,
                 "bearing_before": 0,
                 "location": [13.39763, 52.529432],
-                "type": "depart"
+                "type": "depart",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4360,109 +4363,109 @@ const responseWithoutGeometry = {
                   "out": 0,
                   "entry": [true],
                   "bearings": [85],
-                  "location": [13.39763, 52.529432]
+                  "location": [13.39763, 52.529432],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [90, 150, 270, 330],
-                  "location": [13.401337, 52.529605]
+                  "location": [13.401337, 52.529605],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, true],
                   "bearings": [90, 165, 285],
-                  "location": [13.401541, 52.529618]
+                  "location": [13.401541, 52.529618],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 195, 285],
-                  "location": [13.405456, 52.529405]
+                  "location": [13.405456, 52.529405],
                 },
                 {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, true, false],
                   "bearings": [30, 105, 210, 285],
-                  "location": [13.409405, 52.528711]
+                  "location": [13.409405, 52.528711],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [105, 165, 285],
-                  "location": [13.409967, 52.528591]
+                  "location": [13.409967, 52.528591],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, false],
                   "bearings": [105, 165, 285, 330],
-                  "location": [13.410146, 52.52855]
+                  "location": [13.410146, 52.52855],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 210, 285],
-                  "location": [13.411852, 52.528201]
-                }
+                  "location": [13.411852, 52.528201],
+                },
               ],
               "weight": 203.400000000,
               "duration": 203.400000000,
-              "distance": 1275.6
+              "distance": 1275.6,
             },
             {
               "geometry": "gdr_Iie{pAJS@C@A@CJSWWEECEECOQ",
@@ -4471,7 +4474,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 133,
                 "location": [13.415405, 52.526922],
                 "modifier": "left",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4481,64 +4484,64 @@ const responseWithoutGeometry = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415405, 52.526922]
+                  "location": [13.415405, 52.526922],
                 },
                 {
                   "lanes": [
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [30, 135, 210, 315],
-                  "location": [13.415657, 52.52677]
-                }
+                  "location": [13.415657, 52.52677],
+                },
               ],
               "weight": 12,
               "duration": 12,
-              "distance": 60.6
+              "distance": 60.6,
             },
             {
               "geometry": "aer_Iuh{pAe@a@CCUQaCkB{@y@GESO",
@@ -4547,7 +4550,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 32,
                 "location": [13.415945, 52.527047],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4557,27 +4560,27 @@ const responseWithoutGeometry = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight"]
-                    }
+                      "indications": ["straight"],
+                    },
                   ],
                   "out": 0,
                   "in": 2,
                   "entry": [true, false, false, true],
                   "bearings": [30, 120, 210, 315],
-                  "location": [13.415945, 52.527047]
-                }
+                  "location": [13.415945, 52.527047],
+                },
               ],
               "weight": 18.2,
               "duration": 18.2,
-              "distance": 177.6
+              "distance": 177.6,
             },
             {
               "geometry":
@@ -4587,7 +4590,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 28,
                 "location": [13.417166, 52.528458],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4598,26 +4601,26 @@ const responseWithoutGeometry = {
                   "in": 2,
                   "entry": [true, true, false, false],
                   "bearings": [30, 90, 210, 315],
-                  "location": [13.417166, 52.528458]
+                  "location": [13.417166, 52.528458],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [false, true, true, false],
                   "bearings": [45, 120, 225, 285],
-                  "location": [13.423592, 52.528206]
+                  "location": [13.423592, 52.528206],
                 },
                 {
                   "out": 1,
                   "in": 3,
                   "entry": [true, true, false, false],
                   "bearings": [45, 105, 210, 300],
-                  "location": [13.423868, 52.528136]
-                }
+                  "location": [13.423868, 52.528136],
+                },
               ],
               "weight": 57,
               "duration": 57,
-              "distance": 548.7
+              "distance": 548.7,
             },
             {
               "geometry":
@@ -4627,7 +4630,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 67,
                 "location": [13.424993, 52.528068],
                 "modifier": "right",
-                "type": "turn"
+                "type": "turn",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4638,33 +4641,33 @@ const responseWithoutGeometry = {
                   "in": 2,
                   "entry": [true, true, false, true],
                   "bearings": [60, 150, 255, 345],
-                  "location": [13.424993, 52.528068]
+                  "location": [13.424993, 52.528068],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [120, 225, 300],
-                  "location": [13.425818, 52.52763]
+                  "location": [13.425818, 52.52763],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.428041, 52.526565]
+                  "location": [13.428041, 52.526565],
                 },
                 {
                   "out": 0,
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 225, 315],
-                  "location": [13.429337, 52.525737]
-                }
+                  "location": [13.429337, 52.525737],
+                },
               ],
               "weight": 52.400000000,
               "duration": 52.400000000,
-              "distance": 510.1
+              "distance": 510.1,
             },
             {
               "geometry": "_xq_Iac~pAFAL?J@HBFBr@XNH^NHDTJNFTRRJd@LXFB@B?VB",
@@ -4673,7 +4676,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 163,
                 "location": [13.430405, 52.524964],
                 "modifier": "straight",
-                "type": "new name"
+                "type": "new name",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4684,12 +4687,12 @@ const responseWithoutGeometry = {
                   "in": 2,
                   "entry": [true, true, false],
                   "bearings": [135, 180, 345],
-                  "location": [13.430405, 52.524964]
-                }
+                  "location": [13.430405, 52.524964],
+                },
               ],
               "weight": 20.6,
               "duration": 20.6,
-              "distance": 196.6
+              "distance": 196.6,
             },
             {
               "geometry": "mmq_Io~}pA@V?N?F@jA@dB",
@@ -4698,7 +4701,7 @@ const responseWithoutGeometry = {
                 "bearing_before": 189,
                 "location": [13.429678, 52.523269],
                 "modifier": "right",
-                "type": "continue"
+                "type": "continue",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4708,31 +4711,31 @@ const responseWithoutGeometry = {
                   "lanes": [
                     {
                       "valid": false,
-                      "indications": ["left"]
+                      "indications": ["left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight", "left"]
+                      "indications": ["straight", "left"],
                     },
                     {
                       "valid": false,
-                      "indications": ["straight"]
+                      "indications": ["straight"],
                     },
                     {
                       "valid": true,
-                      "indications": ["straight", "right"]
-                    }
+                      "indications": ["straight", "right"],
+                    },
                   ],
                   "out": 3,
                   "in": 0,
                   "entry": [false, false, true, true],
                   "bearings": [15, 90, 180, 270],
-                  "location": [13.429678, 52.523269]
-                }
+                  "location": [13.429678, 52.523269],
+                },
               ],
               "weight": 6.9,
               "duration": 6.9,
-              "distance": 76.4
+              "distance": 76.4,
             },
             {
               "geometry": "gmq_Imw}pA",
@@ -4740,7 +4743,7 @@ const responseWithoutGeometry = {
                 "bearing_after": 0,
                 "bearing_before": 268,
                 "location": [13.428554, 52.523239],
-                "type": "arrive"
+                "type": "arrive",
               },
               "mode": "driving",
               "driving_side": "right",
@@ -4750,25 +4753,25 @@ const responseWithoutGeometry = {
                   "in": 0,
                   "entry": [true],
                   "bearings": [88],
-                  "location": [13.428554, 52.523239]
-                }
+                  "location": [13.428554, 52.523239],
+                },
               ],
               "weight": 0,
               "duration": 0,
-              "distance": 0
-            }
+              "distance": 0,
+            },
           ],
           "summary": "Torstraße, Friedenstraße",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
-        }
+          "distance": 2845.5,
+        },
       ],
       "weight_name": "routability",
       "weight": 633.4,
       "duration": 630.6,
-      "distance": 4732.5
-    }
+      "distance": 4732.5,
+    },
   ],
   "waypoints": [
     {
@@ -4776,23 +4779,23 @@ const responseWithoutGeometry = {
           "XP8JgPUvmoUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAAC8-QAA_kvMAKlYIQM8TMwArVghAwAA7wqGF9Uq",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "hint":
           "7jfdgR8ZiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAAC8-QAAfm7MABiJIQOCbswA_4ghAwAAXwWGF9Uq",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "hint":
           "WCoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAAC8-QAASufMAOdwIQNL58wA03AhAwQAvxCGF9Uq",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };
 
 const responseTripWithoutGeometry = {
@@ -4805,28 +4808,28 @@ const responseTripWithoutGeometry = {
           "summary": "",
           "weight": 263.2,
           "duration": 260.4,
-          "distance": 1887
+          "distance": 1887,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 370.5,
           "duration": 370.5,
-          "distance": 2845.5
+          "distance": 2845.5,
         },
         {
           "steps": [],
           "summary": "",
           "weight": 339.8,
           "duration": 338.6,
-          "distance": 3279.8
-        }
+          "distance": 3279.8,
+        },
       ],
       "weight_name": "routability",
       "weight": 973.5,
       "duration": 969.5,
-      "distance": 8012.3
-    }
+      "distance": 8012.3,
+    },
   ],
   "waypoints": [
     {
@@ -4836,7 +4839,7 @@ const responseTripWithoutGeometry = {
           "TP8JgEs9moUXAAAABQAAAAAAAAAgAAAAIXRPQYXNK0AAAAAAcPePQQsAAAADAAAAAAAAABAAAABo-gAA_kvMAKlYIQM8TMwArVghAwAA7wogccr9",
       "distance": 4.231521214,
       "name": "Friedrichstraße",
-      "location": [13.388798, 52.517033]
+      "location": [13.388798, 52.517033],
     },
     {
       "waypoint_index": 1,
@@ -4845,7 +4848,7 @@ const responseTripWithoutGeometry = {
           "fTvdgTsuiocGAAAACgAAAAAAAAB3AAAAppONQOodwkAAAAAA8TeEQgYAAAAKAAAAAAAAAHcAAABo-gAAfm7MABiJIQOCbswA_4ghAwAAXwUgccr9",
       "distance": 2.795148358,
       "name": "Torstraße",
-      "location": [13.39763, 52.529432]
+      "location": [13.39763, 52.529432],
     },
     {
       "waypoint_index": 2,
@@ -4854,7 +4857,7 @@ const responseTripWithoutGeometry = {
           "WyoYgP___38fAAAAUQAAACYAAAAeAAAAeosKQlNOX0Jq6iZCjsMGQh8AAABRAAAAJgAAAB4AAABo-gAASufMAOdwIQNL58wA03AhAwQAvxAgccr9",
       "distance": 2.226580806,
       "name": "Platz der Vereinten Nationen",
-      "location": [13.428554, 52.523239]
-    }
-  ]
+      "location": [13.428554, 52.523239],
+    },
+  ],
 };

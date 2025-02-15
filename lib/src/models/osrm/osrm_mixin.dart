@@ -10,8 +10,7 @@ import 'package:routing_client_dart/src/models/translation.dart';
 mixin OSRMHelper {
   Map<String, dynamic> loadInstructionHelperJson({
     Languages language = Languages.en,
-  }) =>
-      json.decode(translation)[language.code] as Map<String, dynamic>;
+  }) => json.decode(translation)[language.code] as Map<String, dynamic>;
 
   /// build instruction for given [road] and [instructionsHelper]
   ///
@@ -40,14 +39,10 @@ mixin OSRMHelper {
     final List<RouteInstruction> instructions = [];
     legs.asMap().forEach((indexLeg, leg) {
       for (var step in leg.steps) {
-        final instruction = buildInstruction(
-          step,
-          instructionsHelper,
-          {
-            "legIndex": indexLeg,
-            "legCount": legCounts,
-          },
-        );
+        final instruction = buildInstruction(step, instructionsHelper, {
+          "legIndex": indexLeg,
+          "legCount": legCounts,
+        });
         RouteInstruction roadInstruction = RouteInstruction(
           distance: step.distance,
           duration: step.duration,
@@ -71,30 +66,39 @@ mixin OSRMHelper {
       type = 'turn';
     }
 
-    var instructionObject = (instructionsV5[type]
-        as Map<String, dynamic>)['default'] as Map<String, dynamic>;
-    final omitSide = type == 'off ramp' &&
+    var instructionObject =
+        (instructionsV5[type] as Map<String, dynamic>)['default']
+            as Map<String, dynamic>;
+    final omitSide =
+        type == 'off ramp' &&
         ((step.maneuver.modifier?.indexOf(step.drivingSide) ?? 0) >= 0);
     if (step.maneuver.modifier != null &&
-        (instructionsV5[type] as Map<String, dynamic>)
-            .containsKey(step.maneuver.modifier!) &&
+        (instructionsV5[type] as Map<String, dynamic>).containsKey(
+          step.maneuver.modifier!,
+        ) &&
         !omitSide) {
-      instructionObject = (instructionsV5[type]
-              as Map<String, dynamic>)[step.maneuver.modifier!]
-          as Map<String, dynamic>;
+      instructionObject =
+          (instructionsV5[type] as Map<String, dynamic>)[step
+                  .maneuver
+                  .modifier!]
+              as Map<String, dynamic>;
     }
     String? laneInstruction;
     switch (step.maneuver.maneuverType) {
       case 'use lane':
         final lane = laneConfig(step);
         if (lane != null) {
-          laneInstruction = (((instructionsV5[type]
-                  as Map<String, dynamic>)['constants']
-              as Map<String, dynamic>)['lanes'] as Map<String, String>)[lane];
+          laneInstruction =
+              (((instructionsV5[type] as Map<String, dynamic>)['constants']
+                      as Map<String, dynamic>)['lanes']
+                  as Map<String, String>)[lane];
         } else {
-          instructionObject = ((instructionsV5[type]
-                  as Map<String, dynamic>)[step.maneuver.maneuverType]
-              as Map<String, dynamic>)['no_lanes'] as Map<String, dynamic>;
+          instructionObject =
+              ((instructionsV5[type] as Map<String, dynamic>)[step
+                          .maneuver
+                          .maneuverType]
+                      as Map<String, dynamic>)['no_lanes']
+                  as Map<String, dynamic>;
         }
         break;
       case 'rotary':
@@ -163,8 +167,10 @@ mixin OSRMHelper {
     String modifierInstruction = "";
     if (step.maneuver.modifier != null) {
       modifierInstruction =
-          (instructionsV5["constants"] as Map<String, dynamic>)["modifier"]
-              [step.maneuver.modifier] as String;
+          (instructionsV5["constants"] as Map<String, dynamic>)["modifier"][step
+                  .maneuver
+                  .modifier]
+              as String;
     }
 
     String nthWaypoint = "";
@@ -178,7 +184,9 @@ mixin OSRMHelper {
     String exitOrdinalise = "";
     if (step.maneuver.exit != null) {
       exitOrdinalise = ordinalize(
-          instructionsV5: instructionsV5, key: step.maneuver.exit.toString());
+        instructionsV5: instructionsV5,
+        key: step.maneuver.exit.toString(),
+      );
     }
 
     return tokenize(instruction, {

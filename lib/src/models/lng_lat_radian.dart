@@ -7,14 +7,10 @@ typedef LocationRadians = double;
 class LngLatRadians {
   final LocationRadians latitude;
   final LocationRadians longitude;
-  LngLatRadians({
-    required this.latitude,
-    required this.longitude,
-  });
-  LngLatRadians.fromLngLat({
-    required LngLat location,
-  })  : latitude = location.lat.radian,
-        longitude = location.lng.radian;
+  LngLatRadians({required this.latitude, required this.longitude});
+  LngLatRadians.fromLngLat({required LngLat location})
+    : latitude = location.lat.radian,
+      longitude = location.lng.radian;
 
   LngLatRadians operator +(LngLatRadians right) {
     return LngLatRadians(
@@ -30,10 +26,8 @@ class LngLatRadians {
     );
   }
 
-  LngLat toLngLat() => LngLat(
-        lng: longitude.toDegree(),
-        lat: latitude.toDegree(),
-      );
+  LngLat toLngLat() =>
+      LngLat(lng: longitude.toDegree(), lat: latitude.toDegree());
 }
 
 extension on LocationRadians {
@@ -41,9 +35,7 @@ extension on LocationRadians {
 }
 
 extension ExtLngLat on LngLat {
-  LngLatRadians get lngLatRadian => LngLatRadians.fromLngLat(
-        location: this,
-      );
+  LngLatRadians get lngLatRadian => LngLatRadians.fromLngLat(location: this);
 }
 
 extension on double {

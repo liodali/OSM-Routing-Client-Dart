@@ -7,63 +7,36 @@ import 'package:routing_client_dart/src/utilities/valhalla_utilities.dart';
 void main() {
   test('test assert empty waypoints in valhalla header', () {
     expect(
-        () => ValhallaRequest(waypoints: []), throwsA(isA<AssertionError>()));
-    expect(
-      () => ValhallaRequest(waypoints: [
-        LngLat(
-          lng: -73.991379,
-          lat: 40.730930,
-        )
-      ]),
-      throwsA(
-        isA<AssertionError>(),
-      ),
+      () => ValhallaRequest(waypoints: []),
+      throwsA(isA<AssertionError>()),
     );
     expect(
-      () => ValhallaRequest(waypoints: [
-        LngLat(
-          lng: -73.991379,
-          lat: 40.730930,
-        ),
-        LngLat(
-          lng: -73.991379,
-          lat: 40.730930,
-        ),
-        LngLat(
-          lng: -73.991379,
-          lat: 40.730930,
-        )
-      ]),
-      throwsA(
-        isA<AssertionError>(),
+      () =>
+          ValhallaRequest(waypoints: [LngLat(lng: -73.991379, lat: 40.730930)]),
+      throwsA(isA<AssertionError>()),
+    );
+    expect(
+      () => ValhallaRequest(
+        waypoints: [
+          LngLat(lng: -73.991379, lat: 40.730930),
+          LngLat(lng: -73.991379, lat: 40.730930),
+          LngLat(lng: -73.991379, lat: 40.730930),
+        ],
       ),
+      throwsA(isA<AssertionError>()),
     );
   });
   test('test valhalla header', () {
     final header = ValhallaRequest(
       waypoints: [
-        LngLat(
-          lng: -73.991379,
-          lat: 40.730930,
-        ),
-        LngLat(
-          lng: -73.991562,
-          lat: 40.749706,
-        ),
+        LngLat(lng: -73.991379, lat: 40.730930),
+        LngLat(lng: -73.991562, lat: 40.749706),
       ],
     );
     expect(header.encodeHeader(), {
       'locations': [
-        {
-          'lat': 40.730930,
-          'lon': -73.991379,
-          'type': 'break',
-        },
-        {
-          'lat': 40.749706,
-          'lon': -73.991562,
-          'type': 'break',
-        },
+        {'lat': 40.730930, 'lon': -73.991379, 'type': 'break'},
+        {'lat': 40.749706, 'lon': -73.991562, 'type': 'break'},
       ],
       'costing': 'auto',
       'units': 'km',
@@ -78,14 +51,8 @@ void main() {
     final header = ValhallaRequest(
       id: 'valhalla_directions',
       waypoints: [
-        LngLat(
-          lng: 8.239853382110597,
-          lat: 50.00949382441468,
-        ),
-        LngLat(
-          lng: 8.24029862880707,
-          lat: 50.00832510754319,
-        ),
+        LngLat(lng: 8.239853382110597, lat: 50.00949382441468),
+        LngLat(lng: 8.24029862880707, lat: 50.00832510754319),
       ],
       costing: Costing.pedestrian,
       costingOption: PedestrianCostingOption(
@@ -113,16 +80,8 @@ void main() {
 
 final _encodedReques1 = {
   "locations": [
-    {
-      "lon": 8.239853382110597,
-      "lat": 50.00949382441468,
-      "type": "break",
-    },
-    {
-      "lon": 8.24029862880707,
-      "lat": 50.00832510754319,
-      "type": "break",
-    }
+    {"lon": 8.239853382110597, "lat": 50.00949382441468, "type": "break"},
+    {"lon": 8.24029862880707, "lat": 50.00832510754319, "type": "break"},
   ],
   "costing": "pedestrian",
   "costing_options": {
@@ -143,8 +102,8 @@ final _encodedReques1 = {
       "max_hiking_difficulty": 1,
       "use_lit": 0,
       "transit_start_end_max_distance": 2145,
-      "transit_transfer_max_distance": 800
-    }
+      "transit_transfer_max_distance": 800,
+    },
   },
   "exclude_polygons": [],
   "units": "km",
@@ -152,5 +111,5 @@ final _encodedReques1 = {
   "directions_type": "instructions",
   "id": "valhalla_directions",
   "format": "json",
-  "language": "de-DE"
+  "language": "de-DE",
 };

@@ -1,6 +1,6 @@
 name: routing_client_dart
 description: Dart Package for Routing Client Api ( support OSRM/Valhalla project )
-version: 1.0.6
+version: 1.0.7
 topics:
   - osm
   - routing
@@ -9,7 +9,7 @@ topics:
 homepage: https://github.com/liodali/OSM-Routing-Client-Dart
 
 environment:
-  sdk: ">=3.5.1 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
   # flutter:
@@ -27,14 +27,14 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
-flutter:
+# flutter:
 
   # To add assets to your package, add an assets section, like this:
-  assets:
-      - packages/routing_client_dart/src/assets/en.json
-      - packages/routing_client_dart/src/assets/de.json
-      - packages/routing_client_dart/src/assets/es.json
-      - packages/routing_client_dart/src/assets/ar.json
+  # assets:
+  #     - packages/routing_client_dart/src/assets/en.json
+  #     - packages/routing_client_dart/src/assets/de.json
+  #     - packages/routing_client_dart/src/assets/es.json
+  #     - packages/routing_client_dart/src/assets/ar.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #

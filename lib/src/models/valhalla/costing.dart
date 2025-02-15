@@ -6,5 +6,5 @@ enum Costing {
   motorcycle,
   bicycle,
   pedestrian,
-  multimodel;
+  multimodel,
 }

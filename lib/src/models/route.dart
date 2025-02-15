@@ -25,12 +25,12 @@ class Route {
     this.polyline = const <LngLat>[],
   });
   const Route.empty()
-      : distance = 0.0,
-        duration = 0.0,
-        polylineEncoded = '',
-        instructions = const <RouteInstruction>[],
-        alternativesRoads = null,
-        polyline = const <LngLat>[];
+    : distance = 0.0,
+      duration = 0.0,
+      polylineEncoded = '',
+      instructions = const <RouteInstruction>[],
+      alternativesRoads = null,
+      polyline = const <LngLat>[];
 
   Route copyWith({
     double? distance,
@@ -39,15 +39,14 @@ class Route {
     List<LngLat>? polyline,
     List<Route>? alternativesRoads,
     List<RouteInstruction>? instructions,
-  }) =>
-      Route(
-        distance: distance ?? this.distance,
-        duration: duration ?? this.duration,
-        polylineEncoded: polylineEncoded ?? this.polylineEncoded,
-        polyline: polyline ?? this.polyline,
-        alternativesRoads: alternativesRoads ?? this.alternativesRoads,
-        instructions: instructions ?? this.instructions,
-      );
+  }) => Route(
+    distance: distance ?? this.distance,
+    duration: duration ?? this.duration,
+    polylineEncoded: polylineEncoded ?? this.polylineEncoded,
+    polyline: polyline ?? this.polyline,
+    alternativesRoads: alternativesRoads ?? this.alternativesRoads,
+    instructions: instructions ?? this.instructions,
+  );
 }
 
 class RouteInstruction {

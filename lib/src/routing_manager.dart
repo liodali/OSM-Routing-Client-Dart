@@ -35,22 +35,17 @@ class RoutingManager {
   final RoutingManagerConfiguration configuration;
   final OSRMRoutingService _osrmService;
   final ValhallaRoutingService _valhallaRoutingService;
-  RoutingManager({
-    this.configuration = const RoutingManagerConfiguration(),
-  })  : _osrmService = OSRMRoutingService.dioClient(
-          client: configuration.osrmServerDioClient ??
-              Dio(
-                BaseOptions(baseUrl: oSRMServer),
-              ),
-        ),
-        _valhallaRoutingService = ValhallaRoutingService.dioClient(
-          client: configuration.valhallaServerDioClient ??
-              Dio(
-                BaseOptions(
-                  baseUrl: osmValhallaServer,
-                ),
-              ),
-        );
+  RoutingManager({this.configuration = const RoutingManagerConfiguration()})
+    : _osrmService = OSRMRoutingService.dioClient(
+        client:
+            configuration.osrmServerDioClient ??
+            Dio(BaseOptions(baseUrl: oSRMServer)),
+      ),
+      _valhallaRoutingService = ValhallaRoutingService.dioClient(
+        client:
+            configuration.valhallaServerDioClient ??
+            Dio(BaseOptions(baseUrl: osmValhallaServer)),
+      );
 
   /// [getRoute]
   ///
@@ -71,14 +66,11 @@ class RoutingManager {
   /// [source] and [destination] must be provided.
   ///
   ///
-  Future<Route> getRoute({
-    required BaseRequest request,
-  }) =>
-      switch (request) {
-        OSRMRequest _ => _osrmService.getOSRMRoad(request),
-        ValhallaRequest _ => _valhallaRoutingService.getValhallaRoad(request),
-        _ => Future.value(const Route.empty()),
-      };
+  Future<Route> getRoute({required BaseRequest request}) => switch (request) {
+    OSRMRequest _ => _osrmService.getOSRMRoad(request),
+    ValhallaRequest _ => _valhallaRoutingService.getValhallaRoad(request),
+    _ => Future.value(const Route.empty()),
+  };
 
   /// [isOnPath]
   ///
@@ -95,9 +87,7 @@ class RoutingManager {
         'we cannot provide next instruction where [polylines] or/and [polylineEncoded]  in roads is null',
       );
     } else if (road.polyline.isNullOrEmpty && road.polylineEncoded != null) {
-      polyline = road.polylineEncoded?.decodeGeometry(
-        precision: precision,
-      );
+      polyline = road.polylineEncoded?.decodeGeometry(precision: precision);
     }
     final location = currentLocation.alignWithPrecision(precision: precision);
 
@@ -151,10 +141,13 @@ class RoutingManager {
     final nextLocation = polyline[indexOfNextLocation];
 
     var currentInstruction = instructions.cast<RouteInstruction?>().firstWhere(
-        (element) => element != null && element.location == nextLocation,
-        orElse: () => null);
-    currentInstruction ??=
-        closeInstructionToLocation(instructions, nextLocation);
+      (element) => element != null && element.location == nextLocation,
+      orElse: () => null,
+    );
+    currentInstruction ??= closeInstructionToLocation(
+      instructions,
+      nextLocation,
+    );
 
     if (currentInstruction == null) {
       return null;
@@ -197,9 +190,7 @@ extension RoadManagerUtils on RoutingManager {
 
     double toleranceCalc = tolerance / earthRadius;
     double havTolerance = MathUtil.hav(toleranceCalc);
-    final lngLatRadian = LngLatRadians.fromLngLat(
-      location: location,
-    );
+    final lngLatRadian = LngLatRadians.fromLngLat(location: location);
     final prev = polylines[closed ? polylines.length - 1 : 0];
     var prevRadian = prev.lngLatRadian;
     var idx = 0;
@@ -224,14 +215,11 @@ extension RoadManagerUtils on RoutingManager {
     } else {
       final (minAcceptable, maxAcceptable) = (
         lngLatRadian.latitude - toleranceCalc,
-        lngLatRadian.latitude + toleranceCalc
+        lngLatRadian.latitude + toleranceCalc,
       );
       var y1 = MathUtil.mercator(prevRadian.latitude);
       var y3 = MathUtil.mercator(lngLatRadian.latitude);
-      final xtry = List.generate(
-        3,
-        (index) => 0.0,
-      );
+      final xtry = List.generate(3, (index) => 0.0);
       for (final lngLat in polylines) {
         final point2 = lngLat.lngLatRadian;
         final y2 = MathUtil.mercator(point2.latitude);
@@ -253,14 +241,18 @@ extension RoadManagerUtils on RoutingManager {
           for (final x3 in xtry) {
             double dy = y2 - y1;
             double len2 = x2 * x2 + dy * dy;
-            double t = len2 <= 0
-                ? 0
-                : MathUtil.clamp((x3 * x2 + (y3 - y1) * dy) / len2, 0, 1);
+            double t =
+                len2 <= 0
+                    ? 0
+                    : MathUtil.clamp((x3 * x2 + (y3 - y1) * dy) / len2, 0, 1);
             double xClosest = t * x2;
             double yClosest = y1 + t * dy;
             double latClosest = MathUtil.inverseMercator(yClosest);
             double havDist = MathUtil.havDistance(
-                lngLatRadian.latitude, latClosest, x3 - xClosest);
+              lngLatRadian.latitude,
+              latClosest,
+              x3 - xClosest,
+            );
             if (havDist < havTolerance) {
               return max(0, idx - 1);
             }
@@ -278,16 +270,28 @@ extension RoadManagerUtils on RoutingManager {
     List<RouteInstruction> instructions,
     LngLat location,
   ) {
-    final instructionWithDistance = instructions
-        .map((instruction) =>
-            (instruction, location.distance(location: instruction.location)))
-        .toList()
-      ..sort((a, b) => a.$2.compareTo(b.$2));
+    final instructionWithDistance =
+        instructions
+            .map(
+              (instruction) => (
+                instruction,
+                location.distance(location: instruction.location),
+              ),
+            )
+            .toList()
+          ..sort((a, b) => a.$2.compareTo(b.$2));
     return instructionWithDistance.first.$1;
   }
 
-  bool isOnSegmentGC(double lat1, double lng1, double lat2, double lng2,
-      double lat3, double lng3, double havTolerance) {
+  bool isOnSegmentGC(
+    double lat1,
+    double lng1,
+    double lat2,
+    double lng2,
+    double lat3,
+    double lng3,
+    double havTolerance,
+  ) {
     double havDist13 = MathUtil.havDistance(lat1, lat3, lng1 - lng3);
     if (havDist13 <= havTolerance) {
       return false;
@@ -298,8 +302,14 @@ extension RoadManagerUtils on RoutingManager {
       return false;
     }
 
-    double sinBearing =
-        MathUtil.sinDeltaBearing(lat1, lng1, lat2, lng2, lat3, lng3);
+    double sinBearing = MathUtil.sinDeltaBearing(
+      lat1,
+      lng1,
+      lat2,
+      lng2,
+      lat3,
+      lng3,
+    );
     double sinDist13 = MathUtil.sinFromHav(havDist13);
     double havCrossTrack = MathUtil.havFromSin(sinDist13 * sinBearing);
     if (havCrossTrack > havTolerance) {
@@ -319,8 +329,10 @@ extension RoadManagerUtils on RoutingManager {
     double cosCrossTrack = 1 - 2 * havCrossTrack;
     double havAlongTrack13 = (havDist13 - havCrossTrack) / cosCrossTrack;
     double havAlongTrack23 = (havDist23 - havCrossTrack) / cosCrossTrack;
-    double sinSumAlongTrack =
-        MathUtil.sinSumFromHav(havAlongTrack13, havAlongTrack23);
+    double sinSumAlongTrack = MathUtil.sinSumFromHav(
+      havAlongTrack13,
+      havAlongTrack23,
+    );
 
     // Compare with half-circle == pi using sign of sin().
     return sinSumAlongTrack > 0;

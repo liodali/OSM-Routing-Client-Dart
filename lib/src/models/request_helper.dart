@@ -38,11 +38,11 @@ class OSRMRequest extends BaseRequest<String> {
     this.overview = Overview.full,
     this.geometries = Geometries.polyline,
     bool? alternatives = false,
-  })  : profile = Profile.route,
-        roundTrip = false,
-        source = SourceGeoPointOption.any,
-        hasAlternative = alternatives,
-        destination = DestinationGeoPointOption.any;
+  }) : profile = Profile.route,
+       roundTrip = false,
+       source = SourceGeoPointOption.any,
+       hasAlternative = alternatives,
+       destination = DestinationGeoPointOption.any;
   const OSRMRequest.trip({
     required super.waypoints,
     super.languages,
@@ -53,8 +53,8 @@ class OSRMRequest extends BaseRequest<String> {
     this.roundTrip = true,
     this.source = SourceGeoPointOption.any,
     this.destination = DestinationGeoPointOption.any,
-  })  : profile = Profile.trip,
-        hasAlternative = null;
+  }) : profile = Profile.trip,
+       hasAlternative = null;
   @override
   String encodeHeader() {
     String baseURLOptions =
@@ -81,8 +81,10 @@ class OpenRouteHeader extends BaseRequest<Map<String, dynamic>> {
     required super.waypoints,
     super.languages,
     required this.apiKey,
-  }) : assert(apiKey.isEmpty,
-            "please you cannot use openrouteservice without API Key");
+  }) : assert(
+         apiKey.isEmpty,
+         "please you cannot use openrouteservice without API Key",
+       );
 
   @override
   Map<String, dynamic> encodeHeader() {
@@ -120,69 +122,60 @@ class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
     this.bannerInstructions,
     this.voiceInstructions,
     super.alternatives,
-  })  : assert(
-          waypoints.length == 2,
-          "we dont support more that 2 points for routing service for now",
-        ),
-        assert(
-          languages != Languages.ar,
-          "arabic language not supported for now",
-        ),
-        assert(
-          (valhallaFormat == ValhallaFormat.orsm &&
-                  Geometries.values.contains(valhallaShapeFormat)) ||
-              valhallaFormat != ValhallaFormat.orsm,
-        );
+  }) : assert(
+         waypoints.length == 2,
+         "we dont support more that 2 points for routing service for now",
+       ),
+       assert(
+         languages != Languages.ar,
+         "arabic language not supported for now",
+       ),
+       assert(
+         (valhallaFormat == ValhallaFormat.orsm &&
+                 Geometries.values.contains(valhallaShapeFormat)) ||
+             valhallaFormat != ValhallaFormat.orsm,
+       );
 
   @override
   Map<String, dynamic> encodeHeader() {
-    final mapHeader = {
-      'locations': waypoints.map((e) {
-        final mPoint = e.toMap();
-        mPoint['type'] = 'break';
-        return mPoint;
-      }).toList(),
-      'exclude_polygons': [],
-      'costing': costing.name,
-      'units': units.name,
-      'language': languages.name,
-      'directions_type': directionsType.name,
-      'format': valhallaFormat.name,
-      'alternates': alternatives,
-    }
-      ..addIfNotNull('id', id)
-      ..addIfNotNull(
-        'shape_format',
-        valhallaFormat == ValhallaFormat.orsm && valhallaShapeFormat != null
-            ? (valhallaShapeFormat ?? Geometries.polyline6).name
-            : null,
-      )
-      ..addIfNotNull(
-        'costing_options',
-        costingOption != null
-            ? {
-                costing.name: costingOption!.toMap(),
-              }
-            : null,
-      )
-      ..addIfNotNull(
-        'banner_instructions',
-        bannerInstructions,
-      )
-      ..addIfNotNull(
-        'voice_instructions',
-        voiceInstructions,
-      )
-      ..addIfNotNull(
-        'exclude_polygons',
-        excludePolygones != null
-            ? convertNestedLngLatToList(excludePolygones!)
-            : null,
-      )
-      ..addIfNotNull(
-        'exclude_locations',
-        excludeLocations?.toWaypoints(),
-      );
+    final mapHeader =
+        {
+            'locations':
+                waypoints.map((e) {
+                  final mPoint = e.toMap();
+                  mPoint['type'] = 'break';
+                  return mPoint;
+                }).toList(),
+            'exclude_polygons': [],
+            'costing': costing.name,
+            'units': units.name,
+            'language': languages.name,
+            'directions_type': directionsType.name,
+            'format': valhallaFormat.name,
+            'alternates': alternatives,
+          }
+          ..addIfNotNull('id', id)
+          ..addIfNotNull(
+            'shape_format',
+            valhallaFormat == ValhallaFormat.orsm && valhallaShapeFormat != null
+                ? (valhallaShapeFormat ?? Geometries.polyline6).name
+                : null,
+          )
+          ..addIfNotNull(
+            'costing_options',
+            costingOption != null
+                ? {costing.name: costingOption!.toMap()}
+                : null,
+          )
+          ..addIfNotNull('banner_instructions', bannerInstructions)
+          ..addIfNotNull('voice_instructions', voiceInstructions)
+          ..addIfNotNull(
+            'exclude_polygons',
+            excludePolygones != null
+                ? convertNestedLngLatToList(excludePolygones!)
+                : null,
+          )
+          ..addIfNotNull('exclude_locations', excludeLocations?.toWaypoints());
 
     return mapHeader;
   }

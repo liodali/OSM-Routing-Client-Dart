@@ -9,11 +9,12 @@ import 'package:fixnum/fixnum.dart';
 const String oSRMServer = "https://routing.openstreetmap.de";
 const String osmValhallaServer = "https://valhalla1.openstreetmap.de/route";
 const double earthRadius = 6371009;
-typedef TurnByTurnInformation = ({
-  RouteInstruction currentInstruction,
-  RouteInstruction? nextInstruction,
-  double distance
-});
+typedef TurnByTurnInformation =
+    ({
+      RouteInstruction currentInstruction,
+      RouteInstruction? nextInstruction,
+      double distance,
+    });
 
 enum Languages {
   en("en-US", 'en'),
@@ -26,41 +27,17 @@ enum Languages {
   final String code;
 }
 
-enum RoutingType {
-  car,
-  foot,
-  bike,
-  publicTransportation,
-  taxi,
-  truck,
-}
+enum RoutingType { car, foot, bike, publicTransportation, taxi, truck }
 
-enum Profile {
-  route,
-  trip,
-}
+enum Profile { route, trip }
 
-enum Overview {
-  simplified,
-  full,
-  none,
-}
+enum Overview { simplified, full, none }
 
-enum Geometries {
-  polyline,
-  polyline6,
-  geojson,
-}
+enum Geometries { polyline, polyline6, geojson }
 
-enum SourceGeoPointOption {
-  any,
-  first,
-}
+enum SourceGeoPointOption { any, first }
 
-enum DestinationGeoPointOption {
-  any,
-  last,
-}
+enum DestinationGeoPointOption { any, last }
 
 extension RoutingTypeExtension on RoutingType {
   String get value {
@@ -88,13 +65,13 @@ extension TransformToWaysOSRM on List<LngLat> {
   /// representation, separated by semicolons.
 
   String toWaypoints() {
-    return map((lngLat) => lngLat.toString())
-        .reduce((value, element) => "$value;$element");
+    return map(
+      (lngLat) => lngLat.toString(),
+    ).reduce((value, element) => "$value;$element");
   }
 
-  List<List<double>> toMapList() => map(
-        (lngLat) => [lngLat.lng, lngLat.lat],
-      ).toList();
+  List<List<double>> toMapList() =>
+      map((lngLat) => [lngLat.lng, lngLat.lat]).toList();
 }
 
 extension ExtList on List? {
@@ -249,21 +226,18 @@ Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
   bool alternative = data.alternative;
   var road = const OSRMRoad.empty();
-  final List<Map<String, dynamic>> routes =
-      List.castFrom(jsonResponse["routes"]);
+  final List<Map<String, dynamic>> routes = List.castFrom(
+    jsonResponse["routes"],
+  );
 
   final route = routes.first;
 
-  road = OSRMRoad.fromOSRMJson(
-    route: route,
-  );
+  road = OSRMRoad.fromOSRMJson(route: route);
 
   if (routes.length > 1 && alternative) {
     routes.removeAt(0);
     for (var route in routes) {
-      final alternative = OSRMRoad.fromOSRMJson(
-        route: route,
-      );
+      final alternative = OSRMRoad.fromOSRMJson(route: route);
       road.addAlternativeRoute(alternative);
     }
   }
@@ -282,12 +256,11 @@ Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
 Future<OSRMRoad> parseTrip(ParserTripComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
   var road = const OSRMRoad.empty();
-  final List<Map<String, dynamic>> routes =
-      List.castFrom(jsonResponse["trips"]);
-  final route = routes.first;
-  road = OSRMRoad.fromOSRMJson(
-    route: route,
+  final List<Map<String, dynamic>> routes = List.castFrom(
+    jsonResponse["trips"],
   );
+  final route = routes.first;
+  road = OSRMRoad.fromOSRMJson(route: route);
 
   return road;
 }

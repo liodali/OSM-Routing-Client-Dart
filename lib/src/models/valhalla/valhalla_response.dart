@@ -16,11 +16,12 @@ class ValhallaResponse {
   factory ValhallaResponse.fromJson(Map<String, dynamic> json) {
     return ValhallaResponse._(
       trip: Trip.fromJson(json['trip']),
-      alternates: json.containsKey('alternates')
-          ? (json['alternates'] as List)
-              .map((alternate) => Trip.fromJson(alternate['trip']))
-              .toList()
-          : null,
+      alternates:
+          json.containsKey('alternates')
+              ? (json['alternates'] as List)
+                  .map((alternate) => Trip.fromJson(alternate['trip']))
+                  .toList()
+              : null,
       id: json['id'],
     );
   }
@@ -29,10 +30,7 @@ class ValhallaResponse {
     int accuracyExponent = 5,
   }) {
     final alters = alternates?.map((e) => e.toRoute()).toList();
-    final road = trip.toRoute(
-      unit: unit,
-      accuracyExponent: accuracyExponent,
-    );
+    final road = trip.toRoute(unit: unit, accuracyExponent: accuracyExponent);
     return road.copyWith(alternativesRoads: alters);
   }
 }
@@ -58,9 +56,10 @@ class Trip {
 
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip._(
-      locations: (json['locations'] as List)
-          .map((location) => Location.fromJson(location))
-          .toList(),
+      locations:
+          (json['locations'] as List)
+              .map((location) => Location.fromJson(location))
+              .toList(),
       legs: (json['legs'] as List).map((leg) => Leg.fromJson(leg)).toList(),
       summary: Summary.fromJson(json['summary']),
       statusMessage: json['status_message'],
@@ -107,9 +106,10 @@ class Leg {
 
   factory Leg.fromJson(Map<String, dynamic> json) {
     return Leg._(
-      maneuvers: List.castFrom(json['maneuvers'])
-          .map((maneuver) => Maneuver.fromJson(maneuver))
-          .toList(),
+      maneuvers:
+          List.castFrom(
+            json['maneuvers'],
+          ).map((maneuver) => Maneuver.fromJson(maneuver)).toList(),
       summary: Summary.fromJson(json['summary']),
       shape: json['shape'],
     );
