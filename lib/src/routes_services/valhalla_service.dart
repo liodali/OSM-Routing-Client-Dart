@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:routing_client_dart/src/models/request_helper.dart';
 import 'package:routing_client_dart/src/models/route.dart';
 import 'package:routing_client_dart/src/models/valhalla/valhalla_response.dart';
@@ -12,7 +14,7 @@ class ValhallaRoutingService extends RoutingService {
     final jsonHeaderRequest = request.encodeHeader();
     final response = await dio.get(
       osmValhallaServer,
-      queryParameters: {'json': jsonHeaderRequest},
+      queryParameters: {'json': json.encode(jsonHeaderRequest)},
     );
     if (response.statusCode != null && response.statusCode! > 299 ||
         response.statusCode! < 200) {
