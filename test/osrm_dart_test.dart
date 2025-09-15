@@ -16,9 +16,8 @@ class FakeOSRMMixin with OSRMHelper {}
 
 class FakeOSRMMService extends OSRMRoutingService {
   @override
-  Map<String, dynamic> loadInstructionHelperJson({
-    Languages language = Languages.en,
-  }) => en;
+  Map<String, dynamic> loadInstructionHelperJson({Languages language = Languages.en}) =>
+      en;
 }
 
 void main() {
@@ -75,8 +74,7 @@ void main() {
         LngLat(lng: 13.397634, lat: 52.529407),
         LngLat(lng: 13.428555, lat: 52.523219),
       ];
-      String strWaypoint =
-          "13.38886,52.517037;13.397634,52.529407;13.428555,52.523219";
+      String strWaypoint = "13.38886,52.517037;13.397634,52.529407;13.428555,52.523219";
       final urlGenerated =
           '$oSRMServer${OSRMRequest.route(
             //oSRMServer,
@@ -95,8 +93,7 @@ void main() {
         LngLat(lng: 13.397634, lat: 52.529407),
         LngLat(lng: 13.428555, lat: 52.523219),
       ];
-      String strWaypoint =
-          "13.38886,52.517037;13.397634,52.529407;13.428555,52.523219";
+      String strWaypoint = "13.38886,52.517037;13.397634,52.529407;13.428555,52.523219";
 
       final urlGenerated =
           '$oSRMServer${OSRMRequest.route(waypoints: waypoints, routingType: RoutingType.bike, geometries: Geometries.polyline, steps: true, alternatives: null).encodeHeader()}';
@@ -127,6 +124,34 @@ void main() {
       expect(road.duration >= 615.0, true);
       expect(road.polylineEncoded != null, true);
       expect(road.polyline?.isNotEmpty, true);
+      expect(road.alternativesRoads?.isNotEmpty, true);
+    });
+    test("test get road with alternative", () async {
+      List<LngLat> waypoints = [
+        LngLat(lng: 13.388860, lat: 52.517037),
+        LngLat(lng: 13.397634, lat: 52.529407),
+        LngLat(lng: 13.428555, lat: 52.523219),
+      ];
+      dioAdapter.onGet(
+        "https://routing.openstreetmap.de/routed-car/route/v1/driving/13.38886,52.517037;13.397634,52.529407;13.428555,52.523219?steps=true&overview=full&geometries=polyline&alternatives=true",
+        (server) => server.reply(200, responseWithAlternative),
+      );
+      final road = await manager.getRoute(
+        request: OSRMRequest.route(
+          waypoints: waypoints,
+          geometries: Geometries.polyline,
+          steps: true,
+          languages: Languages.en,
+          alternatives: true,
+        ),
+      );
+
+      expect(road.distance.toStringAsFixed(2), 42.1147.toStringAsFixed(2));
+      expect(road.duration >= (2006.8 / 360), true);
+      expect(road.polylineEncoded != null, true);
+      expect(road.polyline?.isNotEmpty, true);
+      expect(road.alternativesRoads?.isNotEmpty, true);
+      expect(road.alternativesRoads?.length, 1);
     });
     test("test get road without steps", () async {
       List<LngLat> waypoints = [
@@ -147,9 +172,7 @@ void main() {
         ),
       );
       expect(
-        (road as OSRMRoad).roadLegs
-            .where((element) => element.steps.isNotEmpty)
-            .isEmpty,
+        (road as OSRMRoad).roadLegs.where((element) => element.steps.isNotEmpty).isEmpty,
         true,
       );
     });
@@ -825,8 +848,7 @@ void main() {
                     },
                   ],
                   "driving_side": "right",
-                  "geometry":
-                      "_xq_Iac~pAFAL?J@HBFBp@XPHh@TTJNFTRNFd@N\\HF@J@J@",
+                  "geometry": "_xq_Iac~pAFAL?J@HBFBp@XPHh@TTJNFTRNFd@N\\HF@J@J@",
                   "duration": 20.9,
                   "distance": 196.4,
                   "name": "Platz der Vereinten Nationen",
@@ -1500,8 +1522,7 @@ void main() {
                     },
                   ],
                   "driving_side": "right",
-                  "geometry":
-                      "_xq_Iac~pAFAL?J@HBFBp@XPHh@TTJNFTRNFd@N\\HF@J@J@",
+                  "geometry": "_xq_Iac~pAFAL?J@HBFBp@XPHh@TTJNFTRNFd@N\\HF@J@J@",
                   "duration": 20.9,
                   "distance": 196.4,
                   "name": "Platz der Vereinten Nationen",
@@ -1665,11 +1686,10 @@ void main() {
     };
     final roadStep = RoadStep.fromJson(json: json);
 
-    final instruction = OSRMHelper.buildInstruction(
-      roadStep,
-      instructionHelper,
-      {"legIndex": 0, "legCount": 1},
-    );
+    final instruction = OSRMHelper.buildInstruction(roadStep, instructionHelper, {
+      "legIndex": 0,
+      "legCount": 1,
+    });
     expect(instruction, "Head north");
   });
   test('test buildInstruction 2', () async {
@@ -1708,11 +1728,10 @@ void main() {
       "distance": 157.6,
     };
     final roadStep = RoadStep.fromJson(json: json);
-    final instruction = OSRMHelper.buildInstruction(
-      roadStep,
-      instructionHelper,
-      {"legIndex": 0, "legCount": 1},
-    );
+    final instruction = OSRMHelper.buildInstruction(roadStep, instructionHelper, {
+      "legIndex": 0,
+      "legCount": 1,
+    });
     expect(instruction, "Continue onto Binzmühlestrasse");
   });
 
@@ -1738,10 +1757,7 @@ void main() {
       route: (responseRandomRoute["routes"]! as List).first,
     );
 
-    final instructions = OSRMHelper.buildInstructions(
-      road: road,
-      instructionsHelper: en,
-    );
+    final instructions = OSRMHelper.buildInstructions(road: road, instructionsHelper: en);
 
     final currentLocation = LngLat.fromList(
       lnglat: [13.389147, 52.527549],
@@ -1802,10 +1818,7 @@ void main() {
       route: (response2ndRoute["routes"]! as List).first,
     );
 
-    final instructions = OSRMHelper.buildInstructions(
-      road: road,
-      instructionsHelper: en,
-    );
+    final instructions = OSRMHelper.buildInstructions(road: road, instructionsHelper: en);
 
     final currentLocation = LngLat.fromList(lnglat: [8.26195, 50.009781]);
     final turnByTurnInformation = roadManager.nextInstruction(
@@ -1828,10 +1841,7 @@ void main() {
       turnByTurnInformation?.currentInstruction.instruction,
       "Turn right onto Wallaustraße",
     );
-    expect(
-      turnByTurnInformation?.nextInstruction?.instruction,
-      "Make a slight right",
-    );
+    expect(turnByTurnInformation?.nextInstruction?.instruction, "Make a slight right");
     final distance = currentLocation
     //.alignWithPrecision()
     .distance(location: LngLat.fromList(lnglat: [8.262933, 50.008737]));
