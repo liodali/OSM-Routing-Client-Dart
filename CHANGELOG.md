@@ -1,3 +1,5 @@
+## 1.0.8:
+* fix bug in getRoute alternatives (#30)
 ## 1.0.7:
 * remove isolate to support wasm
 * bump dart sdk to 3.7
