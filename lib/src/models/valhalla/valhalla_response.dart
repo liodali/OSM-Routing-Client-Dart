@@ -124,7 +124,7 @@ class Maneuver {
   final String? verbalPostTransitionInstruction;
   final double time;
   final double length;
-  final int cost;
+  final double cost;
   final int beginShapeIndex;
   final int endShapeIndex;
   final bool? rough;
@@ -179,7 +179,7 @@ class Summary {
   final double maxLon;
   final double time;
   final double length;
-  final int cost;
+  final double cost;
 
   const Summary._({
     required this.hasTimeRestrictions,
