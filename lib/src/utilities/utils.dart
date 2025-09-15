@@ -70,8 +70,7 @@ extension TransformToWaysOSRM on List<LngLat> {
     ).reduce((value, element) => "$value;$element");
   }
 
-  List<List<double>> toMapList() =>
-      map((lngLat) => [lngLat.lng, lngLat.lat]).toList();
+  List<List<double>> toMapList() => map((lngLat) => [lngLat.lng, lngLat.lat]).toList();
 }
 
 extension ExtList on List? {
@@ -117,8 +116,7 @@ extension EncodeExt on List<LngLat> {
     }
 
     final factor = math.pow(10, precision);
-    var output =
-        _encode(this[0].lat, 0, factor) + _encode(this[0].lng, 0, factor);
+    var output = _encode(this[0].lat, 0, factor) + _encode(this[0].lng, 0, factor);
 
     for (var i = 1; i < length; i++) {
       var current = this[i], previous = this[i - 1];
@@ -189,8 +187,7 @@ extension DecodingExt on String {
       } while (byte >= 0x20);
 
       latitudeChange =
-          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
-              .toInt();
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1)).toInt();
 
       shift = result = 0;
 
@@ -201,8 +198,7 @@ extension DecodingExt on String {
       } while (byte >= 0x20);
 
       longitudeChange =
-          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1))
-              .toInt();
+          ((result & 1) != 0 ? ~(Int32(result) >> 1) : (Int32(result) >> 1)).toInt();
 
       lat += latitudeChange;
       lng += longitudeChange;
@@ -225,14 +221,11 @@ extension DecodingExt on String {
 Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
   bool alternative = data.alternative;
-  var road = const OSRMRoad.empty();
-  final List<Map<String, dynamic>> routes = List.castFrom(
-    jsonResponse["routes"],
-  );
+  final List<Map<String, dynamic>> routes = List.castFrom(jsonResponse["routes"]);
 
   final route = routes.first;
 
-  road = OSRMRoad.fromOSRMJson(route: route);
+  final road = OSRMRoad.fromOSRMJson(route: route);
 
   if (routes.length > 1 && alternative) {
     routes.removeAt(0);
@@ -255,14 +248,8 @@ Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
 /// and this road will not be the shortes route
 Future<OSRMRoad> parseTrip(ParserTripComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
-  var road = const OSRMRoad.empty();
-  final List<Map<String, dynamic>> routes = List.castFrom(
-    jsonResponse["trips"],
-  );
-  final route = routes.first;
-  road = OSRMRoad.fromOSRMJson(route: route);
-
-  return road;
+  final List<Map<String, dynamic>> routes = List.castFrom(jsonResponse["trips"]);
+  return OSRMRoad.fromOSRMJson(route: routes.first);
 }
 
 num _py2Round(num value) {

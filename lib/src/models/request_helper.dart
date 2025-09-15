@@ -77,14 +77,8 @@ class OSRMRequest extends BaseRequest<String> {
 
 class OpenRouteHeader extends BaseRequest<Map<String, dynamic>> {
   final String apiKey;
-  OpenRouteHeader({
-    required super.waypoints,
-    super.languages,
-    required this.apiKey,
-  }) : assert(
-         apiKey.isEmpty,
-         "please you cannot use openrouteservice without API Key",
-       );
+  OpenRouteHeader({required super.waypoints, super.languages, required this.apiKey})
+    : assert(apiKey.isEmpty, "please you cannot use openrouteservice without API Key");
 
   @override
   Map<String, dynamic> encodeHeader() {
@@ -126,10 +120,7 @@ class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
          waypoints.length == 2,
          "we dont support more that 2 points for routing service for now",
        ),
-       assert(
-         languages != Languages.ar,
-         "arabic language not supported for now",
-       ),
+       assert(languages != Languages.ar, "arabic language not supported for now"),
        assert(
          (valhallaFormat == ValhallaFormat.orsm &&
                  Geometries.values.contains(valhallaShapeFormat)) ||
@@ -163,9 +154,7 @@ class ValhallaRequest extends BaseRequest<Map<String, dynamic>> {
           )
           ..addIfNotNull(
             'costing_options',
-            costingOption != null
-                ? {costing.name: costingOption!.toMap()}
-                : null,
+            costingOption != null ? {costing.name: costingOption!.toMap()} : null,
           )
           ..addIfNotNull('banner_instructions', bannerInstructions)
           ..addIfNotNull('voice_instructions', voiceInstructions)

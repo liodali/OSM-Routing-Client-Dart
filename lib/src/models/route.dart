@@ -14,23 +14,25 @@ class Route {
   /// this is list of geopoint of the route,this attribute is not null if geometry equal to geojson
   /// except that use always [polylineEncoded]
   final List<LngLat>? polyline;
-  final List<Route>? alternativesRoads;
+  List<Route>? _alternativesRoads = [];
   final List<RouteInstruction> instructions;
-  const Route({
+  Route({
     required this.distance,
     required this.duration,
     required this.polylineEncoded,
     this.instructions = const <RouteInstruction>[],
-    this.alternativesRoads,
+    List<Route> alternativesRoads = const [],
     this.polyline = const <LngLat>[],
-  });
-  const Route.empty()
+  }) : _alternativesRoads = alternativesRoads;
+  Route.empty()
     : distance = 0.0,
       duration = 0.0,
       polylineEncoded = '',
       instructions = const <RouteInstruction>[],
-      alternativesRoads = null,
+      _alternativesRoads = null,
       polyline = const <LngLat>[];
+
+  List<Route>? get alternativesRoads => _alternativesRoads;
 
   Route copyWith({
     double? distance,
@@ -44,9 +46,13 @@ class Route {
     duration: duration ?? this.duration,
     polylineEncoded: polylineEncoded ?? this.polylineEncoded,
     polyline: polyline ?? this.polyline,
-    alternativesRoads: alternativesRoads ?? this.alternativesRoads,
+    alternativesRoads: alternativesRoads ?? _alternativesRoads ?? [],
     instructions: instructions ?? this.instructions,
   );
+
+  void addAlternativeRoute(Route road) {
+    _alternativesRoads?.add(road);
+  }
 }
 
 class RouteInstruction {

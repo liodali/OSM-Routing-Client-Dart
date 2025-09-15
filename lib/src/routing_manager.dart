@@ -38,8 +38,7 @@ class RoutingManager {
   RoutingManager({this.configuration = const RoutingManagerConfiguration()})
     : _osrmService = OSRMRoutingService.dioClient(
         client:
-            configuration.osrmServerDioClient ??
-            Dio(BaseOptions(baseUrl: oSRMServer)),
+            configuration.osrmServerDioClient ?? Dio(BaseOptions(baseUrl: oSRMServer)),
       ),
       _valhallaRoutingService = ValhallaRoutingService.dioClient(
         client:
@@ -69,7 +68,7 @@ class RoutingManager {
   Future<Route> getRoute({required BaseRequest request}) => switch (request) {
     OSRMRequest _ => _osrmService.getOSRMRoad(request),
     ValhallaRequest _ => _valhallaRoutingService.getValhallaRoad(request),
-    _ => Future.value(const Route.empty()),
+    _ => Future.value(Route.empty()),
   };
 
   /// [isOnPath]
@@ -96,8 +95,7 @@ class RoutingManager {
       polyline!,
       tolerance: tolerance,
     );
-    if (indexOfNextLocation == -1 ||
-        indexOfNextLocation > polyline.length - 1) {
+    if (indexOfNextLocation == -1 || indexOfNextLocation > polyline.length - 1) {
       return false;
     }
     return true;
@@ -134,8 +132,7 @@ class RoutingManager {
       polyline!,
       tolerance: tolerance,
     );
-    if (indexOfNextLocation == -1 ||
-        indexOfNextLocation > polyline.length - 1) {
+    if (indexOfNextLocation == -1 || indexOfNextLocation > polyline.length - 1) {
       return null;
     }
     final nextLocation = polyline[indexOfNextLocation];
@@ -144,17 +141,13 @@ class RoutingManager {
       (element) => element != null && element.location == nextLocation,
       orElse: () => null,
     );
-    currentInstruction ??= closeInstructionToLocation(
-      instructions,
-      nextLocation,
-    );
+    currentInstruction ??= closeInstructionToLocation(instructions, nextLocation);
 
     if (currentInstruction == null) {
       return null;
     }
 
-    final nextInstruction =
-        instructions[instructions.indexOf(currentInstruction) + 1];
+    final nextInstruction = instructions[instructions.indexOf(currentInstruction) + 1];
     return (
       currentInstruction: currentInstruction,
       nextInstruction: nextInstruction,
@@ -225,11 +218,7 @@ extension RoadManagerUtils on RoutingManager {
         final y2 = MathUtil.mercator(point2.latitude);
         if (max(prevRadian.latitude, point2.latitude) >= minAcceptable &&
             min(prevRadian.latitude, point2.latitude) <= maxAcceptable) {
-          final x2 = MathUtil.wrap(
-            point2.longitude - prevRadian.longitude,
-            -pi,
-            pi,
-          );
+          final x2 = MathUtil.wrap(point2.longitude - prevRadian.longitude, -pi, pi);
           final x3Base = MathUtil.wrap(
             lngLatRadian.longitude - prevRadian.longitude,
             -pi,
@@ -242,9 +231,7 @@ extension RoadManagerUtils on RoutingManager {
             double dy = y2 - y1;
             double len2 = x2 * x2 + dy * dy;
             double t =
-                len2 <= 0
-                    ? 0
-                    : MathUtil.clamp((x3 * x2 + (y3 - y1) * dy) / len2, 0, 1);
+                len2 <= 0 ? 0 : MathUtil.clamp((x3 * x2 + (y3 - y1) * dy) / len2, 0, 1);
             double xClosest = t * x2;
             double yClosest = y1 + t * dy;
             double latClosest = MathUtil.inverseMercator(yClosest);
@@ -302,14 +289,7 @@ extension RoadManagerUtils on RoutingManager {
       return false;
     }
 
-    double sinBearing = MathUtil.sinDeltaBearing(
-      lat1,
-      lng1,
-      lat2,
-      lng2,
-      lat3,
-      lng3,
-    );
+    double sinBearing = MathUtil.sinDeltaBearing(lat1, lng1, lat2, lng2, lat3, lng3);
     double sinDist13 = MathUtil.sinFromHav(havDist13);
     double havCrossTrack = MathUtil.havFromSin(sinDist13 * sinBearing);
     if (havCrossTrack > havTolerance) {
@@ -329,10 +309,7 @@ extension RoadManagerUtils on RoutingManager {
     double cosCrossTrack = 1 - 2 * havCrossTrack;
     double havAlongTrack13 = (havDist13 - havCrossTrack) / cosCrossTrack;
     double havAlongTrack23 = (havDist23 - havCrossTrack) / cosCrossTrack;
-    double sinSumAlongTrack = MathUtil.sinSumFromHav(
-      havAlongTrack13,
-      havAlongTrack23,
-    );
+    double sinSumAlongTrack = MathUtil.sinSumFromHav(havAlongTrack13, havAlongTrack23);
 
     // Compare with half-circle == pi using sign of sin().
     return sinSumAlongTrack > 0;

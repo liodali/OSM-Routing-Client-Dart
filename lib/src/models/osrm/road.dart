@@ -8,19 +8,24 @@ class OSRMRoad extends Route {
   final bool _isError;
   final List<RoadLeg> _roadLegs;
 
-  const OSRMRoad.empty()
+  OSRMRoad.empty()
     : _isError = false,
       _roadLegs = const <RoadLeg>[],
-      super(distance: 0.0, duration: 0.0, polylineEncoded: "");
+      super(
+        distance: 0.0,
+        duration: 0.0,
+        polylineEncoded: "",
+        alternativesRoads: const [],
+      );
 
-  const OSRMRoad.minimize({
+  OSRMRoad.minimize({
     required super.distance,
     required super.duration,
     super.polylineEncoded,
   }) : _isError = false,
        _roadLegs = const <RoadLeg>[];
 
-  const OSRMRoad({
+  OSRMRoad({
     required super.distance,
     required super.duration,
     required super.polylineEncoded,
@@ -28,7 +33,7 @@ class OSRMRoad extends Route {
     super.polyline,
   }) : _isError = false,
        _roadLegs = const <RoadLeg>[];
-  const OSRMRoad._init({
+  OSRMRoad._init({
     required super.distance,
     required super.duration,
     required super.polylineEncoded,
@@ -41,13 +46,12 @@ class OSRMRoad extends Route {
 
   OSRMRoad.fromOSRMJson({required Map route})
     : _isError = false,
+
       _roadLegs =
           List.castFrom(route["legs"]).map((legMap) {
             final List<RoadStep> roadSteps = [];
             if ((legMap).containsKey("steps")) {
-              final List<Map<String, dynamic>> steps = List.castFrom(
-                legMap["steps"],
-              );
+              final List<Map<String, dynamic>> steps = List.castFrom(legMap["steps"]);
               for (var step in steps) {
                 final roadStep = RoadStep.fromJson(json: step);
                 roadSteps.add(roadStep);
@@ -63,9 +67,7 @@ class OSRMRoad extends Route {
         distance: (double.parse(route["distance"].toString())) / 1000,
         duration: double.parse(route["duration"].toString()),
         polylineEncoded:
-            route["geometry"].runtimeType == String
-                ? route["geometry"] as String
-                : null,
+            route["geometry"].runtimeType == String ? route["geometry"] as String : null,
         polyline:
             route["geometry"] != null && route["geometry"].runtimeType != String
                 ? List.castFrom(
@@ -74,6 +76,7 @@ class OSRMRoad extends Route {
                 : route["geometry"] is String
                 ? (route["geometry"] as String).decodeGeometry()
                 : <LngLat>[],
+        alternativesRoads: <OSRMRoad>[],
       );
 
   OSRMRoad.withError()
@@ -83,8 +86,7 @@ class OSRMRoad extends Route {
 
   bool get canDrawRoad => !_isError;
 
-  List<OSRMRoad>? get alternativeRoads =>
-      super.alternativesRoads as List<OSRMRoad>?;
+  List<OSRMRoad>? get alternativeRoads => super.alternativesRoads as List<OSRMRoad>?;
   List<String> get destinations =>
       _roadLegs
           .expand((legs) => legs.steps)
@@ -92,9 +94,6 @@ class OSRMRoad extends Route {
           .where((element) => element != null)
           .whereType<String>()
           .toList();
-  void addAlternativeRoute(OSRMRoad road) {
-    super.alternativesRoads!.add(road);
-  }
 
   @override
   OSRMRoad copyWith({
@@ -109,7 +108,7 @@ class OSRMRoad extends Route {
     duration: duration ?? this.duration,
     polylineEncoded: polylineEncoded ?? this.polylineEncoded,
     polyline: polyline ?? this.polyline,
-    alternativesRoads: alternativesRoads,
+    alternativesRoads: alternativesRoads ?? this.alternativesRoads ?? const <OSRMRoad>[],
     instructions: instructions ?? this.instructions,
     legs: _roadLegs,
   );
